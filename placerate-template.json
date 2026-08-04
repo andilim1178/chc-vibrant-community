@@ -1,0 +1,995 @@
+{
+  "metadata": {
+    "name": "PlaceRate",
+    "tagline": "Creating Vibrant Communities",
+    "reference": "Based on Creating Vibrant Communities by Dean Landy",
+    "version": "3.0-copilot"
+  },
+  "personas": {
+    "developer": {
+      "label": "Developer",
+      "description": "Architects, planners, project teams",
+      "icon": "🏗️",
+      "color": "#ba7517",
+      "setupHeading": "Project details",
+      "showStages": true,
+      "showNotes": true,
+      "plainLanguage": false
+    },
+    "council": {
+      "label": "Council",
+      "description": "Planners, DA assessors, strategists",
+      "icon": "🏛️",
+      "color": "#185fa5",
+      "setupHeading": "Application details",
+      "showStages": true,
+      "showNotes": true,
+      "plainLanguage": false
+    },
+    "community": {
+      "label": "Community",
+      "description": "Residents, local groups, advocates",
+      "icon": "👋",
+      "color": "#1d9e75",
+      "setupHeading": "Tell us about this project",
+      "showStages": false,
+      "showNotes": false,
+      "plainLanguage": true
+    }
+  },
+  "elements": [
+    {
+      "id": "transport",
+      "name": "Transport",
+      "icon": "🚌",
+      "type": "hard",
+      "description": "Connectivity to public and active transport networks",
+      "communityName": "Getting around",
+      "communityDescription": "How easy is it to get to and from this place without a car?",
+      "maxPoints": 8,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project have direct access to public transport?",
+          "communityQ": "Can you easily catch a bus, train or tram here?",
+          "communityWhy": "Good transport links mean less traffic, cleaner air, and a more connected community.",
+          "type": "yesno",
+          "options": [],
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "How close is the nearest train/tram/bus stop?",
+          "communityQ": "How close is the nearest public transport stop?",
+          "communityWhy": "Being able to walk to a stop makes a huge difference to daily life — especially for people without cars.",
+          "type": "proximity",
+          "options": [
+            {"title": "Within place radius", "value": 3},
+            {"title": "Within community radius", "value": 2},
+            {"title": "Within town radius", "value": 1},
+            {"title": "TBC", "value": 0}
+          ]
+        },
+        {
+          "index": 2,
+          "q": "Which active transport options are available?",
+          "communityQ": "Which of these are available for getting around?",
+          "communityWhy": "Walking and cycling options make a place healthier, safer, and more affordable to live in.",
+          "type": "checklist",
+          "options": [
+            {"title": "Cycling paths", "value": "cycling_paths"},
+            {"title": "Walking paths", "value": "walking_paths"},
+            {"title": "Pedestrian plazas", "value": "pedestrian_plazas"},
+            {"title": "Bike share", "value": "bike_share"},
+            {"title": "E-scooters", "value": "e_scooters"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Add dedicated cycling infrastructure and improve pedestrian connectivity."
+    },
+    {
+      "id": "publicrealm",
+      "name": "Public realm",
+      "icon": "🌳",
+      "type": "hard",
+      "description": "Publicly accessible spaces the community can use and interact within",
+      "communityName": "Outdoor spaces",
+      "communityDescription": "Are there good public spaces where people can gather, relax, and connect?",
+      "maxPoints": 8,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project have a central place for gathering?",
+          "communityQ": "Is there a central public space — like a square or plaza — where the community can gather?",
+          "communityWhy": "Public gathering spaces are the heart of a community. They encourage social connection and community events.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are there areas where pedestrians are prioritised?",
+          "communityQ": "Are paths and streets designed for people first, not just cars?",
+          "communityWhy": "Pedestrian-friendly streets make communities safer, more walkable, and more enjoyable.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which public realm features are included?",
+          "communityQ": "Which of these outdoor features are included?",
+          "communityWhy": "Parks, gardens, and markets create places people want to spend time in.",
+          "type": "checklist",
+          "options": [
+            {"title": "Parks/gardens", "value": "parks_gardens"},
+            {"title": "Plazas", "value": "plazas"},
+            {"title": "Street furniture", "value": "street_furniture"},
+            {"title": "Water features", "value": "water_features"},
+            {"title": "Markets", "value": "markets"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Create more pedestrian-priority zones and gathering spaces."
+    },
+    {
+      "id": "retail",
+      "name": "Retail & food",
+      "icon": "🛍️",
+      "type": "hard",
+      "description": "Retail, dining, and daily needs within the precinct",
+      "communityName": "Shops & food",
+      "communityDescription": "Are there good shops, cafes, and daily services nearby?",
+      "maxPoints": 8,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project include ground-floor retail activation?",
+          "communityQ": "Are there shops, cafes, or services at street level that bring life to the area?",
+          "communityWhy": "Active street frontages make places feel safe and vibrant — there are always people around.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "How close is the nearest supermarket?",
+          "communityQ": "How close is the nearest supermarket or fresh food store?",
+          "communityWhy": "Access to fresh food is essential for community health and convenience.",
+          "type": "proximity",
+          "options": [
+            {"title": "On-site", "value": 3},
+            {"title": "Within 500m", "value": 2},
+            {"title": "Within 1km", "value": 1},
+            {"title": "TBC", "value": 0}
+          ]
+        },
+        {
+          "index": 2,
+          "q": "What food & beverage types are planned?",
+          "communityQ": "What kinds of food and drink options are available or planned?",
+          "communityWhy": "A variety of food choices means everyone in the community — different budgets, tastes, and dietary needs — is catered for.",
+          "type": "checklist",
+          "options": [
+            {"title": "Cafes", "value": "cafes"},
+            {"title": "Restaurants", "value": "restaurants"},
+            {"title": "Bars", "value": "bars"},
+            {"title": "Fast food", "value": "fast_food"},
+            {"title": "Fresh produce", "value": "fresh_produce"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Increase activated ground-floor uses and food & beverage diversity."
+    },
+    {
+      "id": "education",
+      "name": "Education",
+      "icon": "📚",
+      "type": "hard",
+      "description": "Education providers and learning opportunities nearby",
+      "communityName": "Learning & childcare",
+      "communityDescription": "Are there good educational facilities and childcare options nearby?",
+      "maxPoints": 8,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Is there a community space for other education providers?",
+          "communityQ": "Is there a community space for learning — like a library, hall, or education centre?",
+          "communityWhy": "Access to learning spaces benefits people of all ages, from young children to seniors.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Where is the nearest childcare?",
+          "communityQ": "How close is the nearest childcare centre?",
+          "communityWhy": "Accessible childcare is essential for families, especially parents returning to work.",
+          "type": "proximity",
+          "options": [
+            {"title": "Within place radius", "value": 3},
+            {"title": "Within community radius", "value": 2},
+            {"title": "Within town radius", "value": 1},
+            {"title": "TBC", "value": 0}
+          ]
+        },
+        {
+          "index": 2,
+          "q": "Which education types are accessible?",
+          "communityQ": "Which of these learning options are available nearby?",
+          "communityWhy": "A mix of education options supports the whole community — from babies to adults.",
+          "type": "checklist",
+          "options": [
+            {"title": "Library", "value": "library"},
+            {"title": "Community centre", "value": "community_centre"},
+            {"title": "School after hours", "value": "school_after_hours"},
+            {"title": "Makerspace", "value": "makerspace"},
+            {"title": "Large pavilion", "value": "large_pavilion"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Ensure childcare and library access within walking distance."
+    },
+    {
+      "id": "health",
+      "name": "Health & wellbeing",
+      "icon": "🏥",
+      "type": "hard",
+      "description": "Access to health services and wellness facilities",
+      "communityName": "Health & wellbeing",
+      "communityDescription": "How easy is it to access health services and stay active?",
+      "maxPoints": 8,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Is there a GP or medical centre within the precinct?",
+          "communityQ": "Is there a doctor, medical centre, or health clinic in or near this project?",
+          "communityWhy": "Nearby healthcare means quicker access in an emergency and better long-term health outcomes for residents.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "How close is the nearest hospital?",
+          "communityQ": "How close is the nearest hospital?",
+          "communityWhy": "Even if you hope to never need it, hospital proximity matters for families, elderly residents, and people with health needs.",
+          "type": "proximity",
+          "options": [
+            {"title": "Within 2km", "value": 3},
+            {"title": "Within 5km", "value": 2},
+            {"title": "Within 10km", "value": 1},
+            {"title": "TBC", "value": 0}
+          ]
+        },
+        {
+          "index": 2,
+          "q": "Which health facilities are on-site or nearby?",
+          "communityQ": "Which health and wellbeing services are available?",
+          "communityWhy": "A full range of health services keeps people healthy and reduces pressure on hospitals.",
+          "type": "checklist",
+          "options": [
+            {"title": "GP/clinic", "value": "gp_clinic"},
+            {"title": "Gym/fitness", "value": "gym_fitness"},
+            {"title": "Allied health", "value": "allied_health"},
+            {"title": "Pharmacy", "value": "pharmacy"},
+            {"title": "Mental health", "value": "mental_health"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Include on-site allied health and fitness facilities."
+    },
+    {
+      "id": "sustainable",
+      "name": "Sustainable",
+      "icon": "♻️",
+      "type": "hard",
+      "description": "Renewable energy and sustainable design features",
+      "communityName": "Environment & sustainability",
+      "communityDescription": "Is this project designed with the environment in mind?",
+      "maxPoints": 7,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Are you looking to use or create renewable energy sources?",
+          "communityQ": "Does this project use renewable energy like solar panels?",
+          "communityWhy": "Renewable energy lowers electricity bills for residents and reduces the project's impact on the environment.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Which sustainable energy types are planned?",
+          "communityQ": "Which types of renewable or clean energy are included?",
+          "communityWhy": "The more clean energy sources a project uses, the more resilient and environmentally friendly it is.",
+          "type": "checklist",
+          "options": [
+            {"title": "Solar energy", "value": "solar_energy"},
+            {"title": "Wind energy", "value": "wind_energy"},
+            {"title": "Hydropower", "value": "hydropower"},
+            {"title": "Ocean energy", "value": "ocean_energy"},
+            {"title": "Hydrogen & fuel cells", "value": "hydrogen_fuel_cells"}
+          ],
+          "scoring": "count"
+        },
+        {
+          "index": 2,
+          "q": "Are water reuse or recycling systems included?",
+          "communityQ": "Does the project recycle or reuse water?",
+          "communityWhy": "Water recycling reduces pressure on the water network and helps the community be more resilient during droughts.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        }
+      ],
+      "improvement": "Incorporate solar systems and water recycling programs."
+    },
+    {
+      "id": "housing",
+      "name": "Housing diversity",
+      "icon": "🏘️",
+      "type": "hard",
+      "description": "Range of dwelling types and affordability",
+      "communityName": "Housing options",
+      "communityDescription": "Does this project offer a variety of homes for different people and budgets?",
+      "maxPoints": 8,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project include diverse housing types?",
+          "communityQ": "Does the project include different types of homes — not just one kind of apartment or house?",
+          "communityWhy": "A mix of housing types means people at different life stages and budgets can all find a place to live.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Is affordable or social housing included?",
+          "communityQ": "Does the project include affordable or social housing?",
+          "communityWhy": "Affordable housing is essential for teachers, nurses, retail workers, and others who keep communities running.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which housing types are planned?",
+          "communityQ": "Which types of homes are included or planned?",
+          "communityWhy": "Greater variety means more people can find a home that works for them.",
+          "type": "checklist",
+          "options": [
+            {"title": "Apartments", "value": "apartments"},
+            {"title": "Townhouses", "value": "townhouses"},
+            {"title": "Terraces", "value": "terraces"},
+            {"title": "Aged care", "value": "aged_care"},
+            {"title": "Student housing", "value": "student_housing"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Introduce affordable housing and increase dwelling type diversity."
+    },
+    {
+      "id": "economy",
+      "name": "Economy & employment",
+      "icon": "💼",
+      "type": "hard",
+      "description": "Local employment, commercial, and economic activation",
+      "communityName": "Jobs & local economy",
+      "communityDescription": "Does the project create local jobs and economic activity?",
+      "maxPoints": 7,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project include commercial or office space?",
+          "communityQ": "Does the project include offices, shops, or other spaces where people can work?",
+          "communityWhy": "Local employment opportunities mean shorter commutes, stronger local spending, and a more self-sufficient community.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are there co-working or incubator spaces planned?",
+          "communityQ": "Are there co-working spaces, studios, or incubators for small businesses and start-ups?",
+          "communityWhy": "Spaces for small businesses and entrepreneurs help create a diverse, innovative local economy.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which economic uses are included?",
+          "communityQ": "Which types of economic activity are planned?",
+          "communityWhy": "A mix of economic uses makes a place more resilient — if one sector struggles, others keep the community going.",
+          "type": "checklist",
+          "options": [
+            {"title": "Office", "value": "office"},
+            {"title": "Light industrial", "value": "light_industrial"},
+            {"title": "Co-working", "value": "co_working"},
+            {"title": "Hospitality", "value": "hospitality"},
+            {"title": "Start-up incubator", "value": "startup_incubator"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Add co-working spaces and incubator facilities."
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "icon": "⚡",
+      "type": "hard",
+      "description": "Digital connectivity and utility infrastructure",
+      "communityName": "Digital & utilities",
+      "communityDescription": "Does this project have the infrastructure to support modern life?",
+      "maxPoints": 7,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project include high-speed digital connectivity?",
+          "communityQ": "Is high-speed internet (NBN or fibre) available in this project?",
+          "communityWhy": "Fast internet is now as essential as electricity — for working from home, education, and staying connected.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are smart city or digital infrastructure elements planned?",
+          "communityQ": "Are there smart or future-ready features like EV charging or smart lighting?",
+          "communityWhy": "Future-ready infrastructure saves money in the long run and helps residents transition to cleaner technology.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which infrastructure types are included?",
+          "communityQ": "Which of these infrastructure features are included?",
+          "communityWhy": "Good infrastructure supports daily life and makes a community more sustainable and connected.",
+          "type": "checklist",
+          "options": [
+            {"title": "NBN/fibre", "value": "nbn_fibre"},
+            {"title": "EV charging", "value": "ev_charging"},
+            {"title": "Smart lighting", "value": "smart_lighting"},
+            {"title": "5G readiness", "value": "5g_readiness"},
+            {"title": "Community wifi", "value": "community_wifi"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Ensure fibre connectivity and EV charging provision."
+    },
+    {
+      "id": "vision",
+      "name": "Vision & identity",
+      "icon": "🎯",
+      "type": "soft",
+      "description": "Clear project vision and sense of place identity",
+      "communityName": "Character & identity",
+      "communityDescription": "Does this place have a clear identity — something that makes it unique and special?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project have a clear and documented community vision?",
+          "communityQ": "Does this project have a clear vision for what kind of community it wants to be?",
+          "communityWhy": "Places with a strong vision tend to develop a stronger sense of community over time.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Is there a unique identity or branding for the place?",
+          "communityQ": "Is there something distinctive about the design or character of this place?",
+          "communityWhy": "Distinctive places are more memorable, more valued, and create stronger community pride.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which identity elements are included?",
+          "communityQ": "Which of these identity features are part of the project?",
+          "communityWhy": "Art, heritage, and landscape character all contribute to a place that people feel genuinely connected to.",
+          "type": "checklist",
+          "options": [
+            {"title": "Public art", "value": "public_art"},
+            {"title": "Wayfinding", "value": "wayfinding"},
+            {"title": "Heritage references", "value": "heritage_references"},
+            {"title": "Indigenous recognition", "value": "indigenous_recognition"},
+            {"title": "Landscape character", "value": "landscape_character"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Develop a clear place identity and commission public art."
+    },
+    {
+      "id": "people",
+      "name": "People & inclusion",
+      "icon": "👥",
+      "type": "soft",
+      "description": "Diversity, inclusion, and community connection",
+      "communityName": "Inclusion & belonging",
+      "communityDescription": "Is this project designed so everyone feels welcome — regardless of age, ability, or background?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Is the project designed to be accessible for all ages and abilities?",
+          "communityQ": "Is this project designed to be accessible for people of all ages and abilities?",
+          "communityWhy": "Universal design benefits everyone — parents with prams, elderly residents, people with disabilities, and delivery workers.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are community consultation processes in place?",
+          "communityQ": "Have community members been consulted during the design process?",
+          "communityWhy": "When communities are involved in design, the outcome better reflects what people actually need.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which inclusion strategies are included?",
+          "communityQ": "Which of these inclusion features are part of the project?",
+          "communityWhy": "The more inclusive a community is, the stronger and more resilient it becomes.",
+          "type": "checklist",
+          "options": [
+            {"title": "Universal design", "value": "universal_design"},
+            {"title": "Multilingual signage", "value": "multilingual_signage"},
+            {"title": "Indigenous engagement", "value": "indigenous_engagement"},
+            {"title": "Youth programs", "value": "youth_programs"},
+            {"title": "Seniors programs", "value": "seniors_programs"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Strengthen inclusive design and community consultation."
+    },
+    {
+      "id": "safety",
+      "name": "Safety & security",
+      "icon": "🔒",
+      "type": "soft",
+      "description": "Safe environments through design and management",
+      "communityName": "Safety & comfort",
+      "communityDescription": "Does this place feel safe — day and night?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Has CPTED been applied to the design?",
+          "communityQ": "Has the design been set up to reduce crime and make people feel safe — for example through good lighting and clear sightlines?",
+          "communityWhy": "Good design can make a huge difference to how safe people feel — and actually be.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are 24/7 activated edges or passive surveillance elements included?",
+          "communityQ": "Are there active frontages and people around at most times of the day?",
+          "communityWhy": "Places with people around naturally feel safer. \"Eyes on the street\" deters crime without needing security guards.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which safety elements are included?",
+          "communityQ": "Which of these safety features are included?",
+          "communityWhy": "A combination of safety features works better than any single measure alone.",
+          "type": "checklist",
+          "options": [
+            {"title": "Good lighting", "value": "good_lighting"},
+            {"title": "Active frontages", "value": "active_frontages"},
+            {"title": "Clear sightlines", "value": "clear_sightlines"},
+            {"title": "Security cameras", "value": "security_cameras"},
+            {"title": "Management presence", "value": "management_presence"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Apply CPTED principles and improve passive surveillance."
+    },
+    {
+      "id": "events",
+      "name": "Events & activation",
+      "icon": "🎪",
+      "type": "soft",
+      "description": "Programming, events, and ongoing place activation",
+      "communityName": "Events & activities",
+      "communityDescription": "Will this place have regular events, activities, and things to do?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Is there a plan for regular events and programming?",
+          "communityQ": "Is there a plan for regular community events, markets, or activities in this place?",
+          "communityWhy": "Regular programming brings people together, supports local businesses, and makes a place feel alive.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are temporary or pop-up activation spaces planned?",
+          "communityQ": "Are there flexible spaces that can be used for pop-up events, markets, or community activities?",
+          "communityWhy": "Flexible spaces mean the community can adapt the place to their needs as they evolve.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which activation types are intended?",
+          "communityQ": "What kinds of events and activities are planned?",
+          "communityWhy": "A variety of events means there's something for everyone — families, young people, seniors, and everyone in between.",
+          "type": "checklist",
+          "options": [
+            {"title": "Markets", "value": "markets"},
+            {"title": "Festivals", "value": "festivals"},
+            {"title": "Sport/fitness", "value": "sport_fitness"},
+            {"title": "Arts/culture", "value": "arts_culture"},
+            {"title": "Pop-up retail", "value": "popup_retail"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Establish a programming calendar and flexible event spaces."
+    },
+    {
+      "id": "nature",
+      "name": "Nature & biophilia",
+      "icon": "🌿",
+      "type": "soft",
+      "description": "Connection to nature and biodiversity within the precinct",
+      "communityName": "Green spaces & nature",
+      "communityDescription": "Is nature woven into this project — trees, gardens, wildlife?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Is there meaningful tree canopy cover planned?",
+          "communityQ": "Is there meaningful tree cover — not just a few token plants?",
+          "communityWhy": "Tree canopy provides shade, reduces urban heat, improves air quality, and makes streets more pleasant.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are biodiversity or habitat features included?",
+          "communityQ": "Are there features that support local wildlife and biodiversity?",
+          "communityWhy": "Biodiversity features like wetlands and wildlife corridors help maintain a healthy local ecosystem.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which nature elements are included?",
+          "communityQ": "Which of these nature features are included?",
+          "communityWhy": "Every green feature adds up — together they create a healthier, cooler, and more beautiful community.",
+          "type": "checklist",
+          "options": [
+            {"title": "Street trees", "value": "street_trees"},
+            {"title": "Green roofs", "value": "green_roofs"},
+            {"title": "Wetlands/ponds", "value": "wetlands_ponds"},
+            {"title": "Community gardens", "value": "community_gardens"},
+            {"title": "Wildlife corridors", "value": "wildlife_corridors"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Increase tree canopy and introduce biodiversity corridors."
+    },
+    {
+      "id": "arts",
+      "name": "Arts & culture",
+      "icon": "🎨",
+      "type": "soft",
+      "description": "Cultural programming, creative spaces, and public art",
+      "communityName": "Arts & culture",
+      "communityDescription": "Does this project celebrate creativity and culture?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project include dedicated arts or creative spaces?",
+          "communityQ": "Are there dedicated spaces for art, creativity, or cultural activities?",
+          "communityWhy": "Creative spaces support local artists, attract visitors, and give a community a distinctive cultural identity.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Is public art commissioned or planned?",
+          "communityQ": "Is public art part of the design?",
+          "communityWhy": "Public art makes places more beautiful, reflects community identity, and gives people something to be proud of.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which arts elements are included?",
+          "communityQ": "Which arts and cultural features are included?",
+          "communityWhy": "Arts and culture bring people together and contribute to a community's long-term vibrancy.",
+          "type": "checklist",
+          "options": [
+            {"title": "Public art", "value": "public_art"},
+            {"title": "Gallery/studio", "value": "gallery_studio"},
+            {"title": "Performance space", "value": "performance_space"},
+            {"title": "Cultural centre", "value": "cultural_centre"},
+            {"title": "Creative market", "value": "creative_market"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Commission public art and create dedicated creative spaces."
+    },
+    {
+      "id": "play",
+      "name": "Play & recreation",
+      "icon": "⚽",
+      "type": "soft",
+      "description": "Informal and formal recreation opportunities",
+      "communityName": "Play & sport",
+      "communityDescription": "Are there good places to play, exercise, and have fun?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Are dedicated play spaces included for children?",
+          "communityQ": "Are there dedicated play spaces for children?",
+          "communityWhy": "Good play spaces are essential for children's development, and they give families a reason to spend time outside.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are sporting or fitness facilities included?",
+          "communityQ": "Are there places to play sport or exercise?",
+          "communityWhy": "Access to sport and fitness facilities improves physical and mental health across the whole community.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which recreation types are included?",
+          "communityQ": "Which recreation options are available or planned?",
+          "communityWhy": "A variety of recreation options means everyone — from toddlers to seniors — has somewhere to be active.",
+          "type": "checklist",
+          "options": [
+            {"title": "Playground", "value": "playground"},
+            {"title": "Sports courts", "value": "sports_courts"},
+            {"title": "Swimming pool", "value": "swimming_pool"},
+            {"title": "Fitness trail", "value": "fitness_trail"},
+            {"title": "Off-leash dog area", "value": "offleash_dog_area"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Add play areas and informal recreation spaces for all ages."
+    },
+    {
+      "id": "governance",
+      "name": "Governance",
+      "icon": "🏛️",
+      "type": "soft",
+      "description": "Long-term community management and ownership models",
+      "communityName": "Community voice",
+      "communityDescription": "Will residents have a say in how this place is managed over time?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Is there a community management or body corporate structure planned?",
+          "communityQ": "Is there a plan for how this community will be managed and governed over time?",
+          "communityWhy": "Good governance means problems get solved, maintenance happens, and the community's voice is heard.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are there mechanisms for ongoing community input?",
+          "communityQ": "Will there be regular opportunities for residents to provide feedback and shape decisions?",
+          "communityWhy": "Communities where residents have ongoing input tend to be happier, better maintained, and more cohesive.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which governance models are planned?",
+          "communityQ": "Which of these governance approaches are planned?",
+          "communityWhy": "The right governance model depends on the community — but having one is essential.",
+          "type": "checklist",
+          "options": [
+            {"title": "Community land trust", "value": "community_land_trust"},
+            {"title": "Body corporate", "value": "body_corporate"},
+            {"title": "Council management", "value": "council_management"},
+            {"title": "Private management", "value": "private_management"},
+            {"title": "Community cooperative", "value": "community_cooperative"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Establish a community management body and resident voice."
+    },
+    {
+      "id": "aging",
+      "name": "Aging in place",
+      "icon": "👴",
+      "type": "soft",
+      "description": "Design features supporting residents across the life course",
+      "communityName": "Aging & life stages",
+      "communityDescription": "Is this place designed to support people at every stage of life — including as they get older?",
+      "maxPoints": 6,
+      "questions": [
+        {
+          "index": 0,
+          "q": "Is the project designed to support aging in place?",
+          "communityQ": "Is this project designed so that people can comfortably live there as they age?",
+          "communityWhy": "'Aging in place' means people don't have to leave their community as they get older — maintaining connections and independence.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are intergenerational uses planned?",
+          "communityQ": "Are there activities or spaces that bring different generations together?",
+          "communityWhy": "Intergenerational connections benefit everyone — young people gain wisdom, older people stay connected and active.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which aging-friendly features are included?",
+          "communityQ": "Which aging-friendly features are included?",
+          "communityWhy": "Small design choices — like rest points and accessible paths — make a huge difference to older residents and people with mobility challenges.",
+          "type": "checklist",
+          "options": [
+            {"title": "Accessible paths", "value": "accessible_paths"},
+            {"title": "Resting points", "value": "resting_points"},
+            {"title": "Aged care nearby", "value": "aged_care_nearby"},
+            {"title": "Lift access", "value": "lift_access"},
+            {"title": "Social programs", "value": "social_programs"}
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Improve universal access and create intergenerational programming."
+    }
+  ],
+  "benchmarks": [
+    {"name": "Melbourne Quarter", "score": 82},
+    {"name": "Polaris Town Centre", "score": 67},
+    {"name": "National average", "score": 54},
+    {"name": "Regional average", "score": 41}
+  ],
+  "tiers": [
+    {"threshold": 80, "label": "Exceptional — benchmark leader", "class": "tier-exc"},
+    {"threshold": 60, "label": "Good — above average", "class": "tier-good"},
+    {"threshold": 40, "label": "Developing — room to improve", "class": "tier-dev"},
+    {"threshold": 0, "label": "Early stage", "class": "tier-early"}
+  ]
+}

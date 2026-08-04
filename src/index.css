@@ -1,0 +1,135 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0c0d10;
+  --surface: #13151a;
+  --surface2: #1a1c22;
+  --surface3: #21232b;
+  --teal: #1ce4b0;
+  --teal-dim: rgba(28, 228, 176, 0.1);
+  --teal-border: rgba(28, 228, 176, 0.28);
+  --text: #eef0f7;
+  --text-muted: #8b8fa8;
+  --text-dim: #4a4d62;
+  --border: rgba(255, 255, 255, 0.07);
+  --border2: rgba(255, 255, 255, 0.12);
+  --accent: #1ce4b0;
+  --accent-text: #061a12;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --max: 1200px;
+}
+html, body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.shell {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 50;
+}
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+.logo-tag {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: -3px;
+}
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.persona-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+.persona-chip:hover {
+  border-color: var(--teal-border);
+  color: var(--text);
+}
+.proj-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.proj-pill .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px;
+}
+.tab {
+  padding: 9px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  transition: all 0.18s;
+  font-weight: 500;
+}
+.tab.active {
+  background: var(--surface3);
+  color: var(--text);
+}
+.tab:hover:not(.active) {
+  color: var(--text);
+}
