@@ -8,7 +8,7 @@ export const PersonaSelector: React.FC<{ onClose: () => void }> = ({ onClose }) 
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: 'rgba(0,0,0,0.8)',
+      background: 'rgba(43, 42, 56, 0.55)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -23,7 +23,7 @@ export const PersonaSelector: React.FC<{ onClose: () => void }> = ({ onClose }) 
         maxWidth: 700,
         width: '100%'
       }}>
-        <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 24, marginBottom: 8, textAlign: 'center' }}>
+        <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 24, marginBottom: 8, textAlign: 'center', color: 'var(--text)' }}>
           Select Your Persona
         </h2>
         <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginBottom: 24 }}>
@@ -40,7 +40,7 @@ export const PersonaSelector: React.FC<{ onClose: () => void }> = ({ onClose }) 
               }}
               style={{
                 background: persona === key ? 'var(--surface3)' : 'var(--surface2)',
-                border: `1px solid ${persona === key ? 'var(--teal)' : 'var(--border2)'}`,
+                border: `1px solid ${persona === key ? p.color : 'var(--border2)'}`,
                 borderRadius: 'var(--radius-lg)',
                 padding: 20,
                 cursor: 'pointer',
@@ -48,7 +48,7 @@ export const PersonaSelector: React.FC<{ onClose: () => void }> = ({ onClose }) 
               }}
             >
               <div style={{ fontSize: 36, marginBottom: 10 }}>{p.icon}</div>
-              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 16, marginBottom: 6 }}>
+              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 16, marginBottom: 6, color: 'var(--text)' }}>
                 {p.label}
               </div>
               <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{p.description}</div>
