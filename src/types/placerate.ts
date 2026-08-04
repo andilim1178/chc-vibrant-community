@@ -35,6 +35,7 @@ export interface ElementConfig {
   maxPoints: number;
   questions: QuestionConfig[];
   improvement: string;
+  color?: string;
 }
 
 export interface PlaceRateTemplate {

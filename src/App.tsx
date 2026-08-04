@@ -4,9 +4,10 @@ import { HeaderNav } from './components/layout/HeaderNav';
 import { PersonaSelector } from './components/persona/PersonaSelector';
 import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
 import { calculateProjectScore } from './utils/scoring';
+import { pickInk } from './utils/contrast';
 
 const MainContent: React.FC = () => {
-  const { activeTab, activeProject, createNewProject, template } = usePlaceRate();
+  const { activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
   const [showPersonaModal, setShowPersonaModal] = useState(false);
   const [name, setName] = useState('');
   const [addr, setAddr] = useState('');
@@ -56,16 +57,63 @@ const MainContent: React.FC = () => {
         )}
 
         {activeTab === 'elements' && (
-          <div>
-            <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 22, marginBottom: 16 }}>Urban Elements</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
-              {template.elements.map(el => (
-                <div key={el.id} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 16 }}>
-                  <div style={{ fontSize: 24, marginBottom: 6 }}>{el.icon}</div>
-                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 14 }}>{el.name}</div>
-                  <div style={{ fontSize: 11, color: 'var(--text-dim)', textTransform: 'uppercase', marginTop: 4 }}>{el.type} element</div>
-                </div>
+          <div style={{ maxWidth: 680, margin: '0 auto' }}>
+            <div className="swatch-strip">
+              {template.elements.filter(e => e.type === 'hard').map(e => (
+                <div key={e.id} style={{ backgroundColor: e.color || 'var(--el-default)' }} />
               ))}
+            </div>
+
+            <div className="home-card">
+              <div className="home-head">
+                <div className="home-head-title">
+                  {activeProject?.name || 'No project selected'}
+                </div>
+                <button
+                  className="home-head-button"
+                  onClick={() => setShowPersonaModal(true)}
+                  aria-label="Select persona"
+                >
+                  ⚙️
+                </button>
+              </div>
+
+              <div className="home-caption">To begin assessment, select a HARD ELEMENT</div>
+
+              {template.elements
+                .filter(e => e.type === 'hard')
+                .map(e => {
+                  const score = activeProject?.scores?.[e.id];
+                  const hex = e.color || 'var(--el-default)';
+                  const onEl = pickInk(hex === 'var(--el-default)' ? '#767482' : hex);
+                  return (
+                    <div
+                      key={e.id}
+                      className="el-row"
+                      style={{
+                        backgroundColor: hex === 'var(--el-default)' ? 'var(--el-default)' : hex,
+                        '--on-el': onEl
+                      } as React.CSSProperties & { '--on-el': string }}
+                    >
+                      <span>{e.name}</span>
+                      {score !== undefined && (
+                        <span className="el-score">
+                          {e.maxPoints > 0 ? Math.round((score / e.maxPoints) * 100) : 0}%
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+
+              <div
+                className="action-bar"
+                onClick={() => setActiveTab('setup')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => e.key === 'Enter' && setActiveTab('setup')}
+              >
+                Start new assessment
+              </div>
             </div>
           </div>
         )}
@@ -73,7 +121,7 @@ const MainContent: React.FC = () => {
         {activeTab === 'results' && (
           <div style={{ textAlign: 'center', padding: 40 }}>
             <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 28, marginBottom: 16 }}>Vibrancy Score</h2>
-            <div style={{ fontSize: 72, fontFamily: 'var(--font-head)', color: 'var(--teal)', fontWeight: 700 }}>
+            <div style={{ fontSize: 72, fontFamily: 'var(--font-head)', color: 'var(--navy)', fontWeight: 700 }}>
               {totalScore} <span style={{ fontSize: 20, color: 'var(--text-dim)' }}>/ 100</span>
             </div>
             <div style={{ marginTop: 24 }}>

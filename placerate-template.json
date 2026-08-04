@@ -47,6 +47,7 @@
       "communityName": "Getting around",
       "communityDescription": "How easy is it to get to and from this place without a car?",
       "maxPoints": 8,
+      "color": "#CE2626",
       "questions": [
         {
           "index": 0,
@@ -101,6 +102,7 @@
       "communityName": "Outdoor spaces",
       "communityDescription": "Are there good public spaces where people can gather, relax, and connect?",
       "maxPoints": 8,
+      "color": "#7A1420",
       "questions": [
         {
           "index": 0,
@@ -153,6 +155,7 @@
       "communityName": "Shops & food",
       "communityDescription": "Are there good shops, cafes, and daily services nearby?",
       "maxPoints": 8,
+      "color": "#F2CE55",
       "questions": [
         {
           "index": 0,
@@ -206,6 +209,7 @@
       "communityName": "Learning & childcare",
       "communityDescription": "Are there good educational facilities and childcare options nearby?",
       "maxPoints": 8,
+      "color": "#7CC5F8",
       "questions": [
         {
           "index": 0,
@@ -259,6 +263,7 @@
       "communityName": "Health & wellbeing",
       "communityDescription": "How easy is it to access health services and stay active?",
       "maxPoints": 8,
+      "color": "#0F5436",
       "questions": [
         {
           "index": 0,
@@ -312,6 +317,7 @@
       "communityName": "Environment & sustainability",
       "communityDescription": "Is this project designed with the environment in mind?",
       "maxPoints": 7,
+      "color": "#E8940E",
       "questions": [
         {
           "index": 0,
@@ -364,6 +370,7 @@
       "communityName": "Housing options",
       "communityDescription": "Does this project offer a variety of homes for different people and budgets?",
       "maxPoints": 8,
+      "color": "#7B4FC6",
       "questions": [
         {
           "index": 0,
@@ -416,6 +423,7 @@
       "communityName": "Jobs & local economy",
       "communityDescription": "Does the project create local jobs and economic activity?",
       "maxPoints": 7,
+      "color": "#79AC5F",
       "questions": [
         {
           "index": 0,
@@ -468,6 +476,7 @@
       "communityName": "Digital & utilities",
       "communityDescription": "Does this project have the infrastructure to support modern life?",
       "maxPoints": 7,
+      "color": "#EE8ABC",
       "questions": [
         {
           "index": 0,

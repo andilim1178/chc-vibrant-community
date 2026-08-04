@@ -18,6 +18,11 @@ export const VibrancyWheelCanvas: React.FC<{ size?: number }> = ({ size = 100 })
 
     ctx.clearRect(0, 0, size, size);
 
+    // Resolve CSS variables once per render
+    const root = getComputedStyle(document.documentElement);
+    const surfaceColor = root.getPropertyValue('--surface').trim();
+    const defaultColor = root.getPropertyValue('--el-default').trim();
+
     const elements = template.elements;
     const totalEls = elements.length;
 
@@ -38,7 +43,8 @@ export const VibrancyWheelCanvas: React.FC<{ size?: number }> = ({ size = 100 })
       ctx.arc(cx, cy, inner, a2, a1, true);
       ctx.closePath();
 
-      ctx.fillStyle = el.type === 'hard' ? '#1ce4b0' : '#38bdf8';
+      // Use element colour if available, else default
+      ctx.fillStyle = el.color || defaultColor;
       ctx.globalAlpha = sc ? 0.9 : 0.18;
       ctx.fill();
       ctx.globalAlpha = 1;
@@ -46,7 +52,7 @@ export const VibrancyWheelCanvas: React.FC<{ size?: number }> = ({ size = 100 })
 
     ctx.beginPath();
     ctx.arc(cx, cy, inner * 0.65, 0, Math.PI * 2);
-    ctx.fillStyle = '#0c0d10';
+    ctx.fillStyle = surfaceColor;
     ctx.fill();
   }, [template, activeProject, size]);
 
