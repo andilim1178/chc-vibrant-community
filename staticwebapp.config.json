@@ -4,8 +4,8 @@
     "exclude": ["/assets/*", "*.{png,jpg,jpeg,gif,svg,css,js,ico}"]
   },
   "mimeTypes": {
-    ".js": "text/javascript",
-    ".mjs": "text/javascript",
+    ".js": "text/javascript; charset=utf-8",
+    ".mjs": "text/javascript; charset=utf-8",
     ".css": "text/css",
     ".json": "application/json"
   },
