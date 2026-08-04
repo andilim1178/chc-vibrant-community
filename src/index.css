@@ -51,12 +51,14 @@ html, body {
   background: var(--bg);
   z-index: 50;
 }
+
 .logo-group {
   display: flex;
   align-items: center;
   gap: 12px;
   flex: 1;
 }
+
 .logo-text {
   font-family: var(--font-head);
   font-size: 22px;
@@ -64,16 +66,19 @@ html, body {
   color: var(--text);
   letter-spacing: -0.4px;
 }
+
 .logo-tag {
   font-size: 11px;
   color: var(--text-dim);
   margin-top: -3px;
 }
+
 .top-right {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .persona-chip {
   display: flex;
   align-items: center;
@@ -88,10 +93,12 @@ html, body {
   transition: all 0.15s;
   font-family: var(--font-body);
 }
+
 .persona-chip:hover {
-  border-color: var(--teal-border);
+  border-color: var(--border2);
   color: var(--text);
 }
+
 .proj-pill {
   display: flex;
   align-items: center;
@@ -104,13 +111,15 @@ html, body {
   color: var(--text-muted);
   white-space: nowrap;
 }
+
 .proj-pill .dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--navy);
   flex-shrink: 0;
 }
+
 .tabs {
   display: flex;
   gap: 2px;
@@ -119,6 +128,7 @@ html, body {
   border-radius: var(--radius);
   padding: 3px;
 }
+
 .tab {
   padding: 9px 12px;
   border: none;
@@ -131,10 +141,12 @@ html, body {
   transition: all 0.18s;
   font-weight: 500;
 }
+
 .tab.active {
   background: var(--surface3);
   color: var(--text);
 }
+
 .tab:hover:not(.active) {
   color: var(--text);
 }
