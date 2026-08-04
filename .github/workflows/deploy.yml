@@ -39,5 +39,6 @@ jobs:
           app_location: "/"
           api_location: ""
           output_location: "dist"
+          config_file_location: "dist"
           skip_app_build: true
           app_build_command: ""
