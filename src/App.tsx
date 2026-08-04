@@ -121,7 +121,7 @@ const MainContent: React.FC = () => {
         {activeTab === 'results' && (
           <div style={{ textAlign: 'center', padding: 40 }}>
             <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 28, marginBottom: 16 }}>Vibrancy Score</h2>
-            <div style={{ fontSize: 72, fontFamily: 'var(--font-head)', color: 'var(--teal)', fontWeight: 700 }}>
+            <div style={{ fontSize: 72, fontFamily: 'var(--font-head)', color: 'var(--navy)', fontWeight: 700 }}>
               {totalScore} <span style={{ fontSize: 20, color: 'var(--text-dim)' }}>/ 100</span>
             </div>
             <div style={{ marginTop: 24 }}>
