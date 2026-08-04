@@ -1,19 +1,24 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #0c0d10;
-  --surface: #13151a;
-  --surface2: #1a1c22;
-  --surface3: #21232b;
-  --teal: #1ce4b0;
-  --teal-dim: rgba(28, 228, 176, 0.1);
-  --teal-border: rgba(28, 228, 176, 0.28);
-  --text: #eef0f7;
-  --text-muted: #8b8fa8;
-  --text-dim: #4a4d62;
-  --border: rgba(255, 255, 255, 0.07);
-  --border2: rgba(255, 255, 255, 0.12);
-  --accent: #1ce4b0;
-  --accent-text: #061a12;
+  --bg: #F4F4F4;
+  --surface: #F5ECDC;
+  --surface2: #EFE4D2;
+  --surface3: #E7D9C3;
+  --teal: #F5ECDC;
+  --teal-dim: rgba(43, 42, 56, 0.06);
+  --teal-border: rgba(43, 42, 56, 0.18);
+  --text: #2B2A38;
+  --text-muted: #6A6878;
+  --text-dim: #767482;
+  --border: rgba(43, 42, 56, 0.1);
+  --border2: rgba(43, 42, 56, 0.18);
+  --navy: #3B3A50;
+  --on-navy: #F5ECDC;
+  --on-colour: #FFFFFF;
+  --on-colour-ink: #2B2A38;
+  --el-default: #767482;
+  --accent: var(--navy);
+  --accent-text: var(--on-navy);
   --radius: 10px;
   --radius-lg: 14px;
   --radius-xl: 20px;
