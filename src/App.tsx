@@ -3,6 +3,7 @@ import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { ProjectsList } from './components/layout/ProjectsList';
 import { AddressSearch } from './components/setup/AddressSearch';
+import { ElementInfo } from './components/elements/ElementInfo';
 import { PersonaSelector } from './components/persona/PersonaSelector';
 import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
 import { QuestionWizard } from './components/questions/QuestionWizard';
@@ -18,16 +19,26 @@ const MainContent: React.FC = () => {
   const [type] = useState('Mixed Use');
   const [showWizard, setShowWizard] = useState(false);
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
+  const [showElementInfo, setShowElementInfo] = useState(false);
+  const [infoElementId, setInfoElementId] = useState<string | null>(null);
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
 
-  const handleOpenWizard = (elementId: string) => {
+  const handleOpenElementInfo = (elementId: string) => {
     if (!activeProject) {
       setActiveTab('setup');
       return;
     }
-    setSelectedElementId(elementId);
-    setShowWizard(true);
+    setInfoElementId(elementId);
+    setShowElementInfo(true);
+  };
+
+  const handleStartAssessment = () => {
+    if (infoElementId) {
+      setSelectedElementId(infoElementId);
+      setShowWizard(true);
+      setShowElementInfo(false);
+    }
   };
 
   return (
@@ -115,8 +126,8 @@ const MainContent: React.FC = () => {
                       role="button"
                       tabIndex={0}
                       aria-disabled={!activeProject}
-                      onClick={() => handleOpenWizard(e.id)}
-                      onKeyDown={(evt) => evt.key === 'Enter' && handleOpenWizard(e.id)}
+                      onClick={() => handleOpenElementInfo(e.id)}
+                      onKeyDown={(evt) => evt.key === 'Enter' && handleOpenElementInfo(e.id)}
                       style={{
                         backgroundColor: hex === 'var(--el-default)' ? 'var(--el-default)' : hex,
                         '--on-el': onEl,
@@ -157,6 +168,14 @@ const MainContent: React.FC = () => {
               <VibrancyWheelCanvas size={180} />
             </div>
           </div>
+        )}
+
+        {showElementInfo && infoElementId && (
+          <ElementInfo
+            element={template.elements.find(e => e.id === infoElementId)!}
+            onStartAssessment={handleStartAssessment}
+            onClose={() => setShowElementInfo(false)}
+          />
         )}
 
         {showWizard && (
