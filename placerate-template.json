@@ -768,7 +768,8 @@
           "scoring": "count"
         }
       ],
-      "improvement": "Develop a clear place identity and commission public art."
+      "improvement": "Develop a clear place identity and commission public art.",
+      "color": "#FCEFCA"
     },
     {
       "id": "people",
@@ -903,7 +904,8 @@
           "scoring": "count"
         }
       ],
-      "improvement": "Apply CPTED principles and improve passive surveillance."
+      "improvement": "Apply CPTED principles and improve passive surveillance.",
+      "color": "#D3EAFF"
     },
     {
       "id": "events",
@@ -970,7 +972,8 @@
           "scoring": "count"
         }
       ],
-      "improvement": "Establish a programming calendar and flexible event spaces."
+      "improvement": "Establish a programming calendar and flexible event spaces.",
+      "color": "#FCEFCA"
     },
     {
       "id": "nature",
@@ -1037,7 +1040,8 @@
           "scoring": "count"
         }
       ],
-      "improvement": "Increase tree canopy and introduce biodiversity corridors."
+      "improvement": "Increase tree canopy and introduce biodiversity corridors.",
+      "color": "#D3CBEC"
     },
     {
       "id": "arts",
@@ -1104,7 +1108,8 @@
           "scoring": "count"
         }
       ],
-      "improvement": "Commission public art and create dedicated creative spaces."
+      "improvement": "Commission public art and create dedicated creative spaces.",
+      "color": "#EFC6D8"
     },
     {
       "id": "play",
@@ -1171,7 +1176,8 @@
           "scoring": "count"
         }
       ],
-      "improvement": "Add play areas and informal recreation spaces for all ages."
+      "improvement": "Add play areas and informal recreation spaces for all ages.",
+      "color": "#FCEFCA"
     },
     {
       "id": "governance",
@@ -1306,7 +1312,8 @@
           "scoring": "count"
         }
       ],
-      "improvement": "Improve universal access and create intergenerational programming."
+      "improvement": "Improve universal access and create intergenerational programming.",
+      "color": "#EDBCBB"
     }
   ],
   "benchmarks": [
