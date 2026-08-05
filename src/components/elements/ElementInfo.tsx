@@ -320,12 +320,11 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
           {/* Description */}
           <div
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              backgroundColor: 'rgba(255, 255, 255, 0.15)',
               padding: '20px 24px',
               borderRadius: 'var(--radius-lg)',
               marginBottom: 32,
               marginTop: 16,
-              backdropFilter: 'blur(8px)',
             }}
           >
             <p
@@ -333,7 +332,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
                 fontSize: 14,
                 lineHeight: 1.6,
                 margin: 0,
-                color: 'white',
+                color: textColor,
               }}
             >
               {element.description}
