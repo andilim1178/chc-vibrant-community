@@ -162,7 +162,6 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
           display: 'flex',
           flexDirection: 'column',
           maxHeight: '90vh',
-          overflowY: 'auto',
         }}
       >
         {/* Header */}

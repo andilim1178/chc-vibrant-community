@@ -215,7 +215,6 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
           display: 'flex',
           flexDirection: 'column',
           maxHeight: '90vh',
-          overflowY: 'auto',
           position: 'relative',
         }}
       >
