@@ -143,13 +143,28 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         backgroundColor: elementColor,
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         color: textColor,
         zIndex: 1000,
         fontFamily: 'inherit',
+        padding: '40px 24px',
       }}
     >
-      {/* Header */}
       <div
+        style={{
+          maxWidth: 560,
+          width: '100%',
+          backgroundColor: elementColor,
+          borderRadius: 'var(--radius-lg)',
+          display: 'flex',
+          flexDirection: 'column',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+        }}
+      >
+        {/* Header */}
+        <div
         style={{
           padding: '24px',
           borderBottom: `1px solid rgba(0, 0, 0, 0.1)`,
@@ -349,6 +364,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
