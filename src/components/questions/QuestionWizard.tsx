@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { usePlaceRate } from '../../context/PlaceRateContext';
 import { flattenQuestions, getQuestionAtIndex, getTotalQuestionCount, isLastQuestionOfElement } from '../../utils/questionUtils';
 import { pickInk } from '../../utils/contrast';
@@ -71,6 +71,24 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
       setCurrentIndex(currentIndex + 1);
     }
   };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        handleBack();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        handleForward();
+      } else if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentIndex, canGoBack, canGoForward, isLastQuestionOfCurrentElement, isLastQuestionOverall, onClose]);
 
   // Handle answer change
   const handleAnswerChange = (value: any) => {
@@ -227,6 +245,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         <button
           onClick={handleBack}
           disabled={!canGoBack}
+          aria-label="Previous question"
           style={{
             width: '48px',
             height: '48px',
@@ -250,6 +269,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         <button
           onClick={handleForward}
           disabled={!canGoForward}
+          aria-label={isLastQuestionOverall ? "Finish assessment" : "Next question"}
           style={{
             width: '48px',
             height: '48px',

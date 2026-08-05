@@ -35,8 +35,18 @@ export const OptionButton: React.FC<OptionButtonProps> = ({
     <button
       onClick={onClick}
       disabled={disabled}
+      aria-label={`Option: ${label}${selected ? ', selected' : ''}`}
+      aria-pressed={selected}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onFocus={(e) => {
+        const color = window.getComputedStyle(e.currentTarget).color;
+        e.currentTarget.style.outline = `2px solid ${color}`;
+        e.currentTarget.style.outlineOffset = '2px';
+      }}
+      onBlur={(e) => {
+        e.currentTarget.style.outline = 'none';
+      }}
       style={{
         width: '100%',
         padding: '16px 20px',
