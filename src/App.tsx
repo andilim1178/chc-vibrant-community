@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { ProjectsList } from './components/layout/ProjectsList';
+import { AddressSearch } from './components/setup/AddressSearch';
 import { PersonaSelector } from './components/persona/PersonaSelector';
 import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
 import { QuestionWizard } from './components/questions/QuestionWizard';
@@ -13,6 +14,7 @@ const MainContent: React.FC = () => {
   const [showPersonaModal, setShowPersonaModal] = useState(false);
   const [name, setName] = useState('');
   const [addr, setAddr] = useState('');
+  const [postcode, setPostcode] = useState('');
   const [type] = useState('Mixed Use');
   const [showWizard, setShowWizard] = useState(false);
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
@@ -37,7 +39,7 @@ const MainContent: React.FC = () => {
         {activeTab === 'setup' && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 24, maxWidth: 500, margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, marginBottom: 16 }}>Project Details</h2>
-            <form onSubmit={(e) => { e.preventDefault(); createNewProject({ name, addr, type }); }}>
+            <form onSubmit={(e) => { e.preventDefault(); createNewProject({ name, addr, postcode, type }); }}>
               <div style={{ marginBottom: 14 }}>
                 <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>PROJECT NAME</label>
                 <input
@@ -51,12 +53,13 @@ const MainContent: React.FC = () => {
               </div>
               <div style={{ marginBottom: 14 }}>
                 <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>LOCATION / ADDRESS</label>
-                <input
-                  type="text"
+                <AddressSearch
                   value={addr}
-                  onChange={(e) => setAddr(e.target.value)}
+                  onChange={(address: string, postcode_val?: string) => {
+                    setAddr(address);
+                    if (postcode_val) setPostcode(postcode_val);
+                  }}
                   placeholder="e.g. 123 Main St, Sydney"
-                  style={{ width: '100%', padding: '10px 12px', background: 'var(--surface2)', border: '1px solid var(--border2)', borderRadius: 'var(--radius)', color: 'var(--text)' }}
                 />
               </div>
               <button

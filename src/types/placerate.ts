@@ -54,6 +54,7 @@ export interface Project {
   id: string;
   name: string;
   addr: string;
+  postcode?: string;
   type: string;
   by: string;
   date: string;
