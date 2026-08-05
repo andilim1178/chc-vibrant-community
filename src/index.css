@@ -149,7 +149,7 @@ html, body {
 }
 
 .swatch-strip {
-  display: flex;
+  display: none;
   gap: 0;
   margin-bottom: 20px;
   border-radius: var(--radius);
