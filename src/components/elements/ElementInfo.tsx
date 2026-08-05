@@ -282,16 +282,26 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
         </h2>
 
         {/* Description */}
-        <p
+        <div
           style={{
-            fontSize: 14,
-            lineHeight: 1.6,
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            padding: '20px 24px',
+            borderRadius: 'var(--radius-lg)',
             marginBottom: 32,
-            opacity: 0.9,
+            backdropFilter: 'blur(8px)',
           }}
         >
-          {element.description}
-        </p>
+          <p
+            style={{
+              fontSize: 14,
+              lineHeight: 1.6,
+              margin: 0,
+              color: 'white',
+            }}
+          >
+            {element.description}
+          </p>
+        </div>
       </div>
 
       {/* Start Assessment Button */}
