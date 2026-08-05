@@ -46,7 +46,7 @@ html, body {
   position: sticky;
   top: 0;
   background: var(--bg);
-  z-index: 100;
+  z-index: 50;
 }
 
 .logo-group {
@@ -155,9 +155,6 @@ html, body {
   border-radius: var(--radius);
   overflow: hidden;
   height: 12px;
-  position: sticky;
-  top: 76px;
-  z-index: 99;
 }
 
 .swatch-strip > div {
