@@ -136,7 +136,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
     <div
       style={{
         position: 'fixed',
-        top: 0,
+        top: 95,
         left: 0,
         right: 0,
         bottom: 0,
@@ -146,7 +146,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         alignItems: 'center',
         justifyContent: 'center',
         color: textColor,
-        zIndex: 1000,
+        zIndex: 40,
         fontFamily: 'inherit',
         padding: '40px 24px',
       }}
