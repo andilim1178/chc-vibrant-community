@@ -191,7 +191,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
     <div
       style={{
         position: 'fixed',
-        top: 0,
+        top: 95,
         left: 0,
         right: 0,
         bottom: 0,
@@ -200,7 +200,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 999,
+        zIndex: 40,
         padding: '40px 24px',
         overflow: 'auto',
       }}
