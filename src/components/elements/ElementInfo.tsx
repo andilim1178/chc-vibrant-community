@@ -195,7 +195,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'var(--surface)',
+        backgroundColor: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
