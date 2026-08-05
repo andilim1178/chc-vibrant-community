@@ -155,6 +155,9 @@ html, body {
   border-radius: var(--radius);
   overflow: hidden;
   height: 12px;
+  position: sticky;
+  top: 76px;
+  z-index: 49;
 }
 
 .swatch-strip > div {
