@@ -48,7 +48,12 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
 
   // Navigation logic
   const canGoBack = currentIndex > 0;
-  const canGoForward = currentAnswer !== undefined;
+  // An answer counts only if it is actually set. An empty checklist array ([])
+  // means "nothing ticked yet" and must not unlock the forward button.
+  const canGoForward =
+    currentAnswer !== undefined &&
+    currentAnswer !== null &&
+    (Array.isArray(currentAnswer) ? currentAnswer.length > 0 : true);
   const isLastQuestionOfCurrentElement = currentQuestion
     ? isLastQuestionOfElement(template.elements, currentIndex)
     : false;
@@ -75,6 +80,13 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't hijack arrow keys while the user is typing in a text field
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName;
+      const isTextInput =
+        tag === 'TEXTAREA' || tag === 'INPUT' || target?.isContentEditable === true;
+      if (isTextInput) return;
+
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         handleBack();
@@ -112,7 +124,8 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   // Check if notes should be visible
   const showNotes = activePersonaConfig.showNotes;
 
-  if (!currentQuestion || !currentElement) {
+  // Without an active project there is nowhere to store answers, so never open.
+  if (!activeProject || !currentQuestion || !currentElement) {
     return null;
   }
 

@@ -81,7 +81,11 @@ const MainContent: React.FC = () => {
                 </button>
               </div>
 
-              <div className="home-caption">To begin assessment, select a HARD ELEMENT</div>
+              <div className="home-caption">
+                {activeProject
+                  ? 'To begin assessment, select a HARD ELEMENT'
+                  : 'Create a project before starting an assessment'}
+              </div>
 
               {template.elements
                 .filter(e => e.type === 'hard')
@@ -93,11 +97,22 @@ const MainContent: React.FC = () => {
                     <div
                       key={e.id}
                       className="el-row"
-                      onClick={() => { setSelectedElementId(e.id); setShowWizard(true); }}
+                      aria-disabled={!activeProject}
+                      onClick={() => {
+                        // Without an active project, answers cannot be persisted —
+                        // send the user to project setup instead of losing their input.
+                        if (!activeProject) {
+                          setActiveTab('setup');
+                          return;
+                        }
+                        setSelectedElementId(e.id);
+                        setShowWizard(true);
+                      }}
                       style={{
                         backgroundColor: hex === 'var(--el-default)' ? 'var(--el-default)' : hex,
                         '--on-el': onEl,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        opacity: activeProject ? 1 : 0.5
                       } as React.CSSProperties & { '--on-el': string }}
                     >
                       <span>{e.name}</span>

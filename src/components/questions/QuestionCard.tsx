@@ -55,21 +55,25 @@ export const QuestionCard: React.FC<QuestionCardProps> = (props) => {
 
   // Render proximity question type
   const renderProximity = () => {
-    const options = [
-      ...(question.options || []),
-      { title: 'N/A', value: 'n/a' },
-    ];
+    // Store the option INDEX (not the point value) so scoring.ts can look up
+    // question.options[answer].value correctly.
+    const proximityOptions = (question.options || []).map((opt, idx) => ({ ...opt, index: idx }));
 
     return (
       <div style={{ marginTop: '32px' }}>
-        {options.map((option) => (
+        {proximityOptions.map((option) => (
           <OptionButton
-            key={option.value}
+            key={option.index}
             label={option.title}
-            selected={value === option.value}
-            onClick={() => onChange(option.value)}
+            selected={value === option.index}
+            onClick={() => onChange(option.index)}
           />
         ))}
+        <OptionButton
+          label="N/A"
+          selected={value === 'n/a'}
+          onClick={() => onChange('n/a')}
+        />
       </div>
     );
   };
