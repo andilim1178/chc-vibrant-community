@@ -202,7 +202,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
         justifyContent: 'center',
         zIndex: 40,
         padding: '40px 24px',
-        overflow: 'auto',
+        overflow: 'hidden',
       }}
     >
       <div

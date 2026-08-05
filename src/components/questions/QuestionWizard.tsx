@@ -149,6 +149,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         zIndex: 40,
         fontFamily: 'inherit',
         padding: '40px 24px',
+        overflow: 'hidden',
       }}
     >
       <div
