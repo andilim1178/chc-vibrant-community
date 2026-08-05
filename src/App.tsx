@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { ProjectsList } from './components/layout/ProjectsList';
@@ -25,6 +25,12 @@ const MainContent: React.FC = () => {
   const [elementType, setElementType] = useState<'hard' | 'soft'>('hard');
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
+
+  // Close overlays when tab changes
+  useEffect(() => {
+    setShowWizard(false);
+    setShowElementInfo(false);
+  }, [activeTab]);
 
   const handleOpenElementInfo = (elementId: string) => {
     if (!activeProject) {
