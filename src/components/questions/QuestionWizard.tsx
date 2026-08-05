@@ -14,7 +14,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   onClose,
   initialElementId
 }) => {
-  const { template, activeProject, activePersonaConfig, updateProjectAnswers, updateProjectNotes } = usePlaceRate();
+  const { template, activeProject, activePersonaConfig, updateProjectAnswers, updateProjectNotes, setActiveTab } = usePlaceRate();
 
   // Calculate starting index based on initialElementId
   const startIndex = useMemo(() => {
@@ -47,8 +47,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   const textColor = pickInk(resolvedColor);
 
   // Navigation logic
-  const isFirstQuestionOfCurrentElement = currentQuestion?.questionIdx === 0;
-  const canGoBack = currentIndex > 0 && !isFirstQuestionOfCurrentElement;
+  const canGoBack = currentIndex > 0;
   // An answer counts only if it is actually set. An empty checklist array ([])
   // means "nothing ticked yet" and must not unlock the forward button.
   const canGoForward =
@@ -76,6 +75,12 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
     } else {
       setCurrentIndex(currentIndex + 1);
     }
+  };
+
+  // Handle home button
+  const handleHome = () => {
+    onClose();
+    setActiveTab('elements');
   };
 
   // Keyboard navigation
@@ -122,9 +127,6 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
     ? activeProject?.notes[currentQuestion.elementId] || ''
     : '';
 
-  // Check if notes should be visible
-  const showNotes = activePersonaConfig.showNotes;
-
   // Without an active project there is nowhere to store answers, so never open.
   if (!activeProject || !currentQuestion || !currentElement) {
     return null;
@@ -157,10 +159,33 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
           gap: '24px',
         }}
       >
-        {/* Left: Element icon */}
-        <div style={{ fontSize: '24px' }}>
-          {currentElement.icon}
-        </div>
+        {/* Left: Home button */}
+        <button
+          onClick={handleHome}
+          aria-label="Back to elements"
+          style={{
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            border: `2px solid ${textColor}`,
+            backgroundColor: 'transparent',
+            color: textColor,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '18px',
+            transition: 'all 200ms ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
+        >
+          🏠
+        </button>
 
         {/* Center: Element name */}
         <div style={{ flex: 1, textAlign: 'center' }}>
@@ -220,7 +245,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
           justifyContent: 'center',
         }}
       >
-        <div style={{ maxWidth: '600px', width: '100%' }}>
+        <div style={{ maxWidth: '560px', width: '100%' }}>
           {/* Question Card */}
           <QuestionCard
             question={currentQuestion.question}
@@ -231,9 +256,9 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             onChange={handleAnswerChange}
           />
 
-          {/* Notes Section */}
+          {/* Notes Section - Always show */}
           <NotesSection
-            visible={showNotes}
+            visible={true}
             notes={currentNotes}
             onChange={handleNotesChange}
             elementName={
@@ -242,66 +267,88 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
                 : currentElement.name
             }
           />
+
+          {/* Navigation buttons - Below content */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: '32px',
+              paddingTop: '24px',
+              borderTop: `1px solid rgba(255, 255, 255, 0.2)`,
+            }}
+          >
+            {/* Back button */}
+            <button
+              onClick={handleBack}
+              disabled={!canGoBack}
+              aria-label="Previous question"
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                border: `2px solid ${textColor}`,
+                backgroundColor: 'transparent',
+                color: textColor,
+                cursor: canGoBack ? 'pointer' : 'not-allowed',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '20px',
+                opacity: canGoBack ? 1 : 0.3,
+                transition: 'all 200ms ease',
+              }}
+              onMouseEnter={(e) => {
+                if (canGoBack) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
+              ←
+            </button>
+
+            {/* Center: Question counter */}
+            <span style={{ fontSize: '12px', opacity: 0.7 }}>
+              {currentIndex + 1} / {totalQuestions}
+            </span>
+
+            {/* Forward button */}
+            <button
+              onClick={handleForward}
+              disabled={!canGoForward}
+              aria-label={isLastQuestionOverall || isLastQuestionOfCurrentElement ? "Finish assessment" : "Next question"}
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                border: `2px solid ${textColor}`,
+                backgroundColor: 'transparent',
+                color: textColor,
+                cursor: canGoForward ? 'pointer' : 'not-allowed',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '20px',
+                opacity: canGoForward ? 1 : 0.3,
+                transition: 'all 200ms ease',
+              }}
+              onMouseEnter={(e) => {
+                if (canGoForward) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
+              →
+            </button>
+          </div>
         </div>
-      </div>
-
-      {/* Footer */}
-      <div
-        style={{
-          padding: '24px 32px',
-          borderTop: `1px solid rgba(0, 0, 0, 0.1)`,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        {/* Back button */}
-        <button
-          onClick={handleBack}
-          disabled={!canGoBack}
-          aria-label="Previous question"
-          style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '50%',
-            border: `2px solid ${textColor}`,
-            backgroundColor: 'transparent',
-            color: textColor,
-            cursor: canGoBack ? 'pointer' : 'not-allowed',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '20px',
-            opacity: canGoBack ? 1 : 0.3,
-            transition: 'opacity 200ms ease',
-          }}
-        >
-          ←
-        </button>
-
-        {/* Forward button */}
-        <button
-          onClick={handleForward}
-          disabled={!canGoForward}
-          aria-label={isLastQuestionOverall || isLastQuestionOfCurrentElement ? "Finish assessment" : "Next question"}
-          style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '50%',
-            border: `2px solid ${textColor}`,
-            backgroundColor: 'transparent',
-            color: textColor,
-            cursor: canGoForward ? 'pointer' : 'not-allowed',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '20px',
-            opacity: canGoForward ? 1 : 0.3,
-            transition: 'opacity 200ms ease',
-          }}
-        >
-          →
-        </button>
       </div>
     </div>
   );

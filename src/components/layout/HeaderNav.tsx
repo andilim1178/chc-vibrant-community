@@ -5,8 +5,8 @@ export const HeaderNav: React.FC<{ onOpenPersona: () => void }> = ({ onOpenPerso
   const { activeTab, setActiveTab, activeProject, activePersonaConfig } = usePlaceRate();
 
   const tabs = [
-    { id: 'setup', label: 'Setup' },
     { id: 'projects', label: 'Projects' },
+    { id: 'setup', label: 'Setup' },
     { id: 'elements', label: 'Elements' },
     { id: 'results', label: 'Results' },
     { id: 'report', label: 'Report' }
