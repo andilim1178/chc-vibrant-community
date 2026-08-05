@@ -195,141 +195,179 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: element.color === 'var(--el-default)' ? 'var(--surface)' : (element.color || 'var(--surface)'),
+        backgroundColor: 'var(--surface)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 24,
+        justifyContent: 'center',
         zIndex: 999,
-        color: textColor,
+        padding: '40px 24px',
         overflow: 'auto',
       }}
     >
-      {/* Close Button */}
-      <button
-        onClick={onClose}
+      <div
         style={{
-          position: 'absolute',
-          top: 24,
-          left: 24,
-          width: 40,
-          height: 40,
-          borderRadius: '50%',
-          border: `2px solid ${textColor}`,
-          backgroundColor: 'transparent',
+          maxWidth: 560,
+          width: '100%',
+          backgroundColor: element.color === 'var(--el-default)' ? '#767482' : (element.color || '#767482'),
           color: textColor,
-          fontSize: 20,
-          cursor: 'pointer',
+          borderRadius: 'var(--radius-lg)',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          position: 'relative',
         }}
       >
-        ←
-      </button>
-
-      {/* Home Icon */}
-      <button
-        onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: 24,
-          right: 24,
-          width: 40,
-          height: 40,
-          borderRadius: '50%',
-          border: `2px solid ${textColor}`,
-          backgroundColor: 'transparent',
-          color: textColor,
-          fontSize: 20,
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        🏠
-      </button>
-
-      {/* Content */}
-      <div style={{ maxWidth: 400, textAlign: 'center', marginTop: 60 }}>
-        {/* Illustration */}
+        {/* Header with buttons */}
         <div
           style={{
-            width: 150,
-            height: 150,
-            margin: '0 auto 32px',
+            padding: '24px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            color: textColor,
-          }}
-          dangerouslySetInnerHTML={{ __html: illustration }}
-        />
-
-        {/* Element Name */}
-        <h2
-          style={{
-            fontSize: 28,
-            fontWeight: 700,
-            marginBottom: 16,
-            textTransform: 'uppercase',
-            letterSpacing: 1,
+            justifyContent: 'space-between',
+            gap: '24px',
           }}
         >
-          {element.name}
-        </h2>
-
-        {/* Description */}
-        <div
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            padding: '20px 24px',
-            borderRadius: 'var(--radius-lg)',
-            marginBottom: 32,
-            backdropFilter: 'blur(8px)',
-          }}
-        >
-          <p
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            aria-label="Back to elements"
             style={{
-              fontSize: 14,
-              lineHeight: 1.6,
-              margin: 0,
-              color: 'white',
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              border: `2px solid ${textColor}`,
+              backgroundColor: 'transparent',
+              color: textColor,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              transition: 'all 200ms ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
-            {element.description}
-          </p>
+            ←
+          </button>
+
+          {/* Home Icon */}
+          <button
+            onClick={onClose}
+            aria-label="Back to elements"
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              border: `2px solid ${textColor}`,
+              backgroundColor: 'transparent',
+              color: textColor,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              transition: 'all 200ms ease',
+              marginLeft: 'auto',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          >
+            🏠
+          </button>
+        </div>
+
+        {/* Content */}
+        <div style={{ flex: 1, padding: '0 24px 24px 24px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          {/* Illustration */}
+          <div
+            style={{
+              width: 150,
+              height: 150,
+              margin: '0 auto 32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: textColor,
+            }}
+            dangerouslySetInnerHTML={{ __html: illustration }}
+          />
+
+          {/* Element Name */}
+          <h2
+            style={{
+              fontSize: 28,
+              fontWeight: 700,
+              marginBottom: 16,
+              textTransform: 'uppercase',
+              letterSpacing: 1,
+              margin: 0,
+            }}
+          >
+            {element.name}
+          </h2>
+
+          {/* Description */}
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              padding: '20px 24px',
+              borderRadius: 'var(--radius-lg)',
+              marginBottom: 32,
+              marginTop: 16,
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <p
+              style={{
+                fontSize: 14,
+                lineHeight: 1.6,
+                margin: 0,
+                color: 'white',
+              }}
+            >
+              {element.description}
+            </p>
+          </div>
+
+          {/* Start Assessment Button */}
+          <button
+            onClick={onStartAssessment}
+            style={{
+              padding: '14px 32px',
+              fontSize: 16,
+              fontWeight: 600,
+              backgroundColor: textColor,
+              color: element.color === 'var(--el-default)' ? '#767482' : (element.color || 'var(--surface)'),
+              border: 'none',
+              borderRadius: 'var(--radius-lg)',
+              cursor: 'pointer',
+              marginTop: 'auto',
+              transition: 'all 200ms ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '0.85';
+              e.currentTarget.style.transform = 'scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            Start Assessment →
+          </button>
         </div>
       </div>
-
-      {/* Start Assessment Button */}
-      <button
-        onClick={onStartAssessment}
-        style={{
-          padding: '14px 32px',
-          fontSize: 16,
-          fontWeight: 600,
-          backgroundColor: textColor,
-          color: element.color === 'var(--el-default)' ? 'var(--surface)' : (element.color || 'var(--surface)'),
-          border: 'none',
-          borderRadius: 'var(--radius-lg)',
-          cursor: 'pointer',
-          marginBottom: 24,
-          transition: 'all 200ms ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.opacity = '0.85';
-          e.currentTarget.style.transform = 'scale(1.05)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.opacity = '1';
-          e.currentTarget.style.transform = 'scale(1)';
-        }}
-      >
-        Start Assessment →
-      </button>
     </div>
   );
 };
