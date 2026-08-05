@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
+import { ProjectsList } from './components/layout/ProjectsList';
 import { PersonaSelector } from './components/persona/PersonaSelector';
 import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
 import { QuestionWizard } from './components/questions/QuestionWizard';
@@ -67,6 +68,8 @@ const MainContent: React.FC = () => {
             </form>
           </div>
         )}
+
+        {activeTab === 'projects' && <ProjectsList />}
 
         {activeTab === 'elements' && (
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
