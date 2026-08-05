@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { ProjectsList } from './components/layout/ProjectsList';
-import { AddressSearch } from './components/setup/AddressSearch';
-import { ElementInfo } from './components/elements/ElementInfo';
-import { ReportView } from './components/results/ReportView';
 import { PersonaSelector } from './components/persona/PersonaSelector';
 import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
 import { QuestionWizard } from './components/questions/QuestionWizard';
@@ -16,31 +13,19 @@ const MainContent: React.FC = () => {
   const [showPersonaModal, setShowPersonaModal] = useState(false);
   const [name, setName] = useState('');
   const [addr, setAddr] = useState('');
-  const [postcode, setPostcode] = useState('');
   const [type] = useState('Mixed Use');
   const [showWizard, setShowWizard] = useState(false);
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
-  const [showElementInfo, setShowElementInfo] = useState(false);
-  const [infoElementId, setInfoElementId] = useState<string | null>(null);
-  const [elementType, setElementType] = useState<'hard' | 'soft'>('hard');
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
 
-  const handleOpenElementInfo = (elementId: string) => {
+  const handleOpenWizard = (elementId: string) => {
     if (!activeProject) {
       setActiveTab('setup');
       return;
     }
-    setInfoElementId(elementId);
-    setShowElementInfo(true);
-  };
-
-  const handleStartAssessment = () => {
-    if (infoElementId) {
-      setSelectedElementId(infoElementId);
-      setShowWizard(true);
-      setShowElementInfo(false);
-    }
+    setSelectedElementId(elementId);
+    setShowWizard(true);
   };
 
   return (
@@ -52,7 +37,7 @@ const MainContent: React.FC = () => {
         {activeTab === 'setup' && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 24, maxWidth: 500, margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, marginBottom: 16 }}>Project Details</h2>
-            <form onSubmit={(e) => { e.preventDefault(); createNewProject({ name, addr, postcode, type }); }}>
+            <form onSubmit={(e) => { e.preventDefault(); createNewProject({ name, addr, type }); }}>
               <div style={{ marginBottom: 14 }}>
                 <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>PROJECT NAME</label>
                 <input
@@ -66,13 +51,12 @@ const MainContent: React.FC = () => {
               </div>
               <div style={{ marginBottom: 14 }}>
                 <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>LOCATION / ADDRESS</label>
-                <AddressSearch
+                <input
+                  type="text"
                   value={addr}
-                  onChange={(address: string, postcode_val?: string) => {
-                    setAddr(address);
-                    if (postcode_val) setPostcode(postcode_val);
-                  }}
+                  onChange={(e) => setAddr(e.target.value)}
                   placeholder="e.g. 123 Main St, Sydney"
+                  style={{ width: '100%', padding: '10px 12px', background: 'var(--surface2)', border: '1px solid var(--border2)', borderRadius: 'var(--radius)', color: 'var(--text)' }}
                 />
               </div>
               <button
@@ -90,7 +74,7 @@ const MainContent: React.FC = () => {
         {activeTab === 'elements' && (
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
             <div className="swatch-strip">
-              {template.elements.filter(e => e.type === elementType).map(e => (
+              {template.elements.filter(e => e.type === 'hard').map(e => (
                 <div key={e.id} style={{ backgroundColor: e.color || 'var(--el-default)' }} />
               ))}
             </div>
@@ -109,50 +93,14 @@ const MainContent: React.FC = () => {
                 </button>
               </div>
 
-              {/* Element Type Toggle */}
-              <div style={{ display: 'flex', gap: 12, marginBottom: 20, justifyContent: 'center' }}>
-                <button
-                  onClick={() => setElementType('hard')}
-                  style={{
-                    padding: '10px 20px',
-                    fontSize: 14,
-                    fontWeight: 600,
-                    backgroundColor: elementType === 'hard' ? 'var(--accent)' : 'var(--surface2)',
-                    color: elementType === 'hard' ? 'var(--accent-text)' : 'var(--text)',
-                    border: 'none',
-                    borderRadius: 'var(--radius)',
-                    cursor: 'pointer',
-                    transition: 'all 200ms ease',
-                  }}
-                >
-                  Hard Elements
-                </button>
-                <button
-                  onClick={() => setElementType('soft')}
-                  style={{
-                    padding: '10px 20px',
-                    fontSize: 14,
-                    fontWeight: 600,
-                    backgroundColor: elementType === 'soft' ? 'var(--accent)' : 'var(--surface2)',
-                    color: elementType === 'soft' ? 'var(--accent-text)' : 'var(--text)',
-                    border: 'none',
-                    borderRadius: 'var(--radius)',
-                    cursor: 'pointer',
-                    transition: 'all 200ms ease',
-                  }}
-                >
-                  Soft Elements
-                </button>
-              </div>
-
               <div className="home-caption">
                 {activeProject
-                  ? `To begin assessment, select a ${elementType.toUpperCase()} ELEMENT`
+                  ? 'To begin assessment, select a HARD ELEMENT'
                   : 'Create a project before starting an assessment'}
               </div>
 
               {template.elements
-                .filter(e => e.type === elementType)
+                .filter(e => e.type === 'hard')
                 .map(e => {
                   const score = activeProject?.scores?.[e.id];
                   const hex = e.color || 'var(--el-default)';
@@ -164,8 +112,8 @@ const MainContent: React.FC = () => {
                       role="button"
                       tabIndex={0}
                       aria-disabled={!activeProject}
-                      onClick={() => handleOpenElementInfo(e.id)}
-                      onKeyDown={(evt) => evt.key === 'Enter' && handleOpenElementInfo(e.id)}
+                      onClick={() => handleOpenWizard(e.id)}
+                      onKeyDown={(evt) => evt.key === 'Enter' && handleOpenWizard(e.id)}
                       style={{
                         backgroundColor: hex === 'var(--el-default)' ? 'var(--el-default)' : hex,
                         '--on-el': onEl,
@@ -206,16 +154,6 @@ const MainContent: React.FC = () => {
               <VibrancyWheelCanvas size={180} />
             </div>
           </div>
-        )}
-
-        {activeTab === 'report' && <ReportView />}
-
-        {showElementInfo && infoElementId && (
-          <ElementInfo
-            element={template.elements.find(e => e.id === infoElementId)!}
-            onStartAssessment={handleStartAssessment}
-            onClose={() => setShowElementInfo(false)}
-          />
         )}
 
         {showWizard && (
