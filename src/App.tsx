@@ -3,6 +3,7 @@ import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { PersonaSelector } from './components/persona/PersonaSelector';
 import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
+import { QuestionWizard } from './components/questions/QuestionWizard';
 import { calculateProjectScore } from './utils/scoring';
 import { pickInk } from './utils/contrast';
 
@@ -12,6 +13,8 @@ const MainContent: React.FC = () => {
   const [name, setName] = useState('');
   const [addr, setAddr] = useState('');
   const [type] = useState('Mixed Use');
+  const [showWizard, setShowWizard] = useState(false);
+  const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
 
@@ -90,9 +93,11 @@ const MainContent: React.FC = () => {
                     <div
                       key={e.id}
                       className="el-row"
+                      onClick={() => { setSelectedElementId(e.id); setShowWizard(true); }}
                       style={{
                         backgroundColor: hex === 'var(--el-default)' ? 'var(--el-default)' : hex,
-                        '--on-el': onEl
+                        '--on-el': onEl,
+                        cursor: 'pointer'
                       } as React.CSSProperties & { '--on-el': string }}
                     >
                       <span>{e.name}</span>
@@ -128,6 +133,13 @@ const MainContent: React.FC = () => {
               <VibrancyWheelCanvas size={180} />
             </div>
           </div>
+        )}
+
+        {showWizard && (
+          <QuestionWizard
+            initialElementId={selectedElementId || undefined}
+            onClose={() => setShowWizard(false)}
+          />
         )}
       </main>
     </div>
