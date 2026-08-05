@@ -269,7 +269,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         <button
           onClick={handleForward}
           disabled={!canGoForward}
-          aria-label={isLastQuestionOverall ? "Finish assessment" : "Next question"}
+          aria-label={isLastQuestionOverall || isLastQuestionOfCurrentElement ? "Finish assessment" : "Next question"}
           style={{
             width: '48px',
             height: '48px',
