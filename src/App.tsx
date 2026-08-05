@@ -21,6 +21,7 @@ const MainContent: React.FC = () => {
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
   const [showElementInfo, setShowElementInfo] = useState(false);
   const [infoElementId, setInfoElementId] = useState<string | null>(null);
+  const [elementType, setElementType] = useState<'hard' | 'soft'>('hard');
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
 
@@ -88,7 +89,7 @@ const MainContent: React.FC = () => {
         {activeTab === 'elements' && (
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
             <div className="swatch-strip">
-              {template.elements.filter(e => e.type === 'hard').map(e => (
+              {template.elements.filter(e => e.type === elementType).map(e => (
                 <div key={e.id} style={{ backgroundColor: e.color || 'var(--el-default)' }} />
               ))}
             </div>
@@ -107,14 +108,50 @@ const MainContent: React.FC = () => {
                 </button>
               </div>
 
+              {/* Element Type Toggle */}
+              <div style={{ display: 'flex', gap: 12, marginBottom: 20, justifyContent: 'center' }}>
+                <button
+                  onClick={() => setElementType('hard')}
+                  style={{
+                    padding: '10px 20px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    backgroundColor: elementType === 'hard' ? 'var(--accent)' : 'var(--surface2)',
+                    color: elementType === 'hard' ? 'var(--accent-text)' : 'var(--text)',
+                    border: 'none',
+                    borderRadius: 'var(--radius)',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease',
+                  }}
+                >
+                  Hard Elements
+                </button>
+                <button
+                  onClick={() => setElementType('soft')}
+                  style={{
+                    padding: '10px 20px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    backgroundColor: elementType === 'soft' ? 'var(--accent)' : 'var(--surface2)',
+                    color: elementType === 'soft' ? 'var(--accent-text)' : 'var(--text)',
+                    border: 'none',
+                    borderRadius: 'var(--radius)',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease',
+                  }}
+                >
+                  Soft Elements
+                </button>
+              </div>
+
               <div className="home-caption">
                 {activeProject
-                  ? 'To begin assessment, select a HARD ELEMENT'
+                  ? `To begin assessment, select a ${elementType.toUpperCase()} ELEMENT`
                   : 'Create a project before starting an assessment'}
               </div>
 
               {template.elements
-                .filter(e => e.type === 'hard')
+                .filter(e => e.type === elementType)
                 .map(e => {
                   const score = activeProject?.scores?.[e.id];
                   const hex = e.color || 'var(--el-default)';
