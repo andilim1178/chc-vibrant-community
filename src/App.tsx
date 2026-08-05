@@ -18,6 +18,15 @@ const MainContent: React.FC = () => {
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
 
+  const handleOpenWizard = (elementId: string) => {
+    if (!activeProject) {
+      setActiveTab('setup');
+      return;
+    }
+    setSelectedElementId(elementId);
+    setShowWizard(true);
+  };
+
   return (
     <div className="shell">
       <HeaderNav onOpenPersona={() => setShowPersonaModal(true)} />
@@ -97,17 +106,11 @@ const MainContent: React.FC = () => {
                     <div
                       key={e.id}
                       className="el-row"
+                      role="button"
+                      tabIndex={0}
                       aria-disabled={!activeProject}
-                      onClick={() => {
-                        // Without an active project, answers cannot be persisted —
-                        // send the user to project setup instead of losing their input.
-                        if (!activeProject) {
-                          setActiveTab('setup');
-                          return;
-                        }
-                        setSelectedElementId(e.id);
-                        setShowWizard(true);
-                      }}
+                      onClick={() => handleOpenWizard(e.id)}
+                      onKeyDown={(evt) => evt.key === 'Enter' && handleOpenWizard(e.id)}
                       style={{
                         backgroundColor: hex === 'var(--el-default)' ? 'var(--el-default)' : hex,
                         '--on-el': onEl,

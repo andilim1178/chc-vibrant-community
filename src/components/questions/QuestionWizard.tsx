@@ -47,7 +47,8 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   const textColor = pickInk(resolvedColor);
 
   // Navigation logic
-  const canGoBack = currentIndex > 0;
+  const isFirstQuestionOfCurrentElement = currentQuestion?.questionIdx === 0;
+  const canGoBack = currentIndex > 0 && !isFirstQuestionOfCurrentElement;
   // An answer counts only if it is actually set. An empty checklist array ([])
   // means "nothing ticked yet" and must not unlock the forward button.
   const canGoForward =
