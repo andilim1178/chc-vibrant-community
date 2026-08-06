@@ -110,8 +110,9 @@ const MainContent: React.FC = () => {
                   className="home-head-button"
                   onClick={() => setShowPersonaModal(true)}
                   aria-label="Select persona"
+                  style={{ fontFamily: 'Material Icons', fontSize: '24px' }}
                 >
-                  ⚙️
+                  settings
                 </button>
               </div>
 
