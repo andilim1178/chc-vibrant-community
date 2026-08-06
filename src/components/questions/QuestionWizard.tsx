@@ -190,8 +190,9 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '18px',
+            fontSize: '20px',
             transition: 'all 200ms ease',
+            fontFamily: 'Material Icons',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
@@ -200,7 +201,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          🏠
+          home
         </button>
 
         {/* Center: Element name */}
@@ -311,9 +312,10 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '20px',
+                fontSize: '24px',
                 opacity: canGoBack ? 1 : 0.3,
                 transition: 'all 200ms ease',
+                fontFamily: 'Material Icons',
               }}
               onMouseEnter={(e) => {
                 if (canGoBack) {
@@ -324,7 +326,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              ←
+              arrow_back
             </button>
 
             {/* Center: Question counter */}
@@ -348,9 +350,10 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '20px',
+                fontSize: '24px',
                 opacity: canGoForward ? 1 : 0.3,
                 transition: 'all 200ms ease',
+                fontFamily: 'Material Icons',
               }}
               onMouseEnter={(e) => {
                 if (canGoForward) {
@@ -361,7 +364,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              →
+              arrow_forward
             </button>
           </div>
         </div>
