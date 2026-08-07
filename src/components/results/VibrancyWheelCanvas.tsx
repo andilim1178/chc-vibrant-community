@@ -73,7 +73,8 @@ export const VibrancyWheelCanvas: React.FC<VibrancyWheelCanvasProps> = ({ size =
 
     // Draw center text
     ctx.fillStyle = 'var(--text)';
-    ctx.font = `bold ${size * 0.12}px sans-serif`;
+    // Canvas can't read CSS vars — the element font is named directly here.
+    ctx.font = `600 ${size * 0.12}px Poppins, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(totalScore.toString(), centerX, centerY);

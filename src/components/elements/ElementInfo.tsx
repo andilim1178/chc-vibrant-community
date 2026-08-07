@@ -166,7 +166,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
               fontSize: 28,
               fontWeight: 700,
               marginBottom: 16,
-              textTransform: 'uppercase',
+              textTransform: 'none',
               letterSpacing: 1,
               margin: 0,
             }}

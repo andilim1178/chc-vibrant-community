@@ -99,6 +99,19 @@ h4, h5 {
 }
 
 /*
+  Element names run in their natural case. Poppins is a geometric face whose
+  character lives in the lowercase — under the uppercase used elsewhere in the
+  CHC system it is almost indistinguishable from Archivo, so the caps are
+  dropped here and kept for the app chrome.
+*/
+.element-scope h1,
+.element-scope h2,
+.element-scope h3 {
+  text-transform: none;
+  letter-spacing: -0.015em;
+}
+
+/*
   Material Icons render through lowercase ligatures. The uppercase tracking
   used on chips, tabs and bars breaks the ligature and prints the literal
   icon name, so opt every icon out of both.
@@ -338,9 +351,9 @@ h4, h5 {
   color: var(--on-el);
   font-family: var(--font-element);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
   transition: transform 0.15s;
 }
 

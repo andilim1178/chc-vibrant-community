@@ -212,7 +212,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
               fontWeight: 700,
               letterSpacing: '1px',
               margin: 0,
-              textTransform: 'uppercase',
+              textTransform: 'none',
             }}
           >
             {activePersonaConfig.plainLanguage && currentElement.communityName
