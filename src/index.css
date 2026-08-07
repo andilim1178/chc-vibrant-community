@@ -24,6 +24,9 @@
   /* Everything element-related is set in Poppins — see .element-scope below. */
   --font-element: 'Poppins', sans-serif;
   --max: 1200px;
+  /* Rendered height of the sticky .top-bar. The swatch strip pins directly
+     below it, so the two must agree or the strip slides under the bar. */
+  --top-bar-h: 80px;
 }
 
 /*
@@ -179,14 +182,14 @@ html, body {
 }
 
 .swatch-strip {
-  display: none;
+  display: flex;
   gap: 0;
   margin-bottom: 20px;
   border-radius: var(--radius);
   overflow: hidden;
   height: 12px;
   position: sticky;
-  top: 76px;
+  top: var(--top-bar-h);
   z-index: 99;
 }
 
