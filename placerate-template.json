@@ -769,7 +769,7 @@
         }
       ],
       "improvement": "Develop a clear place identity and commission public art.",
-      "color": "#CE2626"
+      "color": "#C8B5AC"
     },
     {
       "id": "people",
@@ -837,7 +837,7 @@
         }
       ],
       "improvement": "Strengthen inclusive design and community consultation.",
-      "color": "#7A1420"
+      "color": "#E8BFBB"
     },
     {
       "id": "safety",
@@ -905,7 +905,7 @@
         }
       ],
       "improvement": "Apply CPTED principles and improve passive surveillance.",
-      "color": "#2D5016"
+      "color": "#F4E0B2"
     },
     {
       "id": "events",
@@ -973,7 +973,7 @@
         }
       ],
       "improvement": "Establish a programming calendar and flexible event spaces.",
-      "color": "#8BC34A"
+      "color": "#F8EDC8"
     },
     {
       "id": "nature",
@@ -1041,7 +1041,7 @@
         }
       ],
       "improvement": "Increase tree canopy and introduce biodiversity corridors.",
-      "color": "#E8B923"
+      "color": "#D8E8D8"
     },
     {
       "id": "arts",
@@ -1109,7 +1109,7 @@
         }
       ],
       "improvement": "Commission public art and create dedicated creative spaces.",
-      "color": "#EFC6D8"
+      "color": "#C0DDD8"
     },
     {
       "id": "play",
@@ -1177,7 +1177,7 @@
         }
       ],
       "improvement": "Add play areas and informal recreation spaces for all ages.",
-      "color": "#E0F2E9"
+      "color": "#D0DFF0"
     },
     {
       "id": "governance",
@@ -1245,7 +1245,7 @@
         }
       ],
       "improvement": "Establish a community management body and resident voice.",
-      "color": "#4472C4"
+      "color": "#D8E0E8"
     },
     {
       "id": "aging",
@@ -1313,7 +1313,7 @@
         }
       ],
       "improvement": "Improve universal access and create intergenerational programming.",
-      "color": "#5B9BD5"
+      "color": "#E0D0E0"
     }
   ],
   "benchmarks": [
