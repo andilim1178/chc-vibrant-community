@@ -47,7 +47,7 @@ export const PersonaSelector: React.FC<{ onClose: () => void }> = ({ onClose }) 
                 textAlign: 'center'
               }}
             >
-              <div style={{ fontSize: 48, marginBottom: 10, fontFamily: 'Material Icons', color: 'var(--text)' }}>{p.icon}</div>
+              <div style={{ fontSize: 36, marginBottom: 10 }}>{p.icon}</div>
               <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 16, marginBottom: 6, color: 'var(--text)' }}>
                 {p.label}
               </div>
