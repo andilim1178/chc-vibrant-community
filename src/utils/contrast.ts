@@ -15,7 +15,7 @@ export function contrastRatio(a: string, b: string): number {
 export function pickInk(
   hex: string,
   light = '#FFFFFF',
-  dark = '#2B2A38'
+  dark = '#000000'
 ): string {
   const ratioLight = contrastRatio(hex, light);
   const ratioDark = contrastRatio(hex, dark);
