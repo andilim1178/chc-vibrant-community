@@ -20,7 +20,7 @@ export const HeaderNav: React.FC<{ onOpenPersona: () => void }> = ({ onOpenPerso
       </div>
       <div className="top-right">
         <button className="persona-chip" onClick={onOpenPersona}>
-          <span>{activePersonaConfig.icon}</span>
+          <span style={{ fontFamily: 'Material Icons' }}>{activePersonaConfig.icon}</span>
           <span>{activePersonaConfig.label}</span>
         </button>
         {activeProject && (

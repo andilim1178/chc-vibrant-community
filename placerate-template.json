@@ -9,7 +9,7 @@
     "developer": {
       "label": "Developer",
       "description": "Architects, planners, project teams",
-      "icon": "\ud83c\udfd7\ufe0f",
+      "icon": "engineering",
       "color": "#ba7517",
       "setupHeading": "Project details",
       "showStages": true,
@@ -19,7 +19,7 @@
     "council": {
       "label": "Council",
       "description": "Planners, DA assessors, strategists",
-      "icon": "\ud83c\udfdb\ufe0f",
+      "icon": "account_balance",
       "color": "#185fa5",
       "setupHeading": "Application details",
       "showStages": true,
@@ -29,7 +29,7 @@
     "community": {
       "label": "Community",
       "description": "Residents, local groups, advocates",
-      "icon": "\ud83d\udc4b",
+      "icon": "group",
       "color": "#1d9e75",
       "setupHeading": "Tell us about this project",
       "showStages": false,
@@ -41,7 +41,7 @@
     {
       "id": "transport",
       "name": "Transport",
-      "icon": "\ud83d\ude8c",
+      "icon": "🚌",
       "type": "hard",
       "description": "Connectivity to public and active transport networks",
       "communityName": "Getting around",
@@ -66,7 +66,7 @@
           "index": 1,
           "q": "How close is the nearest train/tram/bus stop?",
           "communityQ": "How close is the nearest public transport stop?",
-          "communityWhy": "Being able to walk to a stop makes a huge difference to daily life \u2014 especially for people without cars.",
+          "communityWhy": "Being able to walk to a stop makes a huge difference to daily life — especially for people without cars.",
           "type": "proximity",
           "options": [
             {
@@ -123,7 +123,7 @@
     {
       "id": "publicrealm",
       "name": "Public realm",
-      "icon": "\ud83c\udf33",
+      "icon": "🌳",
       "type": "hard",
       "description": "Publicly accessible spaces the community can use and interact within",
       "communityName": "Outdoor spaces",
@@ -134,7 +134,7 @@
         {
           "index": 0,
           "q": "Does the project have a central place for gathering?",
-          "communityQ": "Is there a central public space \u2014 like a square or plaza \u2014 where the community can gather?",
+          "communityQ": "Is there a central public space — like a square or plaza — where the community can gather?",
           "communityWhy": "Public gathering spaces are the heart of a community. They encourage social connection and community events.",
           "type": "yesno",
           "scoring": {
@@ -191,7 +191,7 @@
     {
       "id": "retail",
       "name": "Retail & food",
-      "icon": "\ud83d\udecd\ufe0f",
+      "icon": "🛍️",
       "type": "hard",
       "description": "Retail, dining, and daily needs within the precinct",
       "communityName": "Shops & food",
@@ -203,7 +203,7 @@
           "index": 0,
           "q": "Does the project include ground-floor retail activation?",
           "communityQ": "Are there shops, cafes, or services at street level that bring life to the area?",
-          "communityWhy": "Active street frontages make places feel safe and vibrant \u2014 there are always people around.",
+          "communityWhy": "Active street frontages make places feel safe and vibrant — there are always people around.",
           "type": "yesno",
           "scoring": {
             "yes": 3,
@@ -240,7 +240,7 @@
           "index": 2,
           "q": "What food & beverage types are planned?",
           "communityQ": "What kinds of food and drink options are available or planned?",
-          "communityWhy": "A variety of food choices means everyone in the community \u2014 different budgets, tastes, and dietary needs \u2014 is catered for.",
+          "communityWhy": "A variety of food choices means everyone in the community — different budgets, tastes, and dietary needs — is catered for.",
           "type": "checklist",
           "options": [
             {
@@ -272,7 +272,7 @@
     {
       "id": "education",
       "name": "Education",
-      "icon": "\ud83d\udcda",
+      "icon": "📚",
       "type": "hard",
       "description": "Education providers and learning opportunities nearby",
       "communityName": "Learning & childcare",
@@ -283,7 +283,7 @@
         {
           "index": 0,
           "q": "Is there a community space for other education providers?",
-          "communityQ": "Is there a community space for learning \u2014 like a library, hall, or education centre?",
+          "communityQ": "Is there a community space for learning — like a library, hall, or education centre?",
           "communityWhy": "Access to learning spaces benefits people of all ages, from young children to seniors.",
           "type": "yesno",
           "scoring": {
@@ -321,7 +321,7 @@
           "index": 2,
           "q": "Which education types are accessible?",
           "communityQ": "Which of these learning options are available nearby?",
-          "communityWhy": "A mix of education options supports the whole community \u2014 from babies to adults.",
+          "communityWhy": "A mix of education options supports the whole community — from babies to adults.",
           "type": "checklist",
           "options": [
             {
@@ -353,7 +353,7 @@
     {
       "id": "health",
       "name": "Health & wellbeing",
-      "icon": "\ud83c\udfe5",
+      "icon": "🏥",
       "type": "hard",
       "description": "Access to health services and wellness facilities",
       "communityName": "Health & wellbeing",
@@ -434,7 +434,7 @@
     {
       "id": "sustainable",
       "name": "Sustainable",
-      "icon": "\u267b\ufe0f",
+      "icon": "♻️",
       "type": "hard",
       "description": "Renewable energy and sustainable design features",
       "communityName": "Environment & sustainability",
@@ -502,7 +502,7 @@
     {
       "id": "housing",
       "name": "Housing diversity",
-      "icon": "\ud83c\udfd8\ufe0f",
+      "icon": "🏘️",
       "type": "hard",
       "description": "Range of dwelling types and affordability",
       "communityName": "Housing options",
@@ -513,7 +513,7 @@
         {
           "index": 0,
           "q": "Does the project include diverse housing types?",
-          "communityQ": "Does the project include different types of homes \u2014 not just one kind of apartment or house?",
+          "communityQ": "Does the project include different types of homes — not just one kind of apartment or house?",
           "communityWhy": "A mix of housing types means people at different life stages and budgets can all find a place to live.",
           "type": "yesno",
           "scoring": {
@@ -570,7 +570,7 @@
     {
       "id": "economy",
       "name": "Economy & employment",
-      "icon": "\ud83d\udcbc",
+      "icon": "💼",
       "type": "hard",
       "description": "Local employment, commercial, and economic activation",
       "communityName": "Jobs & local economy",
@@ -606,7 +606,7 @@
           "index": 2,
           "q": "Which economic uses are included?",
           "communityQ": "Which types of economic activity are planned?",
-          "communityWhy": "A mix of economic uses makes a place more resilient \u2014 if one sector struggles, others keep the community going.",
+          "communityWhy": "A mix of economic uses makes a place more resilient — if one sector struggles, others keep the community going.",
           "type": "checklist",
           "options": [
             {
@@ -638,7 +638,7 @@
     {
       "id": "infrastructure",
       "name": "Infrastructure",
-      "icon": "\u26a1",
+      "icon": "⚡",
       "type": "hard",
       "description": "Digital connectivity and utility infrastructure",
       "communityName": "Digital & utilities",
@@ -650,7 +650,7 @@
           "index": 0,
           "q": "Does the project include high-speed digital connectivity?",
           "communityQ": "Is high-speed internet (NBN or fibre) available in this project?",
-          "communityWhy": "Fast internet is now as essential as electricity \u2014 for working from home, education, and staying connected.",
+          "communityWhy": "Fast internet is now as essential as electricity — for working from home, education, and staying connected.",
           "type": "yesno",
           "scoring": {
             "yes": 3,
@@ -706,11 +706,11 @@
     {
       "id": "vision",
       "name": "Vision & identity",
-      "icon": "\ud83c\udfaf",
+      "icon": "🎯",
       "type": "soft",
       "description": "Clear project vision and sense of place identity",
       "communityName": "Character & identity",
-      "communityDescription": "Does this place have a clear identity \u2014 something that makes it unique and special?",
+      "communityDescription": "Does this place have a clear identity — something that makes it unique and special?",
       "maxPoints": 6,
       "questions": [
         {
@@ -774,18 +774,18 @@
     {
       "id": "people",
       "name": "People & inclusion",
-      "icon": "\ud83d\udc65",
+      "icon": "👥",
       "type": "soft",
       "description": "Diversity, inclusion, and community connection",
       "communityName": "Inclusion & belonging",
-      "communityDescription": "Is this project designed so everyone feels welcome \u2014 regardless of age, ability, or background?",
+      "communityDescription": "Is this project designed so everyone feels welcome — regardless of age, ability, or background?",
       "maxPoints": 6,
       "questions": [
         {
           "index": 0,
           "q": "Is the project designed to be accessible for all ages and abilities?",
           "communityQ": "Is this project designed to be accessible for people of all ages and abilities?",
-          "communityWhy": "Universal design benefits everyone \u2014 parents with prams, elderly residents, people with disabilities, and delivery workers.",
+          "communityWhy": "Universal design benefits everyone — parents with prams, elderly residents, people with disabilities, and delivery workers.",
           "type": "yesno",
           "scoring": {
             "yes": 3,
@@ -842,18 +842,18 @@
     {
       "id": "safety",
       "name": "Safety & security",
-      "icon": "\ud83d\udd12",
+      "icon": "🔒",
       "type": "soft",
       "description": "Safe environments through design and management",
       "communityName": "Safety & comfort",
-      "communityDescription": "Does this place feel safe \u2014 day and night?",
+      "communityDescription": "Does this place feel safe — day and night?",
       "maxPoints": 6,
       "questions": [
         {
           "index": 0,
           "q": "Has CPTED been applied to the design?",
-          "communityQ": "Has the design been set up to reduce crime and make people feel safe \u2014 for example through good lighting and clear sightlines?",
-          "communityWhy": "Good design can make a huge difference to how safe people feel \u2014 and actually be.",
+          "communityQ": "Has the design been set up to reduce crime and make people feel safe — for example through good lighting and clear sightlines?",
+          "communityWhy": "Good design can make a huge difference to how safe people feel — and actually be.",
           "type": "yesno",
           "scoring": {
             "yes": 3,
@@ -910,7 +910,7 @@
     {
       "id": "events",
       "name": "Events & activation",
-      "icon": "\ud83c\udfaa",
+      "icon": "🎪",
       "type": "soft",
       "description": "Programming, events, and ongoing place activation",
       "communityName": "Events & activities",
@@ -945,7 +945,7 @@
           "index": 2,
           "q": "Which activation types are intended?",
           "communityQ": "What kinds of events and activities are planned?",
-          "communityWhy": "A variety of events means there's something for everyone \u2014 families, young people, seniors, and everyone in between.",
+          "communityWhy": "A variety of events means there's something for everyone — families, young people, seniors, and everyone in between.",
           "type": "checklist",
           "options": [
             {
@@ -978,17 +978,17 @@
     {
       "id": "nature",
       "name": "Nature & biophilia",
-      "icon": "\ud83c\udf3f",
+      "icon": "🌿",
       "type": "soft",
       "description": "Connection to nature and biodiversity within the precinct",
       "communityName": "Green spaces & nature",
-      "communityDescription": "Is nature woven into this project \u2014 trees, gardens, wildlife?",
+      "communityDescription": "Is nature woven into this project — trees, gardens, wildlife?",
       "maxPoints": 6,
       "questions": [
         {
           "index": 0,
           "q": "Is there meaningful tree canopy cover planned?",
-          "communityQ": "Is there meaningful tree cover \u2014 not just a few token plants?",
+          "communityQ": "Is there meaningful tree cover — not just a few token plants?",
           "communityWhy": "Tree canopy provides shade, reduces urban heat, improves air quality, and makes streets more pleasant.",
           "type": "yesno",
           "scoring": {
@@ -1013,7 +1013,7 @@
           "index": 2,
           "q": "Which nature elements are included?",
           "communityQ": "Which of these nature features are included?",
-          "communityWhy": "Every green feature adds up \u2014 together they create a healthier, cooler, and more beautiful community.",
+          "communityWhy": "Every green feature adds up — together they create a healthier, cooler, and more beautiful community.",
           "type": "checklist",
           "options": [
             {
@@ -1046,7 +1046,7 @@
     {
       "id": "arts",
       "name": "Arts & culture",
-      "icon": "\ud83c\udfa8",
+      "icon": "🎨",
       "type": "soft",
       "description": "Cultural programming, creative spaces, and public art",
       "communityName": "Arts & culture",
@@ -1114,7 +1114,7 @@
     {
       "id": "play",
       "name": "Play & recreation",
-      "icon": "\u26bd",
+      "icon": "⚽",
       "type": "soft",
       "description": "Informal and formal recreation opportunities",
       "communityName": "Play & sport",
@@ -1149,7 +1149,7 @@
           "index": 2,
           "q": "Which recreation types are included?",
           "communityQ": "Which recreation options are available or planned?",
-          "communityWhy": "A variety of recreation options means everyone \u2014 from toddlers to seniors \u2014 has somewhere to be active.",
+          "communityWhy": "A variety of recreation options means everyone — from toddlers to seniors — has somewhere to be active.",
           "type": "checklist",
           "options": [
             {
@@ -1182,7 +1182,7 @@
     {
       "id": "governance",
       "name": "Governance",
-      "icon": "\ud83c\udfdb\ufe0f",
+      "icon": "🏛️",
       "type": "soft",
       "description": "Long-term community management and ownership models",
       "communityName": "Community voice",
@@ -1217,7 +1217,7 @@
           "index": 2,
           "q": "Which governance models are planned?",
           "communityQ": "Which of these governance approaches are planned?",
-          "communityWhy": "The right governance model depends on the community \u2014 but having one is essential.",
+          "communityWhy": "The right governance model depends on the community — but having one is essential.",
           "type": "checklist",
           "options": [
             {
@@ -1250,18 +1250,18 @@
     {
       "id": "aging",
       "name": "Aging in place",
-      "icon": "\ud83d\udc74",
+      "icon": "👴",
       "type": "soft",
       "description": "Design features supporting residents across the life course",
       "communityName": "Aging & life stages",
-      "communityDescription": "Is this place designed to support people at every stage of life \u2014 including as they get older?",
+      "communityDescription": "Is this place designed to support people at every stage of life — including as they get older?",
       "maxPoints": 6,
       "questions": [
         {
           "index": 0,
           "q": "Is the project designed to support aging in place?",
           "communityQ": "Is this project designed so that people can comfortably live there as they age?",
-          "communityWhy": "'Aging in place' means people don't have to leave their community as they get older \u2014 maintaining connections and independence.",
+          "communityWhy": "'Aging in place' means people don't have to leave their community as they get older — maintaining connections and independence.",
           "type": "yesno",
           "scoring": {
             "yes": 3,
@@ -1273,7 +1273,7 @@
           "index": 1,
           "q": "Are intergenerational uses planned?",
           "communityQ": "Are there activities or spaces that bring different generations together?",
-          "communityWhy": "Intergenerational connections benefit everyone \u2014 young people gain wisdom, older people stay connected and active.",
+          "communityWhy": "Intergenerational connections benefit everyone — young people gain wisdom, older people stay connected and active.",
           "type": "yesno",
           "scoring": {
             "yes": 2,
@@ -1285,7 +1285,7 @@
           "index": 2,
           "q": "Which aging-friendly features are included?",
           "communityQ": "Which aging-friendly features are included?",
-          "communityWhy": "Small design choices \u2014 like rest points and accessible paths \u2014 make a huge difference to older residents and people with mobility challenges.",
+          "communityWhy": "Small design choices — like rest points and accessible paths — make a huge difference to older residents and people with mobility challenges.",
           "type": "checklist",
           "options": [
             {
@@ -1337,17 +1337,17 @@
   "tiers": [
     {
       "threshold": 80,
-      "label": "Exceptional \u2014 benchmark leader",
+      "label": "Exceptional — benchmark leader",
       "class": "tier-exc"
     },
     {
       "threshold": 60,
-      "label": "Good \u2014 above average",
+      "label": "Good — above average",
       "class": "tier-good"
     },
     {
       "threshold": 40,
-      "label": "Developing \u2014 room to improve",
+      "label": "Developing — room to improve",
       "class": "tier-dev"
     },
     {
