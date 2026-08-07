@@ -40,6 +40,8 @@
   --font-head: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --font-slab: 'Aleo', Georgia, serif;
+  /* Everything element-related is set in Poppins — see .element-scope below. */
+  --font-element: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
   --max: 1200px;
 }
 
@@ -67,6 +69,33 @@ h4, h5 {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.33;
+}
+
+/*
+  Element scope: anything presenting an element — the element rows, the
+  element detail panel, the assessment wizard, the report breakdown — is set
+  in Poppins. The headings need naming explicitly because the global h1-h3
+  rule above would otherwise win over inheritance.
+
+  Material Icons are excluded automatically: their font-family is set inline,
+  which outranks any of these selectors.
+*/
+.element-scope,
+.element-scope h1,
+.element-scope h2,
+.element-scope h3,
+.element-scope h4,
+.element-scope h5,
+.element-scope p,
+.element-scope button,
+.element-scope input,
+.element-scope textarea,
+.element-scope select,
+/* Classed descendants set their own family, so they need naming too. */
+.element-scope .home-caption,
+.element-scope .el-score,
+.element-scope .action-bar {
+  font-family: var(--font-element);
 }
 
 /*
@@ -307,6 +336,7 @@ h4, h5 {
   margin-bottom: 4px;
   border-radius: var(--radius);
   color: var(--on-el);
+  font-family: var(--font-element);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;

@@ -144,7 +144,7 @@ export const ReportView: React.FC = () => {
         </div>
 
         {/* Hard Elements Breakdown */}
-        <div style={{ marginBottom: 32 }}>
+        <div className="element-scope" style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 16, color: 'var(--text)' }}>
             Hard Elements Assessment
           </h2>
@@ -195,7 +195,7 @@ export const ReportView: React.FC = () => {
         </div>
 
         {/* Soft Elements Breakdown */}
-        <div>
+        <div className="element-scope">
           <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 16, color: 'var(--text)' }}>
             Soft Elements Assessment
           </h2>

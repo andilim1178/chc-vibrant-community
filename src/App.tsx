@@ -123,6 +123,9 @@ const MainContent: React.FC = () => {
                 </button>
               </div>
 
+              {/* Everything below is element content, so it runs in Poppins */}
+              <div className="element-scope">
+
               {/* Element Type Toggle */}
               <div style={{ display: 'flex', gap: 0, marginBottom: 22, border: '1px solid var(--border-strong)' }}>
                 {(['hard', 'soft'] as const).map(t => (
@@ -132,7 +135,6 @@ const MainContent: React.FC = () => {
                     style={{
                       flex: 1,
                       padding: '13px 20px',
-                      fontFamily: 'var(--font-body)',
                       fontSize: 11,
                       fontWeight: 700,
                       letterSpacing: '0.1em',
@@ -187,6 +189,8 @@ const MainContent: React.FC = () => {
                     </div>
                   );
                 })}
+
+              </div>
 
               <div
                 className="action-bar"

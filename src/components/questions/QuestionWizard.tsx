@@ -134,6 +134,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
 
   return (
     <div
+      className="element-scope"
       style={{
         position: 'fixed',
         top: 0,
@@ -147,7 +148,6 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         justifyContent: 'center',
         color: textColor,
         zIndex: 200,
-        fontFamily: 'inherit',
         padding: '40px 24px',
         overflow: 'hidden',
       }}

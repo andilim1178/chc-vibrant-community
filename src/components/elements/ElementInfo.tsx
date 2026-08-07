@@ -41,6 +41,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
 
   return (
     <div
+      className="element-scope"
       style={{
         position: 'fixed',
         top: 0,
