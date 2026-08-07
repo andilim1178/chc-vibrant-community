@@ -56,9 +56,12 @@ This ensures PersonaSelector is the only thing rendered until a persona is set.
 
 ### State & Persistence
 
-- **No changes needed** to PlaceRateContext — persona is already persisted to localStorage
-- The `setPersona()` function already saves to localStorage
-- The context initializes from localStorage on app load
+**Revised 2026-08-07** — the original spec said "no changes needed" to PlaceRateContext. That was wrong. The context defaulted `persona` to `'developer'`, so `!persona` was never true and the gate could never fire. Two context changes are required:
+
+- Widen `persona` to `string | null` and drop the `'developer'` default, so "not yet chosen" is representable
+- Initialise `persona` from localStorage **synchronously** (lazy `useState` initialiser), not in a mount effect — otherwise the first render always has `persona === null` and the selector flashes on every reload for users who already chose one
+- `activePersonaConfig` falls back to the developer config while `persona` is null, so no consumer sees `undefined`
+- The existing `setPersona()` → localStorage persistence effect is unchanged
 
 ### Modal Behavior
 
@@ -74,9 +77,10 @@ This ensures PersonaSelector is the only thing rendered until a persona is set.
 ### Files to Modify
 - `src/App.tsx` or `src/components/layout/MainContent.tsx`: Add persona gate check
 
+- `src/context/PlaceRateContext.tsx`: nullable persona + synchronous localStorage init (see revision above)
+
 ### Files to Reuse (No Changes)
 - `src/components/persona/PersonaSelector.tsx` — existing component
-- `src/context/PlaceRateContext.tsx` — existing state + localStorage logic
 - `src/components/layout/HeaderNav.tsx` — existing persona chip (no changes)
 
 ### Edge Cases

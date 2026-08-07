@@ -15,7 +15,8 @@
 - Must not break existing persona-change functionality via header chip
 - After selection, user lands on Projects page
 - Modal must be blocking (position: fixed, inset: 0, z-index: 100)
-- No changes to PlaceRateContext required — persona persistence already works
+- PlaceRateContext must represent "no persona chosen yet" (`string | null`, no `'developer'` default) and hydrate it synchronously from localStorage — see the revised spec. The original "no changes to PlaceRateContext" constraint was unachievable.
+- The gate's early `return` must sit **below every hook call** in the component, or React throws on the null → selected transition.
 
 ---
 

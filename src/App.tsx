@@ -26,17 +26,18 @@ const MainContent: React.FC = () => {
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
 
-
-  // Gate: require persona selection before showing app content
-  if (!persona) {
-    return <PersonaSelector onClose={() => {}} />;
-  }
-
   // Close overlays when tab changes
   useEffect(() => {
     setShowWizard(false);
     setShowElementInfo(false);
   }, [activeTab]);
+
+  // Gate: require persona selection before showing app content.
+  // Must stay below every hook call — an early return above them breaks
+  // the Rules of Hooks when persona flips from null to a value.
+  if (!persona) {
+    return <PersonaSelector onClose={() => {}} />;
+  }
 
   const handleOpenElementInfo = (elementId: string) => {
     if (!activeProject) {

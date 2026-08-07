@@ -25,9 +25,21 @@ const PlaceRateContext = createContext<PlaceRateContextType | undefined>(undefin
 
 const STORAGE_KEY = 'placerate_react_state_v1';
 
+// Read the saved persona synchronously so the gate in App.tsx doesn't flash
+// the selector on every reload while the load effect catches up.
+const readSavedPersona = (): string | null => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return null;
+    return JSON.parse(saved).persona ?? null;
+  } catch {
+    return null;
+  }
+};
+
 export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [persona, setPersona] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<string>('setup');
+  const [persona, setPersona] = useState<string | null>(readSavedPersona);
+  const [activeTab, setActiveTab] = useState<string>('projects');
   const [wizardStep, setWizardStep] = useState<number>(0);
   const [projects, setProjects] = useState<Project[]>([]);
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
