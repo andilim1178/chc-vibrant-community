@@ -39,6 +39,74 @@
   },
   "elements": [
     {
+      "id": "publicrealm",
+      "name": "Public realm",
+      "icon": "🌳",
+      "type": "hard",
+      "description": "Publicly accessible spaces the community can use and interact within",
+      "communityName": "Outdoor spaces",
+      "communityDescription": "Are there good public spaces where people can gather, relax, and connect?",
+      "maxPoints": 8,
+      "color": "#7A1420",
+      "questions": [
+        {
+          "index": 0,
+          "q": "Does the project have a central place for gathering?",
+          "communityQ": "Is there a central public space — like a square or plaza — where the community can gather?",
+          "communityWhy": "Public gathering spaces are the heart of a community. They encourage social connection and community events.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Are there areas where pedestrians are prioritised?",
+          "communityQ": "Are paths and streets designed for people first, not just cars?",
+          "communityWhy": "Pedestrian-friendly streets make communities safer, more walkable, and more enjoyable.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 2,
+          "q": "Which public realm features are included?",
+          "communityQ": "Which of these outdoor features are included?",
+          "communityWhy": "Parks, gardens, and markets create places people want to spend time in.",
+          "type": "checklist",
+          "options": [
+            {
+              "title": "Parks/gardens",
+              "value": "parks_gardens"
+            },
+            {
+              "title": "Plazas",
+              "value": "plazas"
+            },
+            {
+              "title": "Street furniture",
+              "value": "street_furniture"
+            },
+            {
+              "title": "Water features",
+              "value": "water_features"
+            },
+            {
+              "title": "Markets",
+              "value": "markets"
+            }
+          ],
+          "scoring": "count"
+        }
+      ],
+      "improvement": "Create more pedestrian-priority zones and gathering spaces."
+    },
+    {
       "id": "transport",
       "name": "Transport",
       "icon": "🚌",
@@ -121,74 +189,6 @@
       "improvement": "Add dedicated cycling infrastructure and improve pedestrian connectivity."
     },
     {
-      "id": "publicrealm",
-      "name": "Public realm",
-      "icon": "🌳",
-      "type": "hard",
-      "description": "Publicly accessible spaces the community can use and interact within",
-      "communityName": "Outdoor spaces",
-      "communityDescription": "Are there good public spaces where people can gather, relax, and connect?",
-      "maxPoints": 8,
-      "color": "#7A1420",
-      "questions": [
-        {
-          "index": 0,
-          "q": "Does the project have a central place for gathering?",
-          "communityQ": "Is there a central public space — like a square or plaza — where the community can gather?",
-          "communityWhy": "Public gathering spaces are the heart of a community. They encourage social connection and community events.",
-          "type": "yesno",
-          "scoring": {
-            "yes": 3,
-            "no": 0,
-            "tbc": 0
-          }
-        },
-        {
-          "index": 1,
-          "q": "Are there areas where pedestrians are prioritised?",
-          "communityQ": "Are paths and streets designed for people first, not just cars?",
-          "communityWhy": "Pedestrian-friendly streets make communities safer, more walkable, and more enjoyable.",
-          "type": "yesno",
-          "scoring": {
-            "yes": 2,
-            "no": 0,
-            "tbc": 0
-          }
-        },
-        {
-          "index": 2,
-          "q": "Which public realm features are included?",
-          "communityQ": "Which of these outdoor features are included?",
-          "communityWhy": "Parks, gardens, and markets create places people want to spend time in.",
-          "type": "checklist",
-          "options": [
-            {
-              "title": "Parks/gardens",
-              "value": "parks_gardens"
-            },
-            {
-              "title": "Plazas",
-              "value": "plazas"
-            },
-            {
-              "title": "Street furniture",
-              "value": "street_furniture"
-            },
-            {
-              "title": "Water features",
-              "value": "water_features"
-            },
-            {
-              "title": "Markets",
-              "value": "markets"
-            }
-          ],
-          "scoring": "count"
-        }
-      ],
-      "improvement": "Create more pedestrian-priority zones and gathering spaces."
-    },
-    {
       "id": "retail",
       "name": "Retail & food",
       "icon": "🛍️",
@@ -197,7 +197,7 @@
       "communityName": "Shops & food",
       "communityDescription": "Are there good shops, cafes, and daily services nearby?",
       "maxPoints": 8,
-      "color": "#F2CE55",
+      "color": "#E8B923",
       "questions": [
         {
           "index": 0,
@@ -270,21 +270,21 @@
       "improvement": "Increase activated ground-floor uses and food & beverage diversity."
     },
     {
-      "id": "education",
-      "name": "Education",
-      "icon": "📚",
+      "id": "economy",
+      "name": "Economy & employment",
+      "icon": "💼",
       "type": "hard",
-      "description": "Education providers and learning opportunities nearby",
-      "communityName": "Learning & childcare",
-      "communityDescription": "Are there good educational facilities and childcare options nearby?",
-      "maxPoints": 8,
-      "color": "#7CC5F8",
+      "description": "Local employment, commercial, and economic activation",
+      "communityName": "Jobs & local economy",
+      "communityDescription": "Does the project create local jobs and economic activity?",
+      "maxPoints": 7,
+      "color": "#8BC34A",
       "questions": [
         {
           "index": 0,
-          "q": "Is there a community space for other education providers?",
-          "communityQ": "Is there a community space for learning — like a library, hall, or education centre?",
-          "communityWhy": "Access to learning spaces benefits people of all ages, from young children to seniors.",
+          "q": "Does the project include commercial or office space?",
+          "communityQ": "Does the project include offices, shops, or other spaces where people can work?",
+          "communityWhy": "Local employment opportunities mean shorter commutes, stronger local spending, and a more self-sufficient community.",
           "type": "yesno",
           "scoring": {
             "yes": 3,
@@ -294,61 +294,48 @@
         },
         {
           "index": 1,
-          "q": "Where is the nearest childcare?",
-          "communityQ": "How close is the nearest childcare centre?",
-          "communityWhy": "Accessible childcare is essential for families, especially parents returning to work.",
-          "type": "proximity",
-          "options": [
-            {
-              "title": "Within place radius",
-              "value": 3
-            },
-            {
-              "title": "Within community radius",
-              "value": 2
-            },
-            {
-              "title": "Within town radius",
-              "value": 1
-            },
-            {
-              "title": "TBC",
-              "value": 0
-            }
-          ]
+          "q": "Are there co-working or incubator spaces planned?",
+          "communityQ": "Are there co-working spaces, studios, or incubators for small businesses and start-ups?",
+          "communityWhy": "Spaces for small businesses and entrepreneurs help create a diverse, innovative local economy.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
         },
         {
           "index": 2,
-          "q": "Which education types are accessible?",
-          "communityQ": "Which of these learning options are available nearby?",
-          "communityWhy": "A mix of education options supports the whole community — from babies to adults.",
+          "q": "Which economic uses are included?",
+          "communityQ": "Which types of economic activity are planned?",
+          "communityWhy": "A mix of economic uses makes a place more resilient — if one sector struggles, others keep the community going.",
           "type": "checklist",
           "options": [
             {
-              "title": "Library",
-              "value": "library"
+              "title": "Office",
+              "value": "office"
             },
             {
-              "title": "Community centre",
-              "value": "community_centre"
+              "title": "Light industrial",
+              "value": "light_industrial"
             },
             {
-              "title": "School after hours",
-              "value": "school_after_hours"
+              "title": "Co-working",
+              "value": "co_working"
             },
             {
-              "title": "Makerspace",
-              "value": "makerspace"
+              "title": "Hospitality",
+              "value": "hospitality"
             },
             {
-              "title": "Large pavilion",
-              "value": "large_pavilion"
+              "title": "Start-up incubator",
+              "value": "startup_incubator"
             }
           ],
           "scoring": "count"
         }
       ],
-      "improvement": "Ensure childcare and library access within walking distance."
+      "improvement": "Add co-working spaces and incubator facilities."
     },
     {
       "id": "health",
@@ -359,7 +346,7 @@
       "communityName": "Health & wellbeing",
       "communityDescription": "How easy is it to access health services and stay active?",
       "maxPoints": 8,
-      "color": "#0F5436",
+      "color": "#2D5016",
       "questions": [
         {
           "index": 0,
@@ -432,21 +419,21 @@
       "improvement": "Include on-site allied health and fitness facilities."
     },
     {
-      "id": "sustainable",
-      "name": "Sustainable",
-      "icon": "♻️",
+      "id": "education",
+      "name": "Education",
+      "icon": "📚",
       "type": "hard",
-      "description": "Renewable energy and sustainable design features",
-      "communityName": "Environment & sustainability",
-      "communityDescription": "Is this project designed with the environment in mind?",
-      "maxPoints": 7,
-      "color": "#E8940E",
+      "description": "Education providers and learning opportunities nearby",
+      "communityName": "Learning & childcare",
+      "communityDescription": "Are there good educational facilities and childcare options nearby?",
+      "maxPoints": 8,
+      "color": "#5B9BD5",
       "questions": [
         {
           "index": 0,
-          "q": "Are you looking to use or create renewable energy sources?",
-          "communityQ": "Does this project use renewable energy like solar panels?",
-          "communityWhy": "Renewable energy lowers electricity bills for residents and reduces the project's impact on the environment.",
+          "q": "Is there a community space for other education providers?",
+          "communityQ": "Is there a community space for learning — like a library, hall, or education centre?",
+          "communityWhy": "Access to learning spaces benefits people of all ages, from young children to seniors.",
           "type": "yesno",
           "scoring": {
             "yes": 3,
@@ -456,48 +443,61 @@
         },
         {
           "index": 1,
-          "q": "Which sustainable energy types are planned?",
-          "communityQ": "Which types of renewable or clean energy are included?",
-          "communityWhy": "The more clean energy sources a project uses, the more resilient and environmentally friendly it is.",
-          "type": "checklist",
+          "q": "Where is the nearest childcare?",
+          "communityQ": "How close is the nearest childcare centre?",
+          "communityWhy": "Accessible childcare is essential for families, especially parents returning to work.",
+          "type": "proximity",
           "options": [
             {
-              "title": "Solar energy",
-              "value": "solar_energy"
+              "title": "Within place radius",
+              "value": 3
             },
             {
-              "title": "Wind energy",
-              "value": "wind_energy"
+              "title": "Within community radius",
+              "value": 2
             },
             {
-              "title": "Hydropower",
-              "value": "hydropower"
+              "title": "Within town radius",
+              "value": 1
             },
             {
-              "title": "Ocean energy",
-              "value": "ocean_energy"
-            },
-            {
-              "title": "Hydrogen & fuel cells",
-              "value": "hydrogen_fuel_cells"
+              "title": "TBC",
+              "value": 0
             }
-          ],
-          "scoring": "count"
+          ]
         },
         {
           "index": 2,
-          "q": "Are water reuse or recycling systems included?",
-          "communityQ": "Does the project recycle or reuse water?",
-          "communityWhy": "Water recycling reduces pressure on the water network and helps the community be more resilient during droughts.",
-          "type": "yesno",
-          "scoring": {
-            "yes": 2,
-            "no": 0,
-            "tbc": 0
-          }
+          "q": "Which education types are accessible?",
+          "communityQ": "Which of these learning options are available nearby?",
+          "communityWhy": "A mix of education options supports the whole community — from babies to adults.",
+          "type": "checklist",
+          "options": [
+            {
+              "title": "Library",
+              "value": "library"
+            },
+            {
+              "title": "Community centre",
+              "value": "community_centre"
+            },
+            {
+              "title": "School after hours",
+              "value": "school_after_hours"
+            },
+            {
+              "title": "Makerspace",
+              "value": "makerspace"
+            },
+            {
+              "title": "Large pavilion",
+              "value": "large_pavilion"
+            }
+          ],
+          "scoring": "count"
         }
       ],
-      "improvement": "Incorporate solar systems and water recycling programs."
+      "improvement": "Ensure childcare and library access within walking distance."
     },
     {
       "id": "housing",
@@ -508,7 +508,7 @@
       "communityName": "Housing options",
       "communityDescription": "Does this project offer a variety of homes for different people and budgets?",
       "maxPoints": 8,
-      "color": "#7B4FC6",
+      "color": "#7030A0",
       "questions": [
         {
           "index": 0,
@@ -568,74 +568,6 @@
       "improvement": "Introduce affordable housing and increase dwelling type diversity."
     },
     {
-      "id": "economy",
-      "name": "Economy & employment",
-      "icon": "💼",
-      "type": "hard",
-      "description": "Local employment, commercial, and economic activation",
-      "communityName": "Jobs & local economy",
-      "communityDescription": "Does the project create local jobs and economic activity?",
-      "maxPoints": 7,
-      "color": "#79AC5F",
-      "questions": [
-        {
-          "index": 0,
-          "q": "Does the project include commercial or office space?",
-          "communityQ": "Does the project include offices, shops, or other spaces where people can work?",
-          "communityWhy": "Local employment opportunities mean shorter commutes, stronger local spending, and a more self-sufficient community.",
-          "type": "yesno",
-          "scoring": {
-            "yes": 3,
-            "no": 0,
-            "tbc": 0
-          }
-        },
-        {
-          "index": 1,
-          "q": "Are there co-working or incubator spaces planned?",
-          "communityQ": "Are there co-working spaces, studios, or incubators for small businesses and start-ups?",
-          "communityWhy": "Spaces for small businesses and entrepreneurs help create a diverse, innovative local economy.",
-          "type": "yesno",
-          "scoring": {
-            "yes": 2,
-            "no": 0,
-            "tbc": 0
-          }
-        },
-        {
-          "index": 2,
-          "q": "Which economic uses are included?",
-          "communityQ": "Which types of economic activity are planned?",
-          "communityWhy": "A mix of economic uses makes a place more resilient — if one sector struggles, others keep the community going.",
-          "type": "checklist",
-          "options": [
-            {
-              "title": "Office",
-              "value": "office"
-            },
-            {
-              "title": "Light industrial",
-              "value": "light_industrial"
-            },
-            {
-              "title": "Co-working",
-              "value": "co_working"
-            },
-            {
-              "title": "Hospitality",
-              "value": "hospitality"
-            },
-            {
-              "title": "Start-up incubator",
-              "value": "startup_incubator"
-            }
-          ],
-          "scoring": "count"
-        }
-      ],
-      "improvement": "Add co-working spaces and incubator facilities."
-    },
-    {
       "id": "infrastructure",
       "name": "Infrastructure",
       "icon": "⚡",
@@ -644,7 +576,7 @@
       "communityName": "Digital & utilities",
       "communityDescription": "Does this project have the infrastructure to support modern life?",
       "maxPoints": 7,
-      "color": "#EE8ABC",
+      "color": "#F5B7B1",
       "questions": [
         {
           "index": 0,
@@ -702,6 +634,74 @@
         }
       ],
       "improvement": "Ensure fibre connectivity and EV charging provision."
+    },
+    {
+      "id": "sustainable",
+      "name": "Sustainable",
+      "icon": "♻️",
+      "type": "hard",
+      "description": "Renewable energy and sustainable design features",
+      "communityName": "Environment & sustainability",
+      "communityDescription": "Is this project designed with the environment in mind?",
+      "maxPoints": 7,
+      "color": "#70AD47",
+      "questions": [
+        {
+          "index": 0,
+          "q": "Are you looking to use or create renewable energy sources?",
+          "communityQ": "Does this project use renewable energy like solar panels?",
+          "communityWhy": "Renewable energy lowers electricity bills for residents and reduces the project's impact on the environment.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 3,
+            "no": 0,
+            "tbc": 0
+          }
+        },
+        {
+          "index": 1,
+          "q": "Which sustainable energy types are planned?",
+          "communityQ": "Which types of renewable or clean energy are included?",
+          "communityWhy": "The more clean energy sources a project uses, the more resilient and environmentally friendly it is.",
+          "type": "checklist",
+          "options": [
+            {
+              "title": "Solar energy",
+              "value": "solar_energy"
+            },
+            {
+              "title": "Wind energy",
+              "value": "wind_energy"
+            },
+            {
+              "title": "Hydropower",
+              "value": "hydropower"
+            },
+            {
+              "title": "Ocean energy",
+              "value": "ocean_energy"
+            },
+            {
+              "title": "Hydrogen & fuel cells",
+              "value": "hydrogen_fuel_cells"
+            }
+          ],
+          "scoring": "count"
+        },
+        {
+          "index": 2,
+          "q": "Are water reuse or recycling systems included?",
+          "communityQ": "Does the project recycle or reuse water?",
+          "communityWhy": "Water recycling reduces pressure on the water network and helps the community be more resilient during droughts.",
+          "type": "yesno",
+          "scoring": {
+            "yes": 2,
+            "no": 0,
+            "tbc": 0
+          }
+        }
+      ],
+      "improvement": "Incorporate solar systems and water recycling programs."
     },
     {
       "id": "vision",
@@ -769,7 +769,7 @@
         }
       ],
       "improvement": "Develop a clear place identity and commission public art.",
-      "color": "#FCEFCA"
+      "color": "#CE2626"
     },
     {
       "id": "people",
@@ -837,7 +837,7 @@
         }
       ],
       "improvement": "Strengthen inclusive design and community consultation.",
-      "color": "#CDB6B8"
+      "color": "#7A1420"
     },
     {
       "id": "safety",
@@ -905,7 +905,7 @@
         }
       ],
       "improvement": "Apply CPTED principles and improve passive surveillance.",
-      "color": "#D3EAFF"
+      "color": "#2D5016"
     },
     {
       "id": "events",
@@ -973,7 +973,7 @@
         }
       ],
       "improvement": "Establish a programming calendar and flexible event spaces.",
-      "color": "#F5D5E3"
+      "color": "#8BC34A"
     },
     {
       "id": "nature",
@@ -1041,7 +1041,7 @@
         }
       ],
       "improvement": "Increase tree canopy and introduce biodiversity corridors.",
-      "color": "#D3CBEC"
+      "color": "#E8B923"
     },
     {
       "id": "arts",
@@ -1245,7 +1245,7 @@
         }
       ],
       "improvement": "Establish a community management body and resident voice.",
-      "color": "#F9D8E9"
+      "color": "#4472C4"
     },
     {
       "id": "aging",
@@ -1313,7 +1313,7 @@
         }
       ],
       "improvement": "Improve universal access and create intergenerational programming.",
-      "color": "#EDBCBB"
+      "color": "#5B9BD5"
     }
   ],
   "benchmarks": [
