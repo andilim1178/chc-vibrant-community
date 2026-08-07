@@ -243,9 +243,8 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '20px',
+              fontSize: '18px',
               transition: 'all 200ms ease',
-              fontFamily: 'Material Icons',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
@@ -254,7 +253,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
-            arrow_back
+            ←
           </button>
 
           {/* Home Icon */}
@@ -272,10 +271,9 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '20px',
+              fontSize: '18px',
               transition: 'all 200ms ease',
               marginLeft: 'auto',
-              fontFamily: 'Material Icons',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
@@ -284,7 +282,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
-            home
+            🏠
           </button>
         </div>
 
