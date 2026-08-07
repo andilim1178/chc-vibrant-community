@@ -38,7 +38,7 @@ export const NotesSection: React.FC<NotesSectionProps> = ({
           textDecoration: 'underline'
         }}
       >
-        {arrow} Notes for {elementName}
+        {arrow} Notes for <span style={{ textTransform: 'capitalize' }}>{elementName}</span>
       </button>
 
       {isExpanded && (

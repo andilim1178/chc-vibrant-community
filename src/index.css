@@ -351,7 +351,8 @@ h4, h5 {
   color: var(--on-el);
   font-family: var(--font-element);
   font-weight: 600;
-  text-transform: none;
+  /* Element titles are Title Case; the source data is sentence case. */
+  text-transform: capitalize;
   letter-spacing: 0;
   font-size: 15px;
   transition: transform 0.15s;

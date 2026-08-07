@@ -165,7 +165,7 @@ export const ReportView: React.FC = () => {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <p style={{ fontWeight: 600, fontSize: 14 }}>{element.name}</p>
+                    <p style={{ fontWeight: 600, fontSize: 14, textTransform: 'capitalize' }}>{element.name}</p>
                     <p style={{ fontWeight: 700, fontSize: 14 }}>{percentage}%</p>
                   </div>
                   <div
@@ -216,7 +216,7 @@ export const ReportView: React.FC = () => {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <p style={{ fontWeight: 600, fontSize: 14 }}>{element.name}</p>
+                    <p style={{ fontWeight: 600, fontSize: 14, textTransform: 'capitalize' }}>{element.name}</p>
                     <p style={{ fontWeight: 700, fontSize: 14 }}>{percentage}%</p>
                   </div>
                   <div
