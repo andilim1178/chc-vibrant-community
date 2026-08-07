@@ -5,7 +5,7 @@ import { scoreElement } from '../utils/scoring';
 
 interface PlaceRateContextType {
   template: typeof templateData;
-  persona: string;
+  persona: string | null;
   setPersona: (p: string) => void;
   activePersonaConfig: PersonaConfig;
   projects: Project[];
@@ -26,7 +26,7 @@ const PlaceRateContext = createContext<PlaceRateContextType | undefined>(undefin
 const STORAGE_KEY = 'placerate_react_state_v1';
 
 export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [persona, setPersona] = useState<string>('developer');
+  const [persona, setPersona] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>('setup');
   const [wizardStep, setWizardStep] = useState<number>(0);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -55,7 +55,7 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }, [persona, activeProjectId, projects]);
 
   const activeProject = projects.find(p => p.id === activeProjectId) || null;
-  const activePersonaConfig = templateData.personas[persona] || templateData.personas.developer;
+  const activePersonaConfig = persona ? templateData.personas[persona] || templateData.personas.developer : templateData.personas.developer;
 
   const createNewProject = (data: Partial<Project>) => {
     const newProj: Project = {

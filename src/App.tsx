@@ -12,7 +12,7 @@ import { calculateProjectScore } from './utils/scoring';
 import { pickInk } from './utils/contrast';
 
 const MainContent: React.FC = () => {
-  const { activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
+  const { persona, activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
   const [showPersonaModal, setShowPersonaModal] = useState(false);
   const [name, setName] = useState('');
   const [addr, setAddr] = useState('');
@@ -25,6 +25,12 @@ const MainContent: React.FC = () => {
   const [elementType, setElementType] = useState<'hard' | 'soft'>('hard');
 
   const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
+
+
+  // Gate: require persona selection before showing app content
+  if (!persona) {
+    return <PersonaSelector onClose={() => {}} />;
+  }
 
   // Close overlays when tab changes
   useEffect(() => {
