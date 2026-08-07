@@ -60,7 +60,14 @@ const MainContent: React.FC = () => {
     <div className="shell">
       <HeaderNav onOpenPersona={() => setShowPersonaModal(true)} />
       {showPersonaModal && <PersonaSelector onClose={() => setShowPersonaModal(false)} />}
-      
+
+      {/* Element colour strip — sits under the nav on every tab */}
+      <div className="swatch-strip">
+        {template.elements.filter(e => e.type === elementType).map(e => (
+          <div key={e.id} style={{ backgroundColor: e.color || 'var(--el-default)' }} />
+        ))}
+      </div>
+
       <main>
         {activeTab === 'setup' && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 24, maxWidth: 500, margin: '0 auto' }}>
@@ -102,12 +109,6 @@ const MainContent: React.FC = () => {
 
         {activeTab === 'elements' && (
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
-            <div className="swatch-strip">
-              {template.elements.filter(e => e.type === elementType).map(e => (
-                <div key={e.id} style={{ backgroundColor: e.color || 'var(--el-default)' }} />
-              ))}
-            </div>
-
             <div className="home-card">
               <div className="home-head">
                 <div className="home-head-title">

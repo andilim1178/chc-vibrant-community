@@ -184,7 +184,9 @@ html, body {
 .swatch-strip {
   display: flex;
   gap: 0;
-  margin-bottom: 20px;
+  /* Matches the width of the content column it sits above. */
+  max-width: 680px;
+  margin: 0 auto 20px;
   border-radius: var(--radius);
   overflow: hidden;
   height: 12px;
