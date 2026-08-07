@@ -26,9 +26,18 @@
 5. Modal dismisses → Projects page displays
 
 ### Subsequent Loads (Persona Saved)
-1. App loads → PlaceRateContext restores persona from localStorage
-2. PersonaSelector modal does NOT appear
-3. User lands directly on Projects page (or last visited tab)
+
+**Revised 2026-08-07 (second revision)** — at the user's request, the selector now appears on *every* page load, not just the first. The original behaviour below is superseded.
+
+1. App loads → PlaceRateContext restores the saved persona from localStorage
+2. PersonaSelector modal appears again, with the previously chosen persona pre-highlighted
+3. User confirms (or switches) → modal dismisses → Projects page displays
+
+The saved persona is no longer a reason to skip the gate; it only pre-selects a card. The gate is driven by `personaConfirmed`, a session-scoped flag that is deliberately **not** persisted and resets to `false` on every load.
+
+~~1. App loads → PlaceRateContext restores persona from localStorage~~
+~~2. PersonaSelector modal does NOT appear~~
+~~3. User lands directly on Projects page (or last visited tab)~~
 
 ### Changing Persona Anytime
 - User clicks persona chip in header (existing behavior)
@@ -124,7 +133,8 @@ This ensures PersonaSelector is the only thing rendered until a persona is set.
 - ✓ PersonaSelector modal appears only when no persona is set
 - ✓ Modal is blocking (cannot click behind it)
 - ✓ After selection, user lands on Projects page
-- ✓ Persona is persisted in localStorage (no re-selection on reload)
+- ✓ Persona selector appears on every page load, with the last choice pre-highlighted (revised — supersedes "no re-selection on reload")
+- ✓ Projects and the active project survive reload untouched
 - ✓ Persona can be changed anytime via header chip
 - ✓ Existing PersonaSelector component is reused (no duplication)
 - ✓ All existing functionality remains intact

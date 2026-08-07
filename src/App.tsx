@@ -12,7 +12,7 @@ import { calculateProjectScore } from './utils/scoring';
 import { pickInk } from './utils/contrast';
 
 const MainContent: React.FC = () => {
-  const { persona, activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
+  const { personaConfirmed, activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
   const [showPersonaModal, setShowPersonaModal] = useState(false);
   const [name, setName] = useState('');
   const [addr, setAddr] = useState('');
@@ -32,10 +32,10 @@ const MainContent: React.FC = () => {
     setShowElementInfo(false);
   }, [activeTab]);
 
-  // Gate: require persona selection before showing app content.
+  // Gate: require a persona choice on every page load, not just the first.
   // Must stay below every hook call — an early return above them breaks
-  // the Rules of Hooks when persona flips from null to a value.
-  if (!persona) {
+  // the Rules of Hooks when personaConfirmed flips to true.
+  if (!personaConfirmed) {
     return <PersonaSelector onClose={() => {}} />;
   }
 

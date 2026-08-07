@@ -7,6 +7,8 @@ interface PlaceRateContextType {
   template: typeof templateData;
   persona: string | null;
   setPersona: (p: string) => void;
+  /** False until the user picks a persona in *this* page load. Resets on reload. */
+  personaConfirmed: boolean;
   activePersonaConfig: PersonaConfig;
   projects: Project[];
   activeProject: Project | null;
@@ -54,7 +56,10 @@ const readSavedState = (): SavedState => {
 
 export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [saved] = useState(readSavedState);
-  const [persona, setPersona] = useState<string | null>(saved.persona);
+  const [persona, setPersonaState] = useState<string | null>(saved.persona);
+  // Deliberately not persisted: the selector is shown on every page load, so
+  // the saved persona only pre-highlights the previous choice.
+  const [personaConfirmed, setPersonaConfirmed] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [wizardStep, setWizardStep] = useState<number>(0);
   const [projects, setProjects] = useState<Project[]>(saved.projects);
@@ -67,6 +72,11 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       projects
     }));
   }, [persona, activeProjectId, projects]);
+
+  const setPersona = (p: string) => {
+    setPersonaState(p);
+    setPersonaConfirmed(true);
+  };
 
   const activeProject = projects.find(p => p.id === activeProjectId) || null;
   const activePersonaConfig = persona ? templateData.personas[persona] || templateData.personas.developer : templateData.personas.developer;
@@ -116,6 +126,7 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       template: templateData,
       persona,
       setPersona,
+      personaConfirmed,
       activePersonaConfig,
       projects,
       activeProject,
