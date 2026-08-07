@@ -25,38 +25,40 @@ const PlaceRateContext = createContext<PlaceRateContextType | undefined>(undefin
 
 const STORAGE_KEY = 'placerate_react_state_v1';
 
-// Read the saved persona synchronously so the gate in App.tsx doesn't flash
-// the selector on every reload while the load effect catches up.
-const readSavedPersona = (): string | null => {
+interface SavedState {
+  persona: string | null;
+  projects: Project[];
+  activeProjectId: string | null;
+}
+
+const EMPTY_STATE: SavedState = { persona: null, projects: [], activeProjectId: null };
+
+// Read saved state synchronously, before first render. Hydrating in a mount
+// effect instead would let the persistence effect below fire first with the
+// empty initial state and clobber the user's saved projects.
+const readSavedState = (): SavedState => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return null;
-    return JSON.parse(saved).persona ?? null;
-  } catch {
-    return null;
+    if (!saved) return EMPTY_STATE;
+    const parsed = JSON.parse(saved);
+    return {
+      persona: parsed.persona ?? null,
+      projects: parsed.projects ?? [],
+      activeProjectId: parsed.activeProjectId ?? null
+    };
+  } catch (e) {
+    console.error('Failed to load state', e);
+    return EMPTY_STATE;
   }
 };
 
 export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [persona, setPersona] = useState<string | null>(readSavedPersona);
+  const [saved] = useState(readSavedState);
+  const [persona, setPersona] = useState<string | null>(saved.persona);
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [wizardStep, setWizardStep] = useState<number>(0);
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed.projects) setProjects(parsed.projects);
-        if (parsed.persona) setPersona(parsed.persona);
-        if (parsed.activeProjectId) setActiveProjectId(parsed.activeProjectId);
-      } catch (e) {
-        console.error('Failed to load state', e);
-      }
-    }
-  }, []);
+  const [projects, setProjects] = useState<Project[]>(saved.projects);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(saved.activeProjectId);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
