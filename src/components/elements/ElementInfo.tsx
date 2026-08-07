@@ -58,14 +58,8 @@ const ElementIllustrations: Record<string, string> = {
     <circle cx="100" cy="125" r="6" fill="currentColor" opacity="0.4"/>
   </svg>`,
 
-  'housing': `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <rect x="40" y="100" width="50" height="50" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M 40 100 L 65 70 L 90 100" fill="none" stroke="currentColor" stroke-width="2"/>
-    <line x1="65" y1="100" x2="65" y2="130" stroke="currentColor" stroke-width="1.5"/>
-    <circle cx="50" cy="115" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    <rect x="110" y="95" width="50" height="55" fill="none" stroke="currentColor" stroke-width="2"/>
-    <rect x="120" y="110" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    <rect x="140" y="110" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  'housing': `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Material Icons'; font-size: 120px; display: flex; align-items: center; justify-content: center;">
+    <text x="100" y="130" text-anchor="middle" fill="currentColor" font-family="Material Icons" font-size="120">apartment</text>
   </svg>`,
 
   'economy': `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
