@@ -1,84 +1,41 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-/*
-  Palette and type sampled from chc.com.au: stark black-on-white, a single
-  cyan accent used as a fill (never as text — cyan on white fails contrast),
-  square corners, Flama-style grotesque headings in heavy weights with tight
-  negative tracking, and Aleo as the slab-serif secondary voice.
-
-  Element/environment colours are NOT defined here — they come from the
-  template data and are deliberately left untouched.
-*/
 :root {
-  --bg: #FFFFFF;
-  --surface: #FFFFFF;
-  --surface2: #F2F2F2;
-  --surface3: #E4E4E4;
-  --text: #000000;
-  --text-muted: #5A616B;
-  --text-dim: #767676;
-  --border: rgba(0, 0, 0, 0.14);
-  --border2: rgba(0, 0, 0, 0.28);
-  --border-strong: #000000;
-  --slate: #2B333F;
-  --cyan: #00FFF5;
-  --navy: #000000;
-  --on-navy: #FFFFFF;
+  --bg: #F4F4F4;
+  --surface: #F5ECDC;
+  --surface2: #EFE4D2;
+  --surface3: #E7D9C3;
+  --text: #2B2A38;
+  --text-muted: #6A6878;
+  --text-dim: #767482;
+  --border: rgba(43, 42, 56, 0.1);
+  --border2: rgba(43, 42, 56, 0.18);
+  --navy: #3B3A50;
+  --on-navy: #F5ECDC;
   --on-colour: #FFFFFF;
-  --on-colour-ink: #000000;
+  --on-colour-ink: #2B2A38;
   --el-default: #767482;
-  --accent: #000000;
-  --accent-text: #FFFFFF;
-  --ok: #2B333F;
-  --on-ok: #00FFF5;
-  --warn: #00FFF5;
-  --on-warn: #000000;
-  --danger: #E5231B;
-  --radius: 0px;
-  --radius-lg: 0px;
-  --radius-xl: 0px;
-  --font-head: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-slab: 'Aleo', Georgia, serif;
+  --accent: var(--navy);
+  --accent-text: var(--on-navy);
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
   /* Everything element-related is set in Poppins — see .element-scope below. */
-  --font-element: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  --font-element: 'Poppins', sans-serif;
   --max: 1200px;
-}
-
-html, body {
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.4;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3 {
-  font-family: var(--font-head);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
-  text-transform: uppercase;
-}
-
-h4, h5 {
-  font-family: var(--font-slab);
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.33;
 }
 
 /*
   Element scope: anything presenting an element — the element rows, the
-  element detail panel, the assessment wizard, the report breakdown — is set
-  in Poppins. The headings need naming explicitly because the global h1-h3
-  rule above would otherwise win over inheritance.
+  element detail panel, the assessment wizard, the report breakdowns — is set
+  in Poppins, with element titles in Title Case.
 
-  Material Icons are excluded automatically: their font-family is set inline,
-  which outranks any of these selectors.
+  Headings and classed descendants are named explicitly: rules that target
+  them directly beat a font inherited from this container.
+
+  Material Icons are excluded automatically — their font-family is set
+  inline, which outranks any of these selectors.
 */
 .element-scope,
 .element-scope h1,
@@ -91,83 +48,56 @@ h4, h5 {
 .element-scope input,
 .element-scope textarea,
 .element-scope select,
-/* Classed descendants set their own family, so they need naming too. */
 .element-scope .home-caption,
 .element-scope .el-score,
 .element-scope .action-bar {
   font-family: var(--font-element);
 }
-
-/*
-  Element names run in their natural case. Poppins is a geometric face whose
-  character lives in the lowercase — under the uppercase used elsewhere in the
-  CHC system it is almost indistinguishable from Archivo, so the caps are
-  dropped here and kept for the app chrome.
-*/
-.element-scope h1,
-.element-scope h2,
-.element-scope h3 {
-  text-transform: none;
-  letter-spacing: -0.015em;
+html, body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
 }
-
-/*
-  Material Icons render through lowercase ligatures. The uppercase tracking
-  used on chips, tabs and bars breaks the ligature and prints the literal
-  icon name, so opt every icon out of both.
-*/
-[style*="Material Icons"] {
-  text-transform: none;
-  letter-spacing: normal;
-  font-feature-settings: 'liga';
-}
-
 .shell {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 0 60px;
+  padding: 0 20px 60px;
 }
-
-/* Black masthead, straight off chc.com.au */
 .top-bar {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  row-gap: 10px;
   gap: 14px;
-  padding: 18px 24px;
-  margin-bottom: 32px;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
   position: sticky;
   top: 0;
-  background: #000000;
-  color: #FFFFFF;
+  background: var(--bg);
   z-index: 100;
 }
 
 .logo-group {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  gap: 12px;
   flex: 1;
 }
 
 .logo-text {
   font-family: var(--font-head);
   font-size: 22px;
-  font-weight: 900;
-  color: #FFFFFF;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
-  line-height: 1;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.4px;
 }
 
 .logo-tag {
-  font-family: var(--font-slab);
   font-size: 11px;
-  font-weight: 300;
-  color: var(--cyan);
-  letter-spacing: 0.02em;
-  margin-top: 3px;
+  color: var(--text-dim);
+  margin-top: -3px;
 }
 
 .top-right {
@@ -180,100 +110,81 @@ h4, h5 {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: transparent;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
   cursor: pointer;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #FFFFFF;
+  font-size: 12px;
+  color: var(--text-muted);
   transition: all 0.15s;
   font-family: var(--font-body);
 }
 
 .persona-chip:hover {
-  background: var(--cyan);
-  border-color: var(--cyan);
-  color: #000000;
+  border-color: var(--border2);
+  color: var(--text);
 }
 
 .proj-pill {
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 14px;
-  border-radius: var(--radius);
-  border: 1px solid transparent;
-  background: var(--cyan);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #000000;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  font-size: 12px;
+  color: var(--text-muted);
   white-space: nowrap;
 }
 
 .proj-pill .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 0;
-  background: #000000;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--navy);
   flex-shrink: 0;
 }
 
 .tabs {
   display: flex;
-  gap: 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  /* Wraps to its own row and scrolls rather than pushing the bar wider. */
-  max-width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.tabs::-webkit-scrollbar {
-  display: none;
+  gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px;
 }
 
 .tab {
-  padding: 9px 16px;
+  padding: 9px 12px;
   border: none;
-  border-bottom: 2px solid transparent;
-  border-radius: 0;
+  border-radius: 8px;
   background: transparent;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 13px;
   font-family: var(--font-body);
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-muted);
   transition: all 0.18s;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .tab.active {
-  background: transparent;
-  color: var(--cyan);
-  border-bottom-color: var(--cyan);
+  background: var(--surface3);
+  color: var(--text);
 }
 
 .tab:hover:not(.active) {
-  color: #FFFFFF;
+  color: var(--text);
 }
 
 .swatch-strip {
   display: none;
   gap: 0;
   margin-bottom: 20px;
-  border-radius: 0;
+  border-radius: var(--radius);
   overflow: hidden;
-  height: 10px;
+  height: 12px;
   position: sticky;
   top: 76px;
   z-index: 99;
@@ -285,9 +196,9 @@ h4, h5 {
 
 .home-card {
   background: var(--surface);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 28px;
+  padding: 24px;
   max-width: 680px;
   margin: 0 auto;
 }
@@ -296,49 +207,44 @@ h4, h5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .home-head-title {
   font-family: var(--font-head);
-  font-size: 26px;
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--text);
   text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
 }
 
 .home-head-button {
   background: transparent;
-  border: 1px solid var(--border-strong);
-  border-radius: 0;
-  width: 34px;
-  height: 34px;
+  border: 1px solid var(--border2);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
   padding: 0;
   cursor: pointer;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text);
+  color: var(--text-muted);
   transition: all 0.15s;
-  flex-shrink: 0;
 }
 
 .home-head-button:hover {
-  background: var(--cyan);
-  border-color: var(--cyan);
-  color: #000000;
+  border-color: var(--border);
+  color: var(--text);
 }
 
 .home-caption {
-  font-family: var(--font-slab);
   font-size: 12px;
   color: var(--text-muted);
-  text-transform: none;
-  letter-spacing: 0;
-  margin-bottom: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
 }
 
 .el-row {
@@ -346,45 +252,36 @@ h4, h5 {
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   border-radius: var(--radius);
   color: var(--on-el);
   font-family: var(--font-element);
   font-weight: 600;
   /* Element titles are Title Case; the source data is sentence case. */
   text-transform: capitalize;
-  letter-spacing: 0;
   font-size: 15px;
-  transition: transform 0.15s;
-}
-
-.el-row:hover {
-  transform: translateX(4px);
 }
 
 .el-score {
   font-size: 11px;
   font-weight: 500;
-  color: inherit;
-  opacity: 0.75;
+  color: var(--text-muted);
 }
 
 .action-bar {
-  background: var(--accent);
-  color: var(--accent-text);
-  padding: 17px 20px;
+  background: var(--navy);
+  color: var(--on-navy);
+  padding: 16px 20px;
   border-radius: var(--radius);
   text-align: center;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.15s;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .action-bar:hover {
-  background: var(--cyan);
-  color: #000000;
+  opacity: 0.9;
 }

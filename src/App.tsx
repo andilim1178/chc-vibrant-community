@@ -63,22 +63,22 @@ const MainContent: React.FC = () => {
       
       <main>
         {activeTab === 'setup' && (
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border-strong)', borderRadius: 'var(--radius-lg)', padding: 28, maxWidth: 500, margin: '0 auto' }}>
-            <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 28, marginBottom: 20 }}>Project Details</h2>
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 24, maxWidth: 500, margin: '0 auto' }}>
+            <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, marginBottom: 16 }}>Project Details</h2>
             <form onSubmit={(e) => { e.preventDefault(); createNewProject({ name, addr, postcode, type }); }}>
               <div style={{ marginBottom: 14 }}>
-                <label style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.12em', color: 'var(--text-muted)', display: 'block', marginBottom: 6 }}>PROJECT NAME</label>
+                <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>PROJECT NAME</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Town Centre Revitalisation"
-                  style={{ width: '100%', padding: '12px 14px', background: 'var(--surface)', border: '1px solid var(--border-strong)', borderRadius: 'var(--radius)', color: 'var(--text)', fontFamily: 'var(--font-body)', fontSize: 15 }}
+                  style={{ width: '100%', padding: '10px 12px', background: 'var(--surface2)', border: '1px solid var(--border2)', borderRadius: 'var(--radius)', color: 'var(--text)' }}
                   required
                 />
               </div>
               <div style={{ marginBottom: 14 }}>
-                <label style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.12em', color: 'var(--text-muted)', display: 'block', marginBottom: 6 }}>LOCATION / ADDRESS</label>
+                <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>LOCATION / ADDRESS</label>
                 <AddressSearch
                   value={addr}
                   onChange={(address: string, postcode_val?: string) => {
@@ -90,7 +90,7 @@ const MainContent: React.FC = () => {
               </div>
               <button
                 type="submit"
-                style={{ width: '100%', padding: '15px', background: 'var(--accent)', color: 'var(--accent-text)', border: 'none', borderRadius: 'var(--radius)', fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: 'pointer' }}
+                style={{ width: '100%', padding: '12px', background: 'var(--accent)', color: 'var(--accent-text)', border: 'none', borderRadius: 'var(--radius)', fontWeight: 600, cursor: 'pointer' }}
               >
                 Create Project →
               </button>
@@ -127,29 +127,39 @@ const MainContent: React.FC = () => {
               <div className="element-scope">
 
               {/* Element Type Toggle */}
-              <div style={{ display: 'flex', gap: 0, marginBottom: 22, border: '1px solid var(--border-strong)' }}>
-                {(['hard', 'soft'] as const).map(t => (
-                  <button
-                    key={t}
-                    onClick={() => setElementType(t)}
-                    style={{
-                      flex: 1,
-                      padding: '13px 20px',
-                      fontSize: 11,
-                      fontWeight: 700,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      backgroundColor: elementType === t ? 'var(--accent)' : 'transparent',
-                      color: elementType === t ? 'var(--accent-text)' : 'var(--text)',
-                      border: 'none',
-                      borderRadius: 0,
-                      cursor: 'pointer',
-                      transition: 'all 200ms ease',
-                    }}
-                  >
-                    {t} Elements
-                  </button>
-                ))}
+              <div style={{ display: 'flex', gap: 12, marginBottom: 20, justifyContent: 'center' }}>
+                <button
+                  onClick={() => setElementType('hard')}
+                  style={{
+                    padding: '10px 20px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    backgroundColor: elementType === 'hard' ? 'var(--accent)' : 'var(--surface2)',
+                    color: elementType === 'hard' ? 'var(--accent-text)' : 'var(--text)',
+                    border: 'none',
+                    borderRadius: 'var(--radius)',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease',
+                  }}
+                >
+                  Hard Elements
+                </button>
+                <button
+                  onClick={() => setElementType('soft')}
+                  style={{
+                    padding: '10px 20px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    backgroundColor: elementType === 'soft' ? 'var(--accent)' : 'var(--surface2)',
+                    color: elementType === 'soft' ? 'var(--accent-text)' : 'var(--text)',
+                    border: 'none',
+                    borderRadius: 'var(--radius)',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease',
+                  }}
+                >
+                  Soft Elements
+                </button>
               </div>
 
               <div className="home-caption">
@@ -207,9 +217,9 @@ const MainContent: React.FC = () => {
 
         {activeTab === 'results' && (
           <div style={{ textAlign: 'center', padding: 40 }}>
-            <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 34, marginBottom: 20 }}>Vibrancy Score</h2>
-            <div style={{ fontSize: 104, lineHeight: 1, fontFamily: 'var(--font-head)', color: 'var(--text)', fontWeight: 900, letterSpacing: '-0.045em' }}>
-              {totalScore} <span style={{ fontSize: 22, fontWeight: 400, letterSpacing: 0, color: 'var(--text-dim)' }}>/ 100</span>
+            <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 28, marginBottom: 16 }}>Vibrancy Score</h2>
+            <div style={{ fontSize: 72, fontFamily: 'var(--font-head)', color: 'var(--navy)', fontWeight: 700 }}>
+              {totalScore} <span style={{ fontSize: 20, color: 'var(--text-dim)' }}>/ 100</span>
             </div>
             <div style={{ marginTop: 24 }}>
               <VibrancyWheelCanvas size={180} />

@@ -26,32 +26,26 @@ export const ProjectsList: React.FC = () => {
 
   return (
     <div style={{ maxWidth: 680, margin: '0 auto', padding: 24 }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-        <h2 style={{ fontSize: 32, color: 'var(--text)', margin: 0 }}>Projects</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+        <h2 style={{ fontSize: 24, color: 'var(--text)', margin: 0 }}>Projects</h2>
         <button
           onClick={() => setActiveTab('setup')}
           style={{
-            padding: '12px 18px',
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
+            padding: '10px 16px',
+            fontSize: 14,
+            fontWeight: 600,
             backgroundColor: 'var(--accent)',
             color: 'var(--accent-text)',
-            border: '1px solid var(--accent)',
+            border: 'none',
             borderRadius: 'var(--radius)',
             cursor: 'pointer',
             transition: 'all 200ms ease',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--cyan)';
-            e.currentTarget.style.borderColor = 'var(--cyan)';
-            e.currentTarget.style.color = '#000000';
+            e.currentTarget.style.opacity = '0.85';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--accent)';
-            e.currentTarget.style.borderColor = 'var(--accent)';
-            e.currentTarget.style.color = 'var(--accent-text)';
+            e.currentTarget.style.opacity = '1';
           }}
         >
           + Start new project
@@ -74,8 +68,8 @@ export const ProjectsList: React.FC = () => {
                 key={project.id}
                 onClick={() => handleProjectClick(project.id)}
                 style={{
-                  padding: 20,
-                  border: '1px solid var(--border-strong)',
+                  padding: 16,
+                  border: '1px solid var(--border)',
                   borderRadius: 'var(--radius-lg)',
                   backgroundColor: 'var(--surface)',
                   cursor: 'pointer',
@@ -83,14 +77,16 @@ export const ProjectsList: React.FC = () => {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--surface2)';
+                  e.currentTarget.style.borderColor = 'var(--accent)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--surface)';
+                  e.currentTarget.style.borderColor = 'var(--border)';
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                   <div style={{ flex: 1 }}>
-                    <h3 style={{ fontFamily: 'var(--font-slab)', fontSize: 20, fontWeight: 400, letterSpacing: 0, textTransform: 'none', lineHeight: 1.25, color: 'var(--text)', marginBottom: 4 }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>
                       {project.name}
                     </h3>
                     <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>
@@ -105,10 +101,8 @@ export const ProjectsList: React.FC = () => {
                       borderRadius: 'var(--radius)',
                       fontSize: 12,
                       fontWeight: 600,
-                      backgroundColor: isComplete ? 'var(--ok)' : 'var(--warn)',
-                      color: isComplete ? 'var(--on-ok)' : 'var(--on-warn)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
+                      backgroundColor: isComplete ? '#10b981' : '#fbbf24',
+                      color: isComplete ? '#ffffff' : '#78350f',
                       marginLeft: 12,
                       whiteSpace: 'nowrap',
                     }}
@@ -130,15 +124,15 @@ export const ProjectsList: React.FC = () => {
                   <div
                     style={{
                       height: 6,
-                      backgroundColor: 'var(--surface3)',
-                      borderRadius: 0,
+                      backgroundColor: 'var(--border)',
+                      borderRadius: 3,
                       overflow: 'hidden',
                     }}
                   >
                     <div
                       style={{
                         height: '100%',
-                        backgroundColor: isComplete ? 'var(--ok)' : 'var(--warn)',
+                        backgroundColor: isComplete ? '#10b981' : '#fbbf24',
                         width: `${percentage}%`,
                         transition: 'width 300ms ease',
                       }}
@@ -172,9 +166,9 @@ export const ProjectsList: React.FC = () => {
                     transition: 'all 200ms ease',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--danger)';
-                    e.currentTarget.style.borderColor = 'var(--danger)';
-                    e.currentTarget.style.color = '#FFFFFF';
+                    e.currentTarget.style.backgroundColor = '#ef4444';
+                    e.currentTarget.style.borderColor = '#ef4444';
+                    e.currentTarget.style.color = '#ffffff';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = 'transparent';

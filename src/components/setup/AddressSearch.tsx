@@ -111,12 +111,12 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
         placeholder={placeholder}
         style={{
           width: '100%',
-          padding: '12px 14px',
-          background: 'var(--surface)',
-          border: '1px solid var(--border-strong)',
+          padding: '10px 12px',
+          background: 'var(--surface2)',
+          border: '1px solid var(--border2)',
           borderRadius: 'var(--radius)',
           color: 'var(--text)',
-          fontSize: 15,
+          fontSize: 14,
         }}
       />
 
@@ -146,7 +146,7 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
           right: 0,
           marginTop: 4,
           background: 'var(--surface)',
-          border: '1px solid var(--border-strong)',
+          border: '1px solid var(--border)',
           borderRadius: 'var(--radius)',
           zIndex: 10,
           maxHeight: 200,

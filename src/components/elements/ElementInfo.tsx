@@ -48,11 +48,12 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'var(--surface)',
+        backgroundColor: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        // Above the sticky .top-bar (z-index 100), which otherwise clips this.
         zIndex: 200,
         padding: '40px 24px',
         overflow: 'hidden',
@@ -88,7 +89,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
             style={{
               width: '40px',
               height: '40px',
-              borderRadius: 'var(--radius)',
+              borderRadius: '50%',
               border: `2px solid ${textColor}`,
               backgroundColor: 'transparent',
               color: textColor,
@@ -117,7 +118,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
             style={{
               width: '40px',
               height: '40px',
-              borderRadius: 'var(--radius)',
+              borderRadius: '50%',
               border: `2px solid ${textColor}`,
               backgroundColor: 'transparent',
               color: textColor,

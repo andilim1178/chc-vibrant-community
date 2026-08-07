@@ -141,12 +141,13 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'var(--surface)',
+        backgroundColor: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         color: textColor,
+        // Above the sticky .top-bar (z-index 100), which otherwise clips this.
         zIndex: 200,
         padding: '40px 24px',
         overflow: 'hidden',
@@ -182,7 +183,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
           style={{
             width: '40px',
             height: '40px',
-            borderRadius: 'var(--radius)',
+            borderRadius: '50%',
             border: `2px solid ${textColor}`,
             backgroundColor: 'transparent',
             color: textColor,
@@ -190,8 +191,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '20px',
-            fontFamily: 'Material Icons',
+            fontSize: '18px',
             transition: 'all 200ms ease',
           }}
           onMouseEnter={(e) => {
@@ -201,7 +201,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          home
+          🏠
         </button>
 
         {/* Center: Element name */}
@@ -304,7 +304,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
               style={{
                 width: '48px',
                 height: '48px',
-                borderRadius: 'var(--radius)',
+                borderRadius: '50%',
                 border: `2px solid ${textColor}`,
                 backgroundColor: 'transparent',
                 color: textColor,
@@ -341,7 +341,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
               style={{
                 width: '48px',
                 height: '48px',
-                borderRadius: 'var(--radius)',
+                borderRadius: '50%',
                 border: `2px solid ${textColor}`,
                 backgroundColor: 'transparent',
                 color: textColor,

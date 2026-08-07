@@ -8,56 +8,53 @@ export const PersonaSelector: React.FC<{ onClose: () => void }> = ({ onClose }) 
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: 'rgba(0, 0, 0, 0.88)',
+      background: 'rgba(43, 42, 56, 0.55)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      // Above the sticky .top-bar (z-index 100) and the element overlays (200).
       zIndex: 300,
       padding: 20
     }}>
       <div style={{
         background: 'var(--surface)',
-        border: '1px solid var(--border-strong)',
+        border: '1px solid var(--border)',
         borderRadius: 'var(--radius-xl)',
-        padding: 40,
+        padding: 30,
         maxWidth: 700,
         width: '100%'
       }}>
-        <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 42, fontWeight: 900, letterSpacing: '-0.035em', lineHeight: 1, textTransform: 'uppercase', marginBottom: 10, color: 'var(--text)' }}>
-          Select your persona
+        <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 24, marginBottom: 8, textAlign: 'center', color: 'var(--text)' }}>
+          Select Your Persona
         </h2>
-        <p style={{ fontFamily: 'var(--font-slab)', fontSize: 16, color: 'var(--text-muted)', marginBottom: 28, maxWidth: 420 }}>
+        <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginBottom: 24 }}>
           Choose how you will assess and view place vibrancy metrics.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 1, background: 'var(--border-strong)', border: '1px solid var(--border-strong)' }}>
-          {Object.entries(template.personas).map(([key, p]) => {
-            const selected = persona === key;
-            return (
-              <div
-                key={key}
-                onClick={() => {
-                  setPersona(key);
-                  onClose();
-                }}
-                style={{
-                  background: selected ? 'var(--cyan)' : 'var(--surface)',
-                  borderRadius: 0,
-                  padding: '28px 20px',
-                  cursor: 'pointer',
-                  transition: 'background 150ms ease'
-                }}
-                onMouseEnter={(e) => { if (!selected) e.currentTarget.style.background = 'var(--surface2)'; }}
-                onMouseLeave={(e) => { if (!selected) e.currentTarget.style.background = 'var(--surface)'; }}
-              >
-                <div style={{ fontSize: 44, marginBottom: 14, fontFamily: 'Material Icons', color: 'var(--text)' }}>{p.icon}</div>
-                <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 17, letterSpacing: '-0.02em', textTransform: 'uppercase', marginBottom: 6, color: 'var(--text)' }}>
-                  {p.label}
-                </div>
-                <div style={{ fontFamily: 'var(--font-slab)', fontSize: 13, lineHeight: 1.35, color: selected ? 'var(--text)' : 'var(--text-muted)' }}>{p.description}</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14 }}>
+          {Object.entries(template.personas).map(([key, p]) => (
+            <div
+              key={key}
+              onClick={() => {
+                setPersona(key);
+                onClose();
+              }}
+              style={{
+                background: persona === key ? 'var(--surface3)' : 'var(--surface2)',
+                border: `1px solid ${persona === key ? p.color : 'var(--border2)'}`,
+                borderRadius: 'var(--radius-lg)',
+                padding: 20,
+                cursor: 'pointer',
+                textAlign: 'center'
+              }}
+            >
+              <div style={{ fontSize: 48, marginBottom: 10, fontFamily: 'Material Icons', color: 'var(--text)' }}>{p.icon}</div>
+              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 16, marginBottom: 6, color: 'var(--text)' }}>
+                {p.label}
               </div>
-            );
-          })}
+              <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{p.description}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
