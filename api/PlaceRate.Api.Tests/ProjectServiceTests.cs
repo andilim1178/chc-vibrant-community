@@ -50,4 +50,76 @@ public class ProjectServiceTests
         await Assert.ThrowsAsync<DuplicateProjectNameException>(
             () => service.CreateAsync(NewProject("embark town centre")));
     }
+
+    [Fact]
+    public async Task GetAllAsync_ReturnsAllCreatedProjects()
+    {
+        using var context = CreateContext();
+        var service = new ProjectService(context);
+
+        await service.CreateAsync(NewProject("Project A"));
+        await service.CreateAsync(NewProject("Project B"));
+
+        var all = await service.GetAllAsync();
+
+        Assert.Equal(2, all.Count);
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_ThrowsWhenNotFound()
+    {
+        using var context = CreateContext();
+        var service = new ProjectService(context);
+
+        await Assert.ThrowsAsync<ProjectNotFoundException>(() => service.GetByIdAsync(Guid.NewGuid()));
+    }
+
+    [Fact]
+    public async Task UpdateAsync_UpdatesFieldsAndTimestamp()
+    {
+        using var context = CreateContext();
+        var service = new ProjectService(context);
+        var created = await service.CreateAsync(NewProject("Original Name"));
+        var originalUpdatedAt = created.UpdatedAt;
+
+        var replacement = NewProject("Original Name");
+        replacement.Addr = "New Address";
+        var updated = await service.UpdateAsync(created.Id, replacement);
+
+        Assert.Equal("New Address", updated.Addr);
+        Assert.True(updated.UpdatedAt >= originalUpdatedAt);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_ThrowsWhenRenamingToAnotherProjectsName()
+    {
+        using var context = CreateContext();
+        var service = new ProjectService(context);
+        var first = await service.CreateAsync(NewProject("Project A"));
+        await service.CreateAsync(NewProject("Project B"));
+
+        await Assert.ThrowsAsync<DuplicateProjectNameException>(
+            () => service.UpdateAsync(first.Id, NewProject("Project B")));
+    }
+
+    [Fact]
+    public async Task DeleteAsync_RemovesProject()
+    {
+        using var context = CreateContext();
+        var service = new ProjectService(context);
+        var created = await service.CreateAsync(NewProject("To Delete"));
+
+        await service.DeleteAsync(created.Id);
+
+        await Assert.ThrowsAsync<ProjectNotFoundException>(() => service.GetByIdAsync(created.Id));
+    }
+
+    [Fact]
+    public async Task DeleteAsync_ThrowsWhenNotFound()
+    {
+        using var context = CreateContext();
+        var service = new ProjectService(context);
+
+        await Assert.ThrowsAsync<ProjectNotFoundException>(() => service.DeleteAsync(Guid.NewGuid()));
+    }
 }
