@@ -191,7 +191,8 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '18px',
+            fontSize: '20px',
+            fontFamily: 'Material Icons',
             transition: 'all 200ms ease',
           }}
           onMouseEnter={(e) => {
@@ -201,7 +202,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          🏠
+          home
         </button>
 
         {/* Center: Element name */}
