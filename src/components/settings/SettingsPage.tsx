@@ -6,7 +6,7 @@ interface SettingsPageProps {
 }
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({ onOpenPersona }) => {
-  const { account, activePersonaConfig, updateAccount, signOut } = usePlaceRate();
+  const { account, activePersonaConfig, updateAccount, signOut, goBackFromSettings } = usePlaceRate();
   const [isEditing, setIsEditing] = useState(false);
   const [firstName, setFirstName] = useState(account?.firstName || '');
   const [lastName, setLastName] = useState(account?.lastName || '');
@@ -70,9 +70,19 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onOpenPersona }) => 
           padding: 24,
         }}
       >
-        <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, marginBottom: 20, color: 'var(--text)' }}>
-          Settings
-        </h2>
+        <div className="home-head" style={{ marginBottom: 20 }}>
+          <button
+            className="home-head-button"
+            onClick={goBackFromSettings}
+            aria-label="Back"
+            style={{ fontFamily: 'Material Icons', fontSize: '20px' }}
+          >
+            arrow_back
+          </button>
+          <div className="home-head-title" style={{ fontFamily: 'var(--font-head)', fontSize: 20, color: 'var(--text)' }}>
+            Settings
+          </div>
+        </div>
 
         {/* Persona */}
         <div

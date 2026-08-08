@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { Project, PersonaConfig } from '../types/placerate';
 import { templateData } from '../data/templateLoader';
 import { scoreElement } from '../utils/scoring';
@@ -32,6 +32,8 @@ interface PlaceRateContextType {
   activeProject: Project | null;
   activeTab: string;
   setActiveTab: (t: string) => void;
+  /** Returns to whatever tab was active before navigating into Settings. */
+  goBackFromSettings: () => void;
   wizardStep: number;
   setWizardStep: React.Dispatch<React.SetStateAction<number>>;
   createNewProject: (data: Partial<Project>) => void;
@@ -80,7 +82,19 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // if one is already saved, skip straight past the gate. After that, persona
   // is changed from Settings, not this onboarding screen.
   const [personaConfirmed, setPersonaConfirmed] = useState(() => saved.persona !== null);
-  const [activeTab, setActiveTab] = useState<string>('projects');
+  const [activeTab, setActiveTabState] = useState<string>('projects');
+  // Recorded whenever we navigate into Settings, so the back button there
+  // can return to wherever the user actually came from (Elements, Projects, etc).
+  const previousTabRef = useRef<string>('projects');
+
+  const setActiveTab = (t: string) => {
+    if (t === 'settings' && activeTab !== 'settings') {
+      previousTabRef.current = activeTab;
+    }
+    setActiveTabState(t);
+  };
+
+  const goBackFromSettings = () => setActiveTabState(previousTabRef.current);
   const [wizardStep, setWizardStep] = useState<number>(0);
   const [projects, setProjects] = useState<Project[]>(saved.projects);
   const [activeProjectId, setActiveProjectId] = useState<string | null>(saved.activeProjectId);
@@ -159,6 +173,7 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       activeProject,
       activeTab,
       setActiveTab,
+      goBackFromSettings,
       wizardStep,
       setWizardStep,
       createNewProject,
