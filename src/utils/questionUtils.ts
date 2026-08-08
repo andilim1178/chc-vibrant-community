@@ -79,3 +79,47 @@ export function isLastQuestionOfElement(
   // Check if the question index is the last one in the element
   return flatQuestion.questionIdx === element.questions.length - 1;
 }
+
+/**
+ * An answer counts as given only if it is actually set. An empty checklist
+ * array means "nothing ticked yet" — the same rule the wizard uses to decide
+ * whether the forward button unlocks.
+ */
+export function isAnswered(value: unknown): boolean {
+  if (value === undefined || value === null) return false;
+  if (Array.isArray(value)) return value.length > 0;
+  return true;
+}
+
+export interface Completion {
+  answered: number;
+  total: number;
+  percent: number;
+}
+
+/**
+ * Share of questions answered across the given elements. Completion is counted
+ * per question, not per element, so a part-finished element still moves the bar.
+ */
+export function completionFor(
+  elements: ElementConfig[],
+  answers: Record<string, Record<number, any>> | undefined
+): Completion {
+  let answered = 0;
+  let total = 0;
+
+  for (const element of elements) {
+    total += element.questions.length;
+    const elementAnswers = answers?.[element.id];
+    if (!elementAnswers) continue;
+    for (let i = 0; i < element.questions.length; i++) {
+      if (isAnswered(elementAnswers[i])) answered++;
+    }
+  }
+
+  return {
+    answered,
+    total,
+    percent: total > 0 ? Math.round((answered / total) * 100) : 0,
+  };
+}

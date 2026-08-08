@@ -118,7 +118,8 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
     setProjects(prev => [newProj, ...prev]);
     setActiveProjectId(newProj.id);
-    setActiveTab('elements');
+    // Setup hands off to the project overview, not straight to the elements.
+    setActiveTab('home');
   };
 
   const updateProjectAnswers = (elementId: string, questionIdx: number, val: any) => {

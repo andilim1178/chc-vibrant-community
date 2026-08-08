@@ -7,6 +7,7 @@ export const HeaderNav: React.FC<{ onOpenPersona: () => void }> = ({ onOpenPerso
 
   const tabs = [
     { id: 'projects', label: 'Projects' },
+    { id: 'home', label: 'Home' },
     { id: 'setup', label: 'Setup' },
     { id: 'elements', label: 'Elements' },
     { id: 'results', label: 'Results' },

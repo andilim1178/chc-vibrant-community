@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { ProjectsList } from './components/layout/ProjectsList';
+import { ProjectOverview } from './components/layout/ProjectOverview';
 import { AddressSearch } from './components/setup/AddressSearch';
 import { ElementInfo } from './components/elements/ElementInfo';
 import { ReportView } from './components/results/ReportView';
@@ -111,6 +112,15 @@ const MainContent: React.FC = () => {
         )}
 
         {activeTab === 'projects' && <ProjectsList />}
+
+        {activeTab === 'home' && (
+          <ProjectOverview
+            onOpenElements={(t) => {
+              setElementType(t);
+              setActiveTab('elements');
+            }}
+          />
+        )}
 
         {activeTab === 'elements' && (
           <div style={{ maxWidth: 680, margin: '0 auto' }}>

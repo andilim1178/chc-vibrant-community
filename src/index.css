@@ -612,3 +612,142 @@ html, body {
   background: var(--surface3);
   color: var(--text);
 }
+
+/* ---------------------------------------------------------------------------
+   Project overview — the screen shown after setup
+   --------------------------------------------------------------------------- */
+.overview {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 16px 0 40px;
+}
+
+.overview-title {
+  font-family: var(--font-head);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  text-align: center;
+  color: var(--text);
+}
+
+.overview-addr {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.overview-badge-row {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 26px;
+}
+
+.overview-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  background: #E0912F;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.overview-badge.is-complete {
+  background: #2F7D57;
+}
+
+.overview-bar {
+  height: 16px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.overview-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--navy);
+  transition: width 300ms ease;
+}
+
+.overview-bar-label {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.overview-section {
+  margin-top: 34px;
+}
+
+.overview-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.overview-section-head h2 {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+.overview-section-pct {
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.overview-swatches {
+  display: flex;
+  height: 58px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.overview-swatches > div {
+  flex: 1;
+  transition: transform 150ms ease;
+}
+
+.overview-swatches:hover > div {
+  transform: scaleY(1.06);
+}
+
+.overview-swatches:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+}
+
+.overview-empty-cta {
+  padding: 12px 20px;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .overview-title {
+    font-size: 28px;
+  }
+
+  .overview-section-head h2 {
+    font-size: 22px;
+  }
+
+  .overview-swatches {
+    height: 48px;
+  }
+}
