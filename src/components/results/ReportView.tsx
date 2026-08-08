@@ -252,6 +252,9 @@ export const ReportView: React.FC = () => {
         <button
           onClick={handleDownloadPDF}
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
             padding: '12px 24px',
             fontSize: 14,
             fontWeight: 600,
@@ -269,11 +272,17 @@ export const ReportView: React.FC = () => {
             e.currentTarget.style.opacity = '1';
           }}
         >
-          📥 Download PDF
+          <span aria-hidden="true" style={{ fontFamily: 'Material Icons', fontSize: 18 }}>
+            download
+          </span>
+          Download PDF
         </button>
         <button
           onClick={handleShare}
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
             padding: '12px 24px',
             fontSize: 14,
             fontWeight: 600,
@@ -291,7 +300,10 @@ export const ReportView: React.FC = () => {
             e.currentTarget.style.backgroundColor = 'var(--surface2)';
           }}
         >
-          🔗 Share
+          <span aria-hidden="true" style={{ fontFamily: 'Material Icons', fontSize: 18 }}>
+            share
+          </span>
+          Share
         </button>
       </div>
     </div>
