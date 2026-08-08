@@ -90,8 +90,8 @@ const MainContent: React.FC = () => {
                 </button>
                 <button
                   className="home-head-button"
-                  onClick={() => setShowPersonaModal(true)}
-                  aria-label="Select persona"
+                  onClick={() => setActiveTab('settings')}
+                  aria-label="Settings"
                   style={{ fontFamily: 'Material Icons', fontSize: '24px' }}
                 >
                   settings
@@ -133,14 +133,27 @@ const MainContent: React.FC = () => {
 
               </div>
 
-              <div
-                className="action-bar"
-                onClick={() => setActiveTab('setup')}
-                role="button"
-                tabIndex={0}
-                onKeyDown={e => e.key === 'Enter' && setActiveTab('setup')}
-              >
-                Start new assessment
+              <div style={{ display: 'flex', gap: 12, marginTop: 20 }}>
+                <div
+                  className="action-bar"
+                  style={{ flex: 1, marginTop: 0 }}
+                  onClick={() => setActiveTab('setup')}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={e => e.key === 'Enter' && setActiveTab('setup')}
+                >
+                  Start new assessment
+                </div>
+                <div
+                  className="action-bar action-bar-secondary"
+                  style={{ flex: 1, marginTop: 0 }}
+                  onClick={() => setActiveTab('report')}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={e => e.key === 'Enter' && setActiveTab('report')}
+                >
+                  View Report
+                </div>
               </div>
             </div>
           </div>
@@ -159,6 +172,7 @@ const MainContent: React.FC = () => {
             answers={activeProject?.answers}
             onOpenElement={handleOpenElementInfo}
             onClose={() => setOpenListType(null)}
+            onViewReport={() => { setOpenListType(null); setActiveTab('report'); }}
           />
         )}
 

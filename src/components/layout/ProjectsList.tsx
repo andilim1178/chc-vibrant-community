@@ -22,11 +22,11 @@ export const ProjectsList: React.FC = () => {
       elementId => (project.scores?.[elementId] ?? 0) > 0
     ).length;
 
-    const hardElements = template.elements.filter(e => e.type === 'hard').length;
-    const percentage = hardElements > 0 ? Math.round((answeredElements / hardElements) * 100) : 0;
+    const totalElements = template.elements.length;
+    const percentage = totalElements > 0 ? Math.round((answeredElements / totalElements) * 100) : 0;
     const isComplete = percentage === 100;
 
-    return { percentage, isComplete, answeredElements, hardElements };
+    return { percentage, isComplete, answeredElements, totalElements };
   };
 
   const handleProjectClick = (projectId: string) => {
@@ -108,7 +108,7 @@ export const ProjectsList: React.FC = () => {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {visibleProjects.map(project => {
-            const { percentage, isComplete, answeredElements, hardElements } = getProjectStatus(project.id);
+            const { percentage, isComplete, answeredElements, totalElements } = getProjectStatus(project.id);
 
             return (
               <div
@@ -162,7 +162,7 @@ export const ProjectsList: React.FC = () => {
                 <div style={{ marginBottom: 12 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                     <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                      {answeredElements} of {hardElements} elements
+                      {answeredElements} of {totalElements} elements
                     </span>
                     <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600 }}>
                       {percentage}%

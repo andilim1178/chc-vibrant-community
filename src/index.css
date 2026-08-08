@@ -231,6 +231,12 @@ html, body {
   opacity: 0.9;
 }
 
+.action-bar-secondary {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+}
+
 /* ---------------------------------------------------------------------------
    Phone layout
 

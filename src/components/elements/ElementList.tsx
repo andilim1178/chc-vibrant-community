@@ -9,10 +9,11 @@ interface ElementListProps {
   answers: Record<string, Record<number, any>> | undefined;
   onOpenElement: (elementId: string) => void;
   onClose: () => void;
+  onViewReport: () => void;
 }
 
 /** Full-screen list of one type's elements, opened from the Elements tab's rainbow. */
-export const ElementList: React.FC<ElementListProps> = ({ label, elements, answers, onOpenElement, onClose }) => {
+export const ElementList: React.FC<ElementListProps> = ({ label, elements, answers, onOpenElement, onClose, onViewReport }) => {
   const hasProject = answers !== undefined;
   const setPercent = completionFor(elements, answers).percent;
 
@@ -93,6 +94,16 @@ export const ElementList: React.FC<ElementListProps> = ({ label, elements, answe
                 </div>
               );
             })}
+          </div>
+
+          <div
+            className="action-bar action-bar-secondary"
+            onClick={onViewReport}
+            role="button"
+            tabIndex={0}
+            onKeyDown={evt => evt.key === 'Enter' && onViewReport()}
+          >
+            View Report
           </div>
         </div>
       </div>
