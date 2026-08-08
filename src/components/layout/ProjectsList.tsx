@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { usePlaceRate } from '../../context/PlaceRateContext';
 
 export const ProjectsList: React.FC = () => {
   const { projects, template, selectProject, setActiveTab, deleteProject } = usePlaceRate();
+  const [query, setQuery] = useState('');
+
+  // Matches name, address or type, so "bundoora" and "mixed use" both work.
+  const visibleProjects = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return projects;
+    return projects.filter(p =>
+      [p.name, p.addr, p.type].some(field => (field || '').toLowerCase().includes(q))
+    );
+  }, [projects, query]);
 
   const getProjectStatus = (projectId: string) => {
     const project = projects.find(p => p.id === projectId);
@@ -53,15 +63,51 @@ export const ProjectsList: React.FC = () => {
         </button>
       </div>
 
+      {projects.length > 0 && (
+        <div className="project-search">
+          <span
+            aria-hidden="true"
+            className="project-search-icon"
+            style={{ fontFamily: 'Material Icons' }}
+          >
+            search
+          </span>
+          <input
+            type="search"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search projects"
+            aria-label="Search projects by name, address or type"
+          />
+          {query && (
+            <button
+              type="button"
+              className="project-search-clear"
+              onClick={() => setQuery('')}
+              aria-label="Clear search"
+              style={{ fontFamily: 'Material Icons' }}
+            >
+              close
+            </button>
+          )}
+        </div>
+      )}
+
       {projects.length === 0 ? (
         <div style={{ textAlign: 'center', padding: 40 }}>
           <p style={{ color: 'var(--text-muted)', marginBottom: 24 }}>
             No projects yet. Create one to get started!
           </p>
         </div>
+      ) : visibleProjects.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: 40 }}>
+          <p style={{ color: 'var(--text-muted)' }}>
+            No projects match “{query}”.
+          </p>
+        </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {projects.map(project => {
+          {visibleProjects.map(project => {
             const { percentage, isComplete, answeredElements, hardElements } = getProjectStatus(project.id);
 
             return (

@@ -551,3 +551,64 @@ html, body {
     padding: 26px 20px;
   }
 }
+
+/* Projects search field */
+.project-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.project-search-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 18px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.project-search input {
+  width: 100%;
+  padding: 11px 12px 11px 38px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.project-search input::placeholder {
+  color: var(--text-dim);
+}
+
+/* The stock clear affordance would sit on top of ours */
+.project-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.project-search-clear {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.project-search-clear:hover {
+  background: var(--surface3);
+  color: var(--text);
+}
