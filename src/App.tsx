@@ -2,22 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { ProjectsList } from './components/layout/ProjectsList';
-import { ProjectOverview } from './components/layout/ProjectOverview';
+import { ElementSetPanel, ELEMENT_SETS } from './components/layout/ElementSetPanel';
 import { AddressSearch } from './components/setup/AddressSearch';
 import { ElementInfo } from './components/elements/ElementInfo';
+import { ElementList } from './components/elements/ElementList';
 import { ReportView } from './components/results/ReportView';
 import { PersonaSelector } from './components/persona/PersonaSelector';
 import { LoginScreen } from './components/auth/LoginScreen';
-import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
+import { SettingsPage } from './components/settings/SettingsPage';
 import { QuestionWizard } from './components/questions/QuestionWizard';
-import { calculateProjectScore } from './utils/scoring';
 import { completionFor } from './utils/questionUtils';
-import { pickInk } from './utils/contrast';
-
-const ELEMENT_SETS = [
-  { type: 'hard' as const, label: 'Hard Elements' },
-  { type: 'soft' as const, label: 'Soft Elements' },
-];
 
 const MainContent: React.FC = () => {
   const { account, personaConfirmed, activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
@@ -30,25 +24,16 @@ const MainContent: React.FC = () => {
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
   const [showElementInfo, setShowElementInfo] = useState(false);
   const [infoElementId, setInfoElementId] = useState<string | null>(null);
-  const [elementType, setElementType] = useState<'hard' | 'soft'>('hard');
-  const [pendingScroll, setPendingScroll] = useState<'hard' | 'soft' | null>(null);
+  const [openListType, setOpenListType] = useState<'hard' | 'soft' | null>(null);
 
-  const totalScore = activeProject ? calculateProjectScore(activeProject) : 0;
+  const overallPercent = activeProject ? completionFor(template.elements, activeProject.answers).percent : 0;
 
   // Close overlays when tab changes
   useEffect(() => {
     setShowWizard(false);
     setShowElementInfo(false);
+    setOpenListType(null);
   }, [activeTab]);
-
-  // Jumping in from the overview scrolls to that set. This has to run as an
-  // effect rather than inline with the click: the section only exists once the
-  // elements tab has committed to the DOM.
-  useEffect(() => {
-    if (activeTab !== 'elements' || !pendingScroll) return;
-    document.getElementById(`elements-${pendingScroll}`)?.scrollIntoView({ block: 'start' });
-    setPendingScroll(null);
-  }, [activeTab, pendingScroll]);
 
   // Gates run in order: sign in, then choose a persona, then the app.
   // Both must stay below every hook call — an early return above them breaks
@@ -80,12 +65,12 @@ const MainContent: React.FC = () => {
 
   return (
     <div className="shell">
-      <HeaderNav onOpenPersona={() => setShowPersonaModal(true)} />
+      <HeaderNav />
       {showPersonaModal && <PersonaSelector onClose={() => setShowPersonaModal(false)} />}
 
       {/* Element colour strip — sits under the nav on every tab */}
       <div className="swatch-strip">
-        {template.elements.filter(e => e.type === elementType).map(e => (
+        {template.elements.map(e => (
           <div key={e.id} style={{ backgroundColor: e.color || 'var(--el-default)' }} />
         ))}
       </div>
@@ -129,25 +114,18 @@ const MainContent: React.FC = () => {
 
         {activeTab === 'projects' && <ProjectsList />}
 
-        {activeTab === 'home' && (
-          <ProjectOverview
-            onOpenElements={(t) => {
-              // Keeps the colour strip on the set you came from, and asks the
-              // effect above to scroll to that section once it exists.
-              setElementType(t);
-              setPendingScroll(t);
-              setActiveTab('elements');
-            }}
-          />
-        )}
-
         {activeTab === 'elements' && (
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
             <div className="home-card">
               <div className="home-head">
-                <div className="home-head-title">
-                  {activeProject?.name || 'No project selected'}
-                </div>
+                <button
+                  className="home-head-button"
+                  onClick={() => setActiveTab('projects')}
+                  aria-label="Back to projects"
+                  style={{ fontFamily: 'Material Icons', fontSize: '24px' }}
+                >
+                  home
+                </button>
                 <button
                   className="home-head-button"
                   onClick={() => setShowPersonaModal(true)}
@@ -161,53 +139,35 @@ const MainContent: React.FC = () => {
               {/* Everything below is element content, so it runs in Poppins */}
               <div className="element-scope">
 
-              <div className="home-caption">
-                {activeProject
-                  ? 'To begin assessment, select an element'
-                  : 'Create a project before starting an assessment'}
-              </div>
+              {activeProject ? (
+                <>
+                  <h1 className="overview-title">{activeProject.name}</h1>
+                  {activeProject.addr && <p className="overview-addr">{activeProject.addr}</p>}
 
-              {ELEMENT_SETS.map(set => {
-                const setElements = template.elements.filter(e => e.type === set.type);
-                const setPercent = completionFor(setElements, activeProject?.answers).percent;
+                  <div className="overview-badge-row">
+                    <span className={`overview-badge ${overallPercent === 100 ? 'is-complete' : ''}`}>
+                      {overallPercent === 100 ? 'Completed' : 'In progress'}
+                    </span>
+                  </div>
 
-                return (
-                  <section key={set.type} id={`elements-${set.type}`} className="el-group">
-                    <div className="el-group-head">
-                      <h2>{set.label}</h2>
-                      <span className="el-group-pct">{setPercent}% Complete</span>
-                    </div>
+                  <div
+                    className="overview-bar"
+                    role="progressbar"
+                    aria-valuenow={overallPercent}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label="Overall completion"
+                  >
+                    <div className="overview-bar-fill" style={{ width: `${overallPercent}%` }} />
+                  </div>
+                  <p className="overview-bar-label">{overallPercent}% Complete</p>
+                </>
+              ) : (
+                <div className="home-caption">Create a project before starting an assessment</div>
+              )}
 
-                    {setElements.map(e => {
-                      const hex = e.color || 'var(--el-default)';
-                      const onEl = pickInk(hex === 'var(--el-default)' ? '#767482' : hex);
-                      const elPercent = completionFor([e], activeProject?.answers).percent;
-                      return (
-                        <div
-                          key={e.id}
-                          className="el-row"
-                          role="button"
-                          tabIndex={0}
-                          aria-disabled={!activeProject}
-                          onClick={() => handleOpenElementInfo(e.id)}
-                          onKeyDown={(evt) => evt.key === 'Enter' && handleOpenElementInfo(e.id)}
-                          style={{
-                            backgroundColor: hex === 'var(--el-default)' ? 'var(--el-default)' : hex,
-                            '--on-el': onEl,
-                            cursor: 'pointer',
-                            opacity: activeProject ? 1 : 0.5
-                          } as React.CSSProperties & { '--on-el': string }}
-                        >
-                          <span>{e.name}</span>
-                          {activeProject && elPercent > 0 && (
-                            <span className="el-score">{elPercent}%</span>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </section>
-                );
-              })}
+              <ElementSetPanel type="hard" elements={template.elements} answers={activeProject?.answers} onOpenList={setOpenListType} />
+              <ElementSetPanel type="soft" elements={template.elements} answers={activeProject?.answers} onOpenList={setOpenListType} />
 
               </div>
 
@@ -224,23 +184,26 @@ const MainContent: React.FC = () => {
           </div>
         )}
 
-        {activeTab === 'results' && (
-          <div style={{ textAlign: 'center', padding: 40 }}>
-            <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 28, marginBottom: 16 }}>Vibrancy Score</h2>
-            <div style={{ fontSize: 72, fontFamily: 'var(--font-head)', color: 'var(--navy)', fontWeight: 700 }}>
-              {totalScore} <span style={{ fontSize: 20, color: 'var(--text-dim)' }}>/ 100</span>
-            </div>
-            <div style={{ marginTop: 24 }}>
-              <VibrancyWheelCanvas size={180} />
-            </div>
-          </div>
+        {activeTab === 'report' && <ReportView />}
+
+        {activeTab === 'settings' && (
+          <SettingsPage onOpenPersona={() => setShowPersonaModal(true)} />
         )}
 
-        {activeTab === 'report' && <ReportView />}
+        {openListType && (
+          <ElementList
+            label={ELEMENT_SETS.find(s => s.type === openListType)!.label}
+            elements={template.elements.filter(e => e.type === openListType)}
+            answers={activeProject?.answers}
+            onOpenElement={handleOpenElementInfo}
+            onClose={() => setOpenListType(null)}
+          />
+        )}
 
         {showElementInfo && infoElementId && (
           <ElementInfo
             element={template.elements.find(e => e.id === infoElementId)!}
+            answers={activeProject?.answers}
             onStartAssessment={handleStartAssessment}
             onClose={() => setShowElementInfo(false)}
           />

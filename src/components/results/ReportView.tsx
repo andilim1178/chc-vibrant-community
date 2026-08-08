@@ -103,11 +103,11 @@ export const ReportView: React.FC = () => {
           <div className="report-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, fontSize: 14 }}>
             <div>
               <p style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Project Name</p>
-              <p style={{ color: 'var(--text)', fontWeight: 500 }}>{activeProject.name}</p>
+              <p style={{ color: 'var(--text)', fontWeight: 500, textTransform: 'uppercase' }}>{activeProject.name}</p>
             </div>
             <div>
               <p style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Location</p>
-              <p style={{ color: 'var(--text)', fontWeight: 500 }}>{activeProject.addr || 'N/A'}</p>
+              <p style={{ color: 'var(--text)', fontWeight: 500, textTransform: 'uppercase' }}>{activeProject.addr || 'N/A'}</p>
             </div>
             <div>
               <p style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Type</p>

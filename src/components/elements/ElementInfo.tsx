@@ -1,9 +1,11 @@
 import React from 'react';
 import { ElementConfig } from '../../types/placerate';
 import { pickInk } from '../../utils/contrast';
+import { completionFor } from '../../utils/questionUtils';
 
 interface ElementInfoProps {
   element: ElementConfig;
+  answers: Record<string, Record<number, any>> | undefined;
   onStartAssessment: () => void;
   onClose: () => void;
 }
@@ -33,11 +35,16 @@ const ElementIconNames: Record<string, string> = {
 
 export const ElementInfo: React.FC<ElementInfoProps> = ({
   element,
+  answers,
   onStartAssessment,
   onClose,
 }) => {
   const textColor = pickInk(element.color === 'var(--el-default)' ? '#767482' : (element.color || '#767482'));
   const iconName = ElementIconNames[element.id] || ElementIconNames.default;
+  const completion = completionFor([element], answers);
+  const isComplete = completion.percent === 100;
+  const isStarted = completion.answered > 0;
+  const assessmentLabel = isComplete ? 'Edit Assessment' : isStarted ? 'Resume Assessment' : 'Start Assessment';
 
   return (
     <div
@@ -221,7 +228,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
-            Start Assessment →
+            {assessmentLabel} →
           </button>
         </div>
       </div>

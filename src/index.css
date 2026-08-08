@@ -19,9 +19,8 @@
   --radius: 10px;
   --radius-lg: 14px;
   --radius-xl: 20px;
-  --font-head: 'Space Grotesk', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  /* Everything element-related is set in Poppins — see .element-scope below. */
+  --font-head: 'Poppins', sans-serif;
+  --font-body: 'Poppins', sans-serif;
   --font-element: 'Poppins', sans-serif;
   --max: 1200px;
   /* Rendered height of the sticky .top-bar. The swatch strip pins directly
@@ -29,33 +28,6 @@
   --top-bar-h: 80px;
 }
 
-/*
-  Element scope: anything presenting an element — the element rows, the
-  element detail panel, the assessment wizard, the report breakdowns — is set
-  in Poppins, with element titles in Title Case.
-
-  Headings and classed descendants are named explicitly: rules that target
-  them directly beat a font inherited from this container.
-
-  Material Icons are excluded automatically — their font-family is set
-  inline, which outranks any of these selectors.
-*/
-.element-scope,
-.element-scope h1,
-.element-scope h2,
-.element-scope h3,
-.element-scope h4,
-.element-scope h5,
-.element-scope p,
-.element-scope button,
-.element-scope input,
-.element-scope textarea,
-.element-scope select,
-.element-scope .home-caption,
-.element-scope .el-score,
-.element-scope .action-bar {
-  font-family: var(--font-element);
-}
 html, body {
   min-height: 100vh;
   background: var(--bg);
@@ -134,37 +106,9 @@ html, body {
   border-radius: 20px;
   border: 1px solid var(--border2);
   background: var(--surface2);
-  cursor: pointer;
   font-size: 12px;
   color: var(--text-muted);
-  transition: all 0.15s;
   font-family: var(--font-body);
-}
-
-.persona-chip:hover {
-  border-color: var(--border2);
-  color: var(--text);
-}
-
-.proj-pill {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid var(--border2);
-  background: var(--surface2);
-  font-size: 12px;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-
-.proj-pill .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--navy);
-  flex-shrink: 0;
 }
 
 .tabs {
@@ -269,30 +213,6 @@ html, body {
   margin-bottom: 20px;
 }
 
-.el-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  margin-bottom: 8px;
-  border-radius: var(--radius);
-  color: var(--on-el);
-  font-family: var(--font-element);
-  font-weight: 600;
-  /* Element titles are Title Case; the source data is sentence case. */
-  text-transform: capitalize;
-  font-size: 15px;
-}
-
-.el-score {
-  font-size: 12px;
-  font-weight: 600;
-  /* Inherit --on-el, the ink already contrast-picked for this row's colour.
-     A fixed grey is unreadable on the darker elements. */
-  color: inherit;
-  opacity: 0.85;
-}
-
 .action-bar {
   background: var(--navy);
   color: var(--on-navy);
@@ -383,18 +303,6 @@ html, body {
     padding: 11px 12px;
   }
 
-  /* A long project name must ellipsis, not widen the bar */
-  .proj-pill {
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  .proj-pill > span:last-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   /* Rainbow runs edge to edge under the header, as in the Figma */
   .swatch-strip {
     max-width: none;
@@ -410,11 +318,6 @@ html, body {
 
   .home-head-title {
     font-size: 16px;
-  }
-
-  .el-row {
-    padding: 15px 16px;
-    font-size: 14px;
   }
 
   .action-bar {
@@ -617,14 +520,9 @@ html, body {
 }
 
 /* ---------------------------------------------------------------------------
-   Project overview — the screen shown after setup
+   Elements tab: project header (title/address/badge/overall bar) plus the
+   Hard/Soft sections, each a heading, a percentage, and a clickable rainbow.
    --------------------------------------------------------------------------- */
-.overview {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 16px 0 40px;
-}
-
 .overview-title {
   font-family: var(--font-head);
   font-size: 34px;
@@ -632,6 +530,7 @@ html, body {
   line-height: 1.15;
   letter-spacing: -0.5px;
   text-align: center;
+  text-transform: uppercase;
   color: var(--text);
 }
 
@@ -639,6 +538,7 @@ html, body {
   margin-top: 6px;
   text-align: center;
   font-size: 15px;
+  text-transform: uppercase;
   color: var(--text-muted);
 }
 
@@ -683,7 +583,7 @@ html, body {
 }
 
 .overview-section {
-  margin-top: 34px;
+  margin-top: 20px;
 }
 
 .overview-section-head {
@@ -729,18 +629,6 @@ html, body {
   outline-offset: 3px;
 }
 
-.overview-empty-cta {
-  padding: 12px 20px;
-  background: var(--accent);
-  color: var(--accent-text);
-  border: none;
-  border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 @media (max-width: 767px) {
   .overview-title {
     font-size: 28px;
@@ -755,40 +643,47 @@ html, body {
   }
 }
 
-/* Elements tab: hard and soft listed as separate labelled sets */
-.el-group + .el-group {
-  margin-top: 32px;
+.el-list {
+  margin-top: 16px;
 }
 
-.el-group-head {
+.el-row {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-  scroll-margin-top: calc(var(--top-bar-h) + 24px);
-}
-
-.el-group-head h2 {
+  align-items: center;
+  padding: 16px 20px;
+  margin-bottom: 8px;
+  border-radius: var(--radius);
+  color: var(--on-el);
   font-family: var(--font-element);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
+  font-weight: 600;
+  /* Element titles are Title Case; the source data is sentence case. */
+  text-transform: capitalize;
+  font-size: 15px;
 }
 
-.el-group-pct {
-  font-family: var(--font-element);
-  font-size: 13px;
-  color: var(--text-muted);
-  white-space: nowrap;
+.el-status {
+  font-size: 12px;
+  font-weight: 600;
+  /* Inherit --on-el, the ink already contrast-picked for this row's colour.
+     A fixed grey is unreadable on the darker elements. */
+  color: inherit;
+  opacity: 0.7;
 }
 
-.el-group {
-  scroll-margin-top: calc(var(--top-bar-h) + 20px);
+.el-status.is-started {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+.el-status.is-complete {
+  opacity: 1;
 }
 
 @media (max-width: 767px) {
-  .el-group-head h2 {
-    font-size: 18px;
+  .el-row {
+    padding: 15px 16px;
+    font-size: 14px;
   }
 }
+

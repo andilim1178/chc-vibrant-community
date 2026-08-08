@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { usePlaceRate } from '../../context/PlaceRateContext';
 import { flattenQuestions, getQuestionAtIndex, getTotalQuestionCount, isLastQuestionOfElement } from '../../utils/questionUtils';
-import { pickInk } from '../../utils/contrast';
+import { pickInk, lighten } from '../../utils/contrast';
 import { QuestionCard } from './QuestionCard';
 import { NotesSection } from './NotesSection';
 
@@ -45,6 +45,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   const elementColor = currentElement?.color || 'var(--el-default)';
   const resolvedColor = elementColor === 'var(--el-default)' ? '#767482' : elementColor;
   const textColor = pickInk(resolvedColor);
+  const progressTrackTint = lighten(resolvedColor, 0.75);
 
   // Navigation logic
   const canGoBack = currentIndex > 0;
@@ -58,6 +59,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
     ? isLastQuestionOfElement(template.elements, currentIndex)
     : false;
   const isLastQuestionOverall = currentIndex === totalQuestions - 1;
+  const isFinishStep = isLastQuestionOverall || isLastQuestionOfCurrentElement;
 
   // Handle back button
   const handleBack = () => {
@@ -70,7 +72,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   const handleForward = () => {
     if (!canGoForward) return;
 
-    if (isLastQuestionOverall || isLastQuestionOfCurrentElement) {
+    if (isFinishStep) {
       onClose();
     } else {
       setCurrentIndex(currentIndex + 1);
@@ -231,7 +233,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             textAlign: 'right',
           }}
         >
-          Q{currentIndex + 1} of {totalQuestions}
+          Q{currentQuestion.questionIdx + 1} of {currentElement.questions.length}
         </div>
       </div>
 
@@ -239,15 +241,15 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
       <div
         style={{
           height: '4px',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          backgroundColor: progressTrackTint,
           overflow: 'hidden',
         }}
       >
         <div
           style={{
             height: '100%',
-            backgroundColor: 'rgba(255, 255, 255, 0.4)',
-            width: `${((currentIndex + 1) / totalQuestions) * 100}%`,
+            backgroundColor: '#000000',
+            width: `${((currentQuestion.questionIdx + 1) / currentElement.questions.length) * 100}%`,
             transition: 'width 200ms ease',
           }}
         />
@@ -331,39 +333,60 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
 
             {/* Center: Question counter */}
             <span style={{ fontSize: '12px', opacity: 0.7 }}>
-              {currentIndex + 1} / {totalQuestions}
+              {currentQuestion.questionIdx + 1} / {currentElement.questions.length}
             </span>
 
-            {/* Forward button */}
+            {/* Forward button — a wider "Finish" pill on the last question, otherwise a plain arrow */}
             <button
               onClick={handleForward}
               disabled={!canGoForward}
-              aria-label={isLastQuestionOverall || isLastQuestionOfCurrentElement ? "Finish assessment" : "Next question"}
-              style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                border: `2px solid ${textColor}`,
-                backgroundColor: 'transparent',
-                color: textColor,
-                cursor: canGoForward ? 'pointer' : 'not-allowed',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '20px',
-                opacity: canGoForward ? 1 : 0.3,
-                transition: 'all 200ms ease',
-              }}
+              aria-label={isFinishStep ? "Finish assessment" : "Next question"}
+              style={
+                isFinishStep
+                  ? {
+                      height: '48px',
+                      padding: '0 24px',
+                      borderRadius: '24px',
+                      border: `2px solid ${textColor}`,
+                      backgroundColor: canGoForward ? textColor : 'transparent',
+                      color: canGoForward ? resolvedColor : textColor,
+                      cursor: canGoForward ? 'pointer' : 'not-allowed',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '14px',
+                      fontWeight: 600,
+                      opacity: canGoForward ? 1 : 0.3,
+                      transition: 'all 200ms ease',
+                    }
+                  : {
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '50%',
+                      border: `2px solid ${textColor}`,
+                      backgroundColor: 'transparent',
+                      color: textColor,
+                      cursor: canGoForward ? 'pointer' : 'not-allowed',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '20px',
+                      opacity: canGoForward ? 1 : 0.3,
+                      transition: 'all 200ms ease',
+                    }
+              }
               onMouseEnter={(e) => {
-                if (canGoForward) {
+                if (canGoForward && !isFinishStep) {
                   e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                 }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
+                if (!isFinishStep) {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }
               }}
             >
-              →
+              {isFinishStep ? 'Finish' : '→'}
             </button>
           </div>
         </div>

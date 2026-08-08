@@ -133,10 +133,10 @@ export const ProjectsList: React.FC = () => {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                   <div style={{ flex: 1 }}>
-                    <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 4, textTransform: 'uppercase' }}>
                       {project.name}
                     </h3>
-                    <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 8 }}>
+                    <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 8, textTransform: 'uppercase' }}>
                       {project.addr || 'No address'}
                     </p>
                   </div>
@@ -193,38 +193,67 @@ export const ProjectsList: React.FC = () => {
                   <span>{project.date}</span>
                 </div>
 
-                {/* Delete Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (confirm(`Delete project "${project.name}"?`)) {
-                      deleteProject(project.id);
-                    }
-                  }}
-                  style={{
-                    marginTop: 12,
-                    padding: '6px 12px',
-                    fontSize: 12,
-                    backgroundColor: 'transparent',
-                    border: '1px solid var(--text-muted)',
-                    borderRadius: 'var(--radius)',
-                    color: 'var(--text-muted)',
-                    cursor: 'pointer',
-                    transition: 'all 200ms ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#ef4444';
-                    e.currentTarget.style.borderColor = '#ef4444';
-                    e.currentTarget.style.color = '#ffffff';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                    e.currentTarget.style.borderColor = 'var(--text-muted)';
-                    e.currentTarget.style.color = 'var(--text-muted)';
-                  }}
-                >
-                  Delete
-                </button>
+                <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                  {/* View Report Button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      selectProject(project.id);
+                      setActiveTab('report');
+                    }}
+                    style={{
+                      padding: '6px 12px',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      backgroundColor: 'var(--accent)',
+                      color: 'var(--accent-text)',
+                      border: 'none',
+                      borderRadius: 'var(--radius)',
+                      cursor: 'pointer',
+                      transition: 'all 200ms ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.opacity = '0.85';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = '1';
+                    }}
+                  >
+                    View Report
+                  </button>
+
+                  {/* Delete Button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (confirm(`Delete project "${project.name}"?`)) {
+                        deleteProject(project.id);
+                      }
+                    }}
+                    style={{
+                      padding: '6px 12px',
+                      fontSize: 12,
+                      backgroundColor: 'transparent',
+                      border: '1px solid var(--text-muted)',
+                      borderRadius: 'var(--radius)',
+                      color: 'var(--text-muted)',
+                      cursor: 'pointer',
+                      transition: 'all 200ms ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#ef4444';
+                      e.currentTarget.style.borderColor = '#ef4444';
+                      e.currentTarget.style.color = '#ffffff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.borderColor = 'var(--text-muted)';
+                      e.currentTarget.style.color = 'var(--text-muted)';
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             );
           })}

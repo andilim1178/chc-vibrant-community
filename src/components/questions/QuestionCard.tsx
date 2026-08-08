@@ -1,6 +1,6 @@
 import React from 'react';
 import { QuestionConfig } from '../../types/placerate';
-import { pickInk } from '../../utils/contrast';
+import { pickInk, lighten } from '../../utils/contrast';
 import { OptionButton } from './OptionButton';
 
 interface QuestionCardProps {
@@ -29,6 +29,9 @@ export const QuestionCard: React.FC<QuestionCardProps> = (props) => {
   // Text color
   const resolvedColor = elementColor === 'var(--el-default)' ? '#767482' : elementColor;
   const textColor = pickInk(resolvedColor);
+  // Options are a light tint of the element's own colour, with the colour
+  // itself as ink — a simple two-tone look instead of white overlays.
+  const tint = lighten(resolvedColor, 0.75);
 
   // Render yes/no question type
   const renderYesNo = () => {
@@ -46,6 +49,8 @@ export const QuestionCard: React.FC<QuestionCardProps> = (props) => {
             key={option.value}
             label={option.label}
             selected={value === option.value}
+            tint={tint}
+            ink={resolvedColor}
             onClick={() => onChange(option.value)}
           />
         ))}
@@ -66,12 +71,16 @@ export const QuestionCard: React.FC<QuestionCardProps> = (props) => {
             key={option.index}
             label={option.title}
             selected={value === option.index}
+            tint={tint}
+            ink={resolvedColor}
             onClick={() => onChange(option.index)}
           />
         ))}
         <OptionButton
           label="N/A"
           selected={value === 'n/a'}
+          tint={tint}
+          ink={resolvedColor}
           onClick={() => onChange('n/a')}
         />
       </div>
@@ -90,6 +99,8 @@ export const QuestionCard: React.FC<QuestionCardProps> = (props) => {
           label="N/A - Not applicable"
           selected={isNASelected}
           disabled={Array.isArray(value) && value.length > 0}
+          tint={tint}
+          ink={resolvedColor}
           onClick={() => {
             if (isNASelected) {
               onChange([]);
@@ -106,6 +117,8 @@ export const QuestionCard: React.FC<QuestionCardProps> = (props) => {
             label={option.title}
             selected={selectedItems.includes(option.value)}
             disabled={isNASelected}
+            tint={tint}
+            ink={resolvedColor}
             onClick={() => {
               if (isNASelected) {
                 // If N/A is selected, clicking an option deselects N/A and selects just that option

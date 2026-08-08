@@ -21,3 +21,12 @@ export function pickInk(
   const ratioDark = contrastRatio(hex, dark);
   return ratioLight >= ratioDark ? light : dark;
 }
+
+/** Mixes a hex colour toward white. amount 0 = unchanged, 1 = white. */
+export function lighten(hex: string, amount: number): string {
+  const channel = (i: number) => parseInt(hex.slice(i, i + 2), 16);
+  const mix = (c: number) => Math.round(c + (255 - c) * amount);
+  return '#' + [1, 3, 5]
+    .map(i => mix(channel(i)).toString(16).padStart(2, '0'))
+    .join('');
+}

@@ -11,6 +11,9 @@ import { scoreElement } from '../utils/scoring';
 export interface Account {
   method: 'google' | 'facebook' | 'email';
   email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
 }
 
 interface PlaceRateContextType {
@@ -19,9 +22,10 @@ interface PlaceRateContextType {
   account: Account | null;
   signIn: (account: Account) => void;
   signOut: () => void;
+  updateAccount: (patch: Partial<Account>) => void;
   persona: string | null;
   setPersona: (p: string) => void;
-  /** False until the user picks a persona in *this* page load. Resets on reload. */
+  /** False until a persona has ever been picked on this device — true thereafter, even across sign-outs. */
   personaConfirmed: boolean;
   activePersonaConfig: PersonaConfig;
   projects: Project[];
@@ -73,9 +77,10 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Deliberately not persisted, so the login screen leads every page load.
   const [account, setAccount] = useState<Account | null>(null);
   const [persona, setPersonaState] = useState<string | null>(saved.persona);
-  // Deliberately not persisted: the selector is shown on every page load, so
-  // the saved persona only pre-highlights the previous choice.
-  const [personaConfirmed, setPersonaConfirmed] = useState(false);
+  // Shown only the first time someone ever picks a persona on this device —
+  // if one is already saved, skip straight past the gate. After that, persona
+  // is changed from Settings, not this onboarding screen.
+  const [personaConfirmed, setPersonaConfirmed] = useState(() => saved.persona !== null);
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [wizardStep, setWizardStep] = useState<number>(0);
   const [projects, setProjects] = useState<Project[]>(saved.projects);
@@ -96,9 +101,14 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const signIn = (next: Account) => setAccount(next);
 
+  // Signing out doesn't re-trigger the persona gate: if one's already saved,
+  // the next sign-in should skip straight past it, same as any other return visit.
   const signOut = () => {
     setAccount(null);
-    setPersonaConfirmed(false);
+  };
+
+  const updateAccount = (patch: Partial<Account>) => {
+    setAccount(prev => (prev ? { ...prev, ...patch } : prev));
   };
 
   const activeProject = projects.find(p => p.id === activeProjectId) || null;
@@ -118,8 +128,7 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
     setProjects(prev => [newProj, ...prev]);
     setActiveProjectId(newProj.id);
-    // Setup hands off to the project overview, not straight to the elements.
-    setActiveTab('home');
+    setActiveTab('elements');
   };
 
   const updateProjectAnswers = (elementId: string, questionIdx: number, val: any) => {
@@ -151,6 +160,7 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       account,
       signIn,
       signOut,
+      updateAccount,
       persona,
       setPersona,
       personaConfirmed,
