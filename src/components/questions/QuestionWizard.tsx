@@ -3,7 +3,7 @@ import { usePlaceRate } from '../../context/PlaceRateContext';
 import { flattenQuestions, getQuestionAtIndex, getTotalQuestionCount, isLastQuestionOfElement } from '../../utils/questionUtils';
 import { pickInk, lighten } from '../../utils/contrast';
 import { QuestionCard } from './QuestionCard';
-import { NotesSection } from './NotesSection';
+import { MapSection } from './MapSection';
 
 interface QuestionWizardProps {
   onClose: () => void;
@@ -14,7 +14,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
   onClose,
   initialElementId
 }) => {
-  const { template, activeProject, activePersonaConfig, updateProjectAnswers, updateProjectNotes, setActiveTab } = usePlaceRate();
+  const { template, activeProject, activePersonaConfig, updateProjectAnswers, setActiveTab } = usePlaceRate();
 
   // Calculate starting index based on initialElementId
   const startIndex = useMemo(() => {
@@ -116,18 +116,6 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
       updateProjectAnswers(currentQuestion.elementId, currentQuestion.questionIdx, value);
     }
   };
-
-  // Handle notes change
-  const handleNotesChange = (notes: string) => {
-    if (currentQuestion) {
-      updateProjectNotes(currentQuestion.elementId, notes);
-    }
-  };
-
-  // Get current notes
-  const currentNotes = currentQuestion
-    ? activeProject?.notes[currentQuestion.elementId] || ''
-    : '';
 
   // Without an active project there is nowhere to store answers, so never open.
   if (!activeProject || !currentQuestion || !currentElement) {
@@ -276,11 +264,10 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
             onChange={handleAnswerChange}
           />
 
-          {/* Notes Section - Always show */}
-          <NotesSection
+          {/* Map Section - helps answer proximity questions against the project's address */}
+          <MapSection
             visible={true}
-            notes={currentNotes}
-            onChange={handleNotesChange}
+            address={activeProject.addr}
             elementName={
               activePersonaConfig.plainLanguage && currentElement.communityName
                 ? currentElement.communityName

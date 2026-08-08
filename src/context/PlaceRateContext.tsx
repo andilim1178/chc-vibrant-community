@@ -36,7 +36,6 @@ interface PlaceRateContextType {
   setWizardStep: React.Dispatch<React.SetStateAction<number>>;
   createNewProject: (data: Partial<Project>) => void;
   updateProjectAnswers: (elementId: string, questionIdx: number, val: any) => void;
-  updateProjectNotes: (elementId: string, notes: string) => void;
   selectProject: (id: string) => void;
   deleteProject: (id: string) => void;
 }
@@ -123,8 +122,7 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       by: data.by || '',
       date: new Date().toISOString().split('T')[0],
       answers: {},
-      scores: {},
-      notes: {}
+      scores: {}
     };
     setProjects(prev => [newProj, ...prev]);
     setActiveProjectId(newProj.id);
@@ -143,14 +141,6 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         newScores[elementId] = scoreElement(elConfig, elementAnswers);
       }
       return { ...p, answers: newAnswers, scores: newScores };
-    }));
-  };
-
-  const updateProjectNotes = (elementId: string, notes: string) => {
-    if (!activeProjectId) return;
-    setProjects(prev => prev.map(p => {
-      if (p.id !== activeProjectId) return p;
-      return { ...p, notes: { ...p.notes, [elementId]: notes } };
     }));
   };
 
@@ -173,7 +163,6 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       setWizardStep,
       createNewProject,
       updateProjectAnswers,
-      updateProjectNotes,
       selectProject: setActiveProjectId,
       deleteProject: (id) => setProjects(prev => prev.filter(p => p.id !== id))
     }}>

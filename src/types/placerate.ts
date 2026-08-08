@@ -60,5 +60,4 @@ export interface Project {
   date: string;
   answers: Record<string, Record<number, any>>;
   scores: Record<string, number>;
-  notes: Record<string, string>;
 }
