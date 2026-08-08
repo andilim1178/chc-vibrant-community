@@ -475,3 +475,44 @@ html, body {
     font-size: 14px !important;
   }
 }
+
+/* Sticky "Start new assessment" bar on the projects screen, per the Figma.
+   Sits below the overlays (200/300) so the wizard still covers it. */
+.projects-bottom-cta {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* The bottom bar replaces the button above the list */
+  .projects-cta {
+    display: none;
+  }
+
+  .projects-bottom-cta {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    width: 100%;
+    border: none;
+    background: var(--navy);
+    color: var(--on-navy);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    /* Clears the iPhone home indicator */
+    padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+  }
+
+  /* Keep the last card from hiding under the bar */
+  .projects-wrap {
+    padding-bottom: 92px !important;
+  }
+}

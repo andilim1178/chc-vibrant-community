@@ -184,6 +184,15 @@ export const ProjectsList: React.FC = () => {
           })}
         </div>
       )}
+
+      {/* Phone-only sticky CTA, per the Figma. On desktop the button above
+          the list does this job and this one stays hidden. */}
+      <button
+        className="projects-bottom-cta"
+        onClick={() => setActiveTab('setup')}
+      >
+        Start new assessment
+      </button>
     </div>
   );
 };
