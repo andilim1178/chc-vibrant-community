@@ -41,7 +41,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({
 
   return (
     <div
-      className="element-scope"
+      className="element-scope overlay-screen"
       style={{
         position: 'fixed',
         top: 0,

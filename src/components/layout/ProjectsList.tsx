@@ -25,10 +25,11 @@ export const ProjectsList: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: 680, margin: '0 auto', padding: 24 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+    <div className="projects-wrap" style={{ maxWidth: 680, margin: '0 auto', padding: 24 }}>
+      <div className="projects-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <h2 style={{ fontSize: 24, color: 'var(--text)', margin: 0 }}>Projects</h2>
         <button
+          className="projects-cta"
           onClick={() => setActiveTab('setup')}
           style={{
             padding: '10px 16px',

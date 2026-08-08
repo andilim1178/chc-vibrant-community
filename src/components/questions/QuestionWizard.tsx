@@ -134,7 +134,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({
 
   return (
     <div
-      className="element-scope"
+      className="element-scope overlay-screen"
       style={{
         position: 'fixed',
         top: 0,

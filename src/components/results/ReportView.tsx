@@ -67,9 +67,10 @@ export const ReportView: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
+    <div className="report-wrap" style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
       <div
         ref={reportRef}
+        className="report-sheet"
         style={{
           backgroundColor: 'var(--surface)',
           padding: 40,
@@ -99,7 +100,7 @@ export const ReportView: React.FC = () => {
           <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: 'var(--text)' }}>
             Project Details
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, fontSize: 14 }}>
+          <div className="report-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, fontSize: 14 }}>
             <div>
               <p style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Project Name</p>
               <p style={{ color: 'var(--text)', fontWeight: 500 }}>{activeProject.name}</p>
@@ -148,7 +149,7 @@ export const ReportView: React.FC = () => {
           <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 16, color: 'var(--text)' }}>
             Hard Elements Assessment
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="report-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {hardElements.map(element => {
               const score = activeProject.scores?.[element.id] || 0;
               const percentage = element.maxPoints > 0 ? Math.round((score / element.maxPoints) * 100) : 0;
@@ -199,7 +200,7 @@ export const ReportView: React.FC = () => {
           <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 16, color: 'var(--text)' }}>
             Soft Elements Assessment
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="report-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {softElements.map(element => {
               const score = activeProject.scores?.[element.id] || 0;
               const percentage = element.maxPoints > 0 ? Math.round((score / element.maxPoints) * 100) : 0;

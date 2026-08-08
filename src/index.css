@@ -87,6 +87,23 @@ html, body {
   align-items: center;
   gap: 12px;
   flex: 1;
+  min-width: 0;
+}
+
+/* Phone-only control; the media query at the bottom of this file reveals it. */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 26px;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .logo-text {
@@ -289,4 +306,172 @@ html, body {
 
 .action-bar:hover {
   opacity: 0.9;
+}
+
+/* ---------------------------------------------------------------------------
+   Phone layout
+
+   The desktop header packs the wordmark, persona chip, project pill and five
+   tabs into one non-wrapping row — roughly 864px of content, which is what
+   forced the horizontal scroll on a 375px screen. Below, the tabs and chips
+   collapse behind a hamburger, matching the Figma, and every content column
+   drops to full width.
+   --------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  :root {
+    --top-bar-h: 57px;
+  }
+
+  .shell {
+    padding: 0 16px 40px;
+  }
+
+  .top-bar {
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 12px 0;
+    margin-bottom: 0;
+  }
+
+  .logo-text {
+    font-size: 19px;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+  }
+
+  .logo-tag {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* Collapsed until the hamburger is tapped */
+  .top-bar .top-right,
+  .top-bar .tabs {
+    display: none;
+  }
+
+  .top-bar.menu-open .top-right,
+  .top-bar.menu-open .tabs {
+    display: flex;
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .top-bar.menu-open .top-right {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .top-bar.menu-open .tabs {
+    flex-direction: column;
+    gap: 2px;
+    margin: 10px 0 4px;
+  }
+
+  .top-bar.menu-open .tab {
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    padding: 11px 12px;
+  }
+
+  /* A long project name must ellipsis, not widen the bar */
+  .proj-pill {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .proj-pill > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Rainbow runs edge to edge under the header, as in the Figma */
+  .swatch-strip {
+    max-width: none;
+    margin: 0 -16px 16px;
+    border-radius: 0;
+    height: 10px;
+  }
+
+  .home-card {
+    padding: 18px 16px;
+    border-radius: var(--radius);
+  }
+
+  .home-head-title {
+    font-size: 16px;
+  }
+
+  .el-row {
+    padding: 15px 16px;
+    font-size: 14px;
+  }
+
+  .action-bar {
+    padding: 15px 16px;
+  }
+}
+
+/* The two full-screen element overlays carry their padding, width and radius
+   as inline styles, so overriding them from a media query needs !important.
+   On a phone the Figma shows these edge to edge with no letterboxing. */
+@media (max-width: 767px) {
+  .overlay-screen {
+    padding: 0 !important;
+  }
+
+  .overlay-screen > div {
+    max-width: none !important;
+    width: 100% !important;
+    height: 100%;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* The report's two-up grids cannot shrink below their text's min-content
+   width, which pushed the page ~7px wide on a 375px screen. One column,
+   and less sheet padding to buy the cards room. */
+@media (max-width: 767px) {
+  .report-wrap {
+    padding: 16px 0 !important;
+  }
+
+  .report-sheet {
+    padding: 20px 16px !important;
+  }
+
+  .report-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Projects list on a phone: the heading and CTA stop competing for one row,
+   and the card gets its side padding back from the shell. */
+@media (max-width: 767px) {
+  .projects-wrap {
+    padding: 20px 0 !important;
+  }
+
+  .projects-head {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .projects-head h2 {
+    flex-basis: 100%;
+  }
+
+  .projects-cta {
+    width: 100%;
+    padding: 14px 16px !important;
+    font-size: 14px !important;
+  }
 }
