@@ -6,13 +6,14 @@ import { AddressSearch } from './components/setup/AddressSearch';
 import { ElementInfo } from './components/elements/ElementInfo';
 import { ReportView } from './components/results/ReportView';
 import { PersonaSelector } from './components/persona/PersonaSelector';
+import { LoginScreen } from './components/auth/LoginScreen';
 import { VibrancyWheelCanvas } from './components/results/VibrancyWheelCanvas';
 import { QuestionWizard } from './components/questions/QuestionWizard';
 import { calculateProjectScore } from './utils/scoring';
 import { pickInk } from './utils/contrast';
 
 const MainContent: React.FC = () => {
-  const { personaConfirmed, activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
+  const { account, personaConfirmed, activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
   const [showPersonaModal, setShowPersonaModal] = useState(false);
   const [name, setName] = useState('');
   const [addr, setAddr] = useState('');
@@ -32,9 +33,13 @@ const MainContent: React.FC = () => {
     setShowElementInfo(false);
   }, [activeTab]);
 
-  // Gate: require a persona choice on every page load, not just the first.
-  // Must stay below every hook call — an early return above them breaks
-  // the Rules of Hooks when personaConfirmed flips to true.
+  // Gates run in order: sign in, then choose a persona, then the app.
+  // Both must stay below every hook call — an early return above them breaks
+  // the Rules of Hooks when the flag flips.
+  if (!account) {
+    return <LoginScreen />;
+  }
+
   if (!personaConfirmed) {
     return <PersonaSelector onClose={() => {}} />;
   }

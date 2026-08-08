@@ -3,8 +3,22 @@ import { Project, PersonaConfig } from '../types/placerate';
 import { templateData } from '../data/templateLoader';
 import { scoreElement } from '../utils/scoring';
 
+/**
+ * Mock sign-in only. Nothing is authenticated against a server and no
+ * password is ever held here — `signIn` records the method and, for the
+ * email route, the address, purely so the UI can greet the user.
+ */
+export interface Account {
+  method: 'google' | 'facebook' | 'email';
+  email?: string;
+}
+
 interface PlaceRateContextType {
   template: typeof templateData;
+  /** Null until sign-in happens in *this* page load. Resets on reload. */
+  account: Account | null;
+  signIn: (account: Account) => void;
+  signOut: () => void;
   persona: string | null;
   setPersona: (p: string) => void;
   /** False until the user picks a persona in *this* page load. Resets on reload. */
@@ -56,6 +70,8 @@ const readSavedState = (): SavedState => {
 
 export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [saved] = useState(readSavedState);
+  // Deliberately not persisted, so the login screen leads every page load.
+  const [account, setAccount] = useState<Account | null>(null);
   const [persona, setPersonaState] = useState<string | null>(saved.persona);
   // Deliberately not persisted: the selector is shown on every page load, so
   // the saved persona only pre-highlights the previous choice.
@@ -76,6 +92,13 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const setPersona = (p: string) => {
     setPersonaState(p);
     setPersonaConfirmed(true);
+  };
+
+  const signIn = (next: Account) => setAccount(next);
+
+  const signOut = () => {
+    setAccount(null);
+    setPersonaConfirmed(false);
   };
 
   const activeProject = projects.find(p => p.id === activeProjectId) || null;
@@ -124,6 +147,9 @@ export const PlaceRateProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   return (
     <PlaceRateContext.Provider value={{
       template: templateData,
+      account,
+      signIn,
+      signOut,
       persona,
       setPersona,
       personaConfirmed,
