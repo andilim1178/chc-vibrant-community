@@ -92,4 +92,21 @@ public class ProjectsFunctions
             return new ConflictObjectResult(new { error = ex.Message });
         }
     }
+
+    [Function("DeleteProject")]
+    public async Task<IActionResult> DeleteProject(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "projects/{id:guid}")] HttpRequest req,
+        Guid id)
+    {
+        try
+        {
+            await _projectService.DeleteAsync(id);
+            return new NoContentResult();
+        }
+        catch (ProjectNotFoundException ex)
+        {
+            _logger.LogWarning("DeleteProject: {Message}", ex.Message);
+            return new NotFoundObjectResult(new { error = ex.Message });
+        }
+    }
 }
