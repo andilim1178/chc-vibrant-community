@@ -64,4 +64,32 @@ public class ProjectsFunctions
             return new ConflictObjectResult(new { error = ex.Message });
         }
     }
+
+    [Function("UpdateProject")]
+    public async Task<IActionResult> UpdateProject(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "projects/{id:guid}")] HttpRequest req,
+        Guid id)
+    {
+        var request = await req.ReadFromJsonAsync<UpdateProjectRequest>();
+        if (request is null || string.IsNullOrWhiteSpace(request.Name))
+        {
+            return new BadRequestObjectResult(new { error = "Name is required." });
+        }
+
+        try
+        {
+            var updated = await _projectService.UpdateAsync(id, request.ToProject());
+            return new OkObjectResult(updated.ToDetailDto());
+        }
+        catch (ProjectNotFoundException ex)
+        {
+            _logger.LogWarning("UpdateProject: {Message}", ex.Message);
+            return new NotFoundObjectResult(new { error = ex.Message });
+        }
+        catch (DuplicateProjectNameException ex)
+        {
+            _logger.LogWarning("UpdateProject: {Message}", ex.Message);
+            return new ConflictObjectResult(new { error = ex.Message });
+        }
+    }
 }
