@@ -285,9 +285,12 @@ html, body {
 }
 
 .el-score {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  /* Inherit --on-el, the ink already contrast-picked for this row's colour.
+     A fixed grey is unreadable on the darker elements. */
+  color: inherit;
+  opacity: 0.85;
 }
 
 .action-bar {
@@ -749,5 +752,43 @@ html, body {
 
   .overview-swatches {
     height: 48px;
+  }
+}
+
+/* Elements tab: hard and soft listed as separate labelled sets */
+.el-group + .el-group {
+  margin-top: 32px;
+}
+
+.el-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  scroll-margin-top: calc(var(--top-bar-h) + 24px);
+}
+
+.el-group-head h2 {
+  font-family: var(--font-element);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.el-group-pct {
+  font-family: var(--font-element);
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.el-group {
+  scroll-margin-top: calc(var(--top-bar-h) + 20px);
+}
+
+@media (max-width: 767px) {
+  .el-group-head h2 {
+    font-size: 18px;
   }
 }
