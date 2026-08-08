@@ -1,13 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-interface AddressResult {
+export interface AddressComponents {
   fullAddress: string;
+  street1?: string;
+  street2?: string;
+  city?: string;
+  state?: string;
   postcode?: string;
+  country?: string;
 }
 
 interface AddressSearchProps {
   value: string;
-  onChange: (address: string, postcode?: string) => void;
+  /** Fires on every keystroke, so the search box stays a controlled input. */
+  onChange: (text: string) => void;
+  /** Fires when a suggestion is picked, with the full parsed address — use this to auto-fill other fields. */
+  onSelect?: (address: AddressComponents) => void;
   placeholder?: string;
 }
 
@@ -17,17 +25,46 @@ declare global {
   }
 }
 
+/** Pulls street/city/state/postcode/country out of a Google geocode result. */
+function parseAddressComponents(components: any[]): Omit<AddressComponents, 'fullAddress'> {
+  const find = (type: string) => components.find((c: any) => c.types.includes(type));
+
+  const streetNumber = find('street_number')?.long_name;
+  const route = find('route')?.long_name;
+  const street1 = [streetNumber, route].filter(Boolean).join(' ') || undefined;
+  const street2 = find('subpremise')?.long_name;
+  const city =
+    find('locality')?.long_name ||
+    find('sublocality')?.long_name ||
+    find('postal_town')?.long_name;
+  const state = find('administrative_area_level_1')?.short_name;
+  const postcode = find('postal_code')?.long_name;
+  const country = find('country')?.long_name;
+
+  return { street1, street2, city, state, postcode, country };
+}
+
 export const AddressSearch: React.FC<AddressSearchProps> = ({
   value,
   onChange,
-  placeholder = 'e.g. 123 Main St, Sydney'
+  onSelect,
+  placeholder = 'Search for address'
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [suggestions, setSuggestions] = useState<AddressResult[]>([]);
+  const [suggestions, setSuggestions] = useState<AddressComponents[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  // Selecting a suggestion changes `value` via onChange, which would otherwise
+  // re-run this effect and immediately re-search for (and reopen) the address
+  // the user just picked. Set right before that onChange call, consumed here.
+  const skipNextSearchRef = useRef(false);
 
   useEffect(() => {
+    if (skipNextSearchRef.current) {
+      skipNextSearchRef.current = false;
+      return;
+    }
+
     if (!window.google?.maps?.places) {
       console.warn('Google Maps API not loaded. Address autocomplete disabled.');
       return;
@@ -58,25 +95,18 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
           return;
         }
 
-        // Get details for each prediction to extract postcode
+        // Get details for each prediction to extract the full address breakdown
         const detailPromises = predictions.slice(0, 5).map(prediction => {
-          return new Promise<AddressResult>(resolve => {
+          return new Promise<AddressComponents>(resolve => {
             geocoder.geocode({ placeId: prediction.place_id }, (results: any[]) => {
               if (results && results[0]) {
                 const result = results[0];
-                const address = result.formatted_address;
-
-                // Extract postcode from address components
-                let postcode: string | undefined;
-                result.address_components.forEach((comp: any) => {
-                  if (comp.types.includes('postal_code')) {
-                    postcode = comp.long_name;
-                  }
+                resolve({
+                  fullAddress: result.formatted_address,
+                  ...parseAddressComponents(result.address_components || []),
                 });
-
-                resolve({ fullAddress: address, postcode });
               } else {
-                resolve({ fullAddress: prediction.description, postcode: undefined });
+                resolve({ fullAddress: prediction.description });
               }
             });
           });
@@ -93,10 +123,12 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
     return () => clearTimeout(timer);
   }, [value]);
 
-  const handleSelectSuggestion = (suggestion: AddressResult) => {
-    onChange(suggestion.fullAddress, suggestion.postcode);
+  const handleSelectSuggestion = (suggestion: AddressComponents) => {
+    skipNextSearchRef.current = true;
     setSuggestions([]);
     setShowSuggestions(false);
+    onChange(suggestion.fullAddress);
+    onSelect?.(suggestion);
   };
 
   return (

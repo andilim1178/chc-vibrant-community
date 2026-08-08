@@ -3,7 +3,7 @@ import { PlaceRateProvider, usePlaceRate } from './context/PlaceRateContext';
 import { HeaderNav } from './components/layout/HeaderNav';
 import { ProjectsList } from './components/layout/ProjectsList';
 import { ElementSetPanel, ELEMENT_SETS } from './components/layout/ElementSetPanel';
-import { AddressSearch } from './components/setup/AddressSearch';
+import { SetupForm } from './components/setup/SetupForm';
 import { ElementInfo } from './components/elements/ElementInfo';
 import { ElementList } from './components/elements/ElementList';
 import { ReportView } from './components/results/ReportView';
@@ -14,12 +14,8 @@ import { QuestionWizard } from './components/questions/QuestionWizard';
 import { completionFor } from './utils/questionUtils';
 
 const MainContent: React.FC = () => {
-  const { account, personaConfirmed, activeTab, setActiveTab, activeProject, createNewProject, template } = usePlaceRate();
+  const { account, personaConfirmed, activeTab, setActiveTab, activeProject, template } = usePlaceRate();
   const [showPersonaModal, setShowPersonaModal] = useState(false);
-  const [name, setName] = useState('');
-  const [addr, setAddr] = useState('');
-  const [postcode, setPostcode] = useState('');
-  const [type] = useState('Mixed Use');
   const [showWizard, setShowWizard] = useState(false);
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
   const [showElementInfo, setShowElementInfo] = useState(false);
@@ -76,41 +72,7 @@ const MainContent: React.FC = () => {
       </div>
 
       <main>
-        {activeTab === 'setup' && (
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 24, maxWidth: 500, margin: '0 auto' }}>
-            <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 20, marginBottom: 16 }}>Project Details</h2>
-            <form onSubmit={(e) => { e.preventDefault(); createNewProject({ name, addr, postcode, type }); }}>
-              <div style={{ marginBottom: 14 }}>
-                <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>PROJECT NAME</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Town Centre Revitalisation"
-                  style={{ width: '100%', padding: '10px 12px', background: 'var(--surface2)', border: '1px solid var(--border2)', borderRadius: 'var(--radius)', color: 'var(--text)' }}
-                  required
-                />
-              </div>
-              <div style={{ marginBottom: 14 }}>
-                <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>LOCATION / ADDRESS</label>
-                <AddressSearch
-                  value={addr}
-                  onChange={(address: string, postcode_val?: string) => {
-                    setAddr(address);
-                    if (postcode_val) setPostcode(postcode_val);
-                  }}
-                  placeholder="e.g. 123 Main St, Sydney"
-                />
-              </div>
-              <button
-                type="submit"
-                style={{ width: '100%', padding: '12px', background: 'var(--accent)', color: 'var(--accent-text)', border: 'none', borderRadius: 'var(--radius)', fontWeight: 600, cursor: 'pointer' }}
-              >
-                Create Project →
-              </button>
-            </form>
-          </div>
-        )}
+        {activeTab === 'setup' && <SetupForm />}
 
         {activeTab === 'projects' && <ProjectsList />}
 
